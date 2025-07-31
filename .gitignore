@@ -44,5 +44,10 @@ dehydrated/
 # Coverage reports
 coverage/
 
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
 # Other
 .cache
