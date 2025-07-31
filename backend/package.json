@@ -11,11 +11,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@mapbox/togeojson": "^0.16.2",
     "@xmpp/client": "^0.13.4",
+    "atmosx-nwws-parser": "^1.0.154",
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "he": "^1.2.0",
-    "node-fetch": "^3.3.2",
+    "node-fetch": "^2.7.0",
     "socket.io": "^4.8.1",
-    "xml2js": "^0.6.2"
+    "sqlite3": "^5.1.7",
+    "xml2js": "^0.6.2",
+    "xmldom": "^0.6.0"
   }
 }

@@ -43,18 +43,48 @@ export function AlertsSidebar({ className }) { // Accept className prop
   const navigate = useNavigate();
 
   useEffect(() => {
+    let isMounted = true;
     const socket = io(SOCKET_SERVER_URL);
-    socket.on('connect', () => console.log('Connected to Socket.IO server'));
 
-    socket.on('new-alert', (parsedAlert) => {
-      console.log('Received parsed alert:', parsedAlert); // Log the full alert object
-      // Ensure parsedAlert.id is used directly if it's the CAP identifier
-      setAlerts(prevAlerts => [parsedAlert, ...prevAlerts]);
+    // Fetch existing alerts from API when component mounts
+    const fetchExistingAlerts = async () => {
+      try {
+        const response = await fetch('/api/alerts');
+        if (response.ok) {
+          const existingAlerts = await response.json();
+          if (isMounted) {
+            setAlerts(existingAlerts);
+          }
+        } else {
+          console.error('AlertsSidebar: Failed to fetch existing alerts:', response.statusText);
+        }
+      } catch (error) {
+        console.error('AlertsSidebar: Error fetching existing alerts:', error);
+      }
+    };
+
+    socket.on('connect', () => {
+      if (isMounted) {
+        // Fetch existing alerts after connecting
+        fetchExistingAlerts();
+      }
     });
 
-    socket.on('disconnect', () => console.log('Disconnected from Socket.IO server'));
+    socket.on('new-alert', (parsedAlert) => {
+      if (isMounted) {
+        setAlerts(prevAlerts => {
+          // Remove any existing alert with the same ID to avoid duplicates
+          const filteredAlerts = prevAlerts.filter(alert => alert.id !== parsedAlert.id);
+          // Add new alert at the beginning (most recent first)
+          return [parsedAlert, ...filteredAlerts];
+        });
+      }
+    });
+
+    socket.on('disconnect', () => {});
 
     return () => {
+      isMounted = false;
       socket.disconnect();
     };
   }, []);

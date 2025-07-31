@@ -16,16 +16,31 @@ const MapControls = ({
   setCapeOpacity,
   spcOutlookLayer,
   setSpcOutlookLayer,
+  showRadar,
+  setShowRadar,
+  showWwa,
+  setShowWwa,
+
   positionClass = 'absolute top-4 right-[336px]',
 }) => {
   const [showSpcSubmenu, setShowSpcSubmenu] = useState(false);
-  const submenuRef = useRef(null);
+  const [showRadarSubmenu, setShowRadarSubmenu] = useState(false);
 
-  // Close submenu when clicking outside
+  const submenuRef = useRef(null);
+  const radarSubmenuRef = useRef(null);
+
+
+  // Close submenus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Close SPC submenu if click is outside
       if (submenuRef.current && !submenuRef.current.contains(event.target)) {
         setShowSpcSubmenu(false);
+      }
+      
+      // Close radar submenu if click is outside
+      if (radarSubmenuRef.current && !radarSubmenuRef.current.contains(event.target)) {
+        setShowRadarSubmenu(false);
       }
     };
 
@@ -67,26 +82,79 @@ const MapControls = ({
   };
 
   const handleSpcLayerSelect = (layerId) => {
-    console.log('SPC Layer selected:', layerId); // Debug log
+    // SPC Layer selected
     setSpcOutlookLayer(layerId);
     setSelectedLayer('spc-outlooks');
     setShowSpcSubmenu(false);
   };
+
+
+
   return (
     <div className={`${positionClass} z-[1000] rounded-lg bg-gray-800/90 backdrop-blur-md shadow-lg p-3`}>
       {/* Map Layer Selection */}
       <div>
         <div className="flex gap-2">
-          <button
-            onClick={() => setSelectedLayer('radar-warnings')}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-              selectedLayer === 'radar-warnings'
-                ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20 border border-teal-400'
-                : 'bg-gray-700 text-gray-200 hover:bg-gray-600 border border-gray-600'
-            }`}
-          >
-            Radar
-          </button>
+          {/* Radar/Warnings Dropdown */}
+          <div className="relative" ref={radarSubmenuRef}>
+            <button
+              onClick={() => {
+                setSelectedLayer('radar-warnings');
+                setShowRadarSubmenu(!showRadarSubmenu);
+              }}
+              className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
+                selectedLayer === 'radar-warnings'
+                  ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20 border border-teal-400'
+                  : 'bg-gray-700 text-gray-200 hover:bg-gray-600 border border-gray-600'
+              }`}
+            >
+              <span>Radar</span>
+              <span className="text-xs">▼</span>
+            </button>
+            
+            {/* Radar/Warnings Submenu */}
+            {showRadarSubmenu && (
+              <div className="absolute top-full left-0 mt-1 bg-gray-800/95 backdrop-blur-md rounded-md shadow-lg border border-gray-600 min-w-48 z-[1001]">
+                <div className="p-2 space-y-1">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowRadar(!showRadar);
+                    }}
+                    className={`w-full text-left px-3 py-2 text-sm rounded transition-colors flex items-center justify-between ${
+                      showRadar
+                        ? 'bg-teal-500 text-white'
+                        : 'text-gray-200 hover:bg-gray-700'
+                    }`}
+                  >
+                    <span>Radar</span>
+                    <span className={`w-4 h-4 rounded border ${showRadar ? 'bg-teal-500 border-teal-500' : 'border-gray-400'}`}>
+                      {showRadar && <span className="w-2 h-2 bg-white rounded-full block mx-auto mt-1"></span>}
+                    </span>
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowWwa(!showWwa);
+                    }}
+                    className={`w-full text-left px-3 py-2 text-sm rounded transition-colors flex items-center justify-between ${
+                      showWwa
+                        ? 'bg-teal-500 text-white'
+                        : 'text-gray-200 hover:bg-gray-700'
+                    }`}
+                  >
+                    <span>Warnings</span>
+                    <span className={`w-4 h-4 rounded border ${showWwa ? 'bg-teal-500 border-teal-500' : 'border-gray-400'}`}>
+                      {showWwa && <span className="w-2 h-2 bg-white rounded-full block mx-auto mt-1"></span>}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+          
+
+          
           <button
             onClick={() => setSelectedLayer('storm-reports')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
@@ -97,6 +165,7 @@ const MapControls = ({
           >
             Storm Reports
           </button>
+          
           <div className="relative" ref={submenuRef}>
             <button
               onClick={() => setShowSpcSubmenu(!showSpcSubmenu)}
@@ -131,6 +200,7 @@ const MapControls = ({
               </div>
             )}
           </div>
+          
           <button
             onClick={() => setSelectedLayer('future-radar')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
@@ -141,18 +211,43 @@ const MapControls = ({
           >
             Future Radar
           </button>
-          <button
-            onClick={() => setSelectedLayer('single-radar')}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-              selectedLayer === 'single-radar'
-                ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20 border border-teal-400'
-                : 'bg-gray-700 text-gray-200 hover:bg-gray-600 border border-gray-600'
-            }`}
-          >
-            Single Radar
-          </button>
         </div>
       </div>
+
+      {/* Opacity Controls - REMOVED radar opacity slider */}
+      {selectedLayer === 'sigtor' && (
+        <div className="mt-3 pt-3 border-t border-gray-600">
+          <label className="block text-sm font-medium text-gray-200 mb-2">
+            SIG TOR Opacity: {Math.round(sigTorOpacity * 100)}%
+          </label>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={sigTorOpacity}
+            onChange={(e) => setSigTorOpacity(parseFloat(e.target.value))}
+            className="w-full accent-teal-500"
+          />
+        </div>
+      )}
+
+      {selectedLayer === 'cape' && (
+        <div className="mt-3 pt-3 border-t border-gray-600">
+          <label className="block text-sm font-medium text-gray-200 mb-2">
+            CAPE Opacity: {Math.round(capeOpacity * 100)}%
+          </label>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={capeOpacity}
+            onChange={(e) => setCapeOpacity(parseFloat(e.target.value))}
+            className="w-full accent-teal-500"
+          />
+        </div>
+      )}
     </div>
   );
 };

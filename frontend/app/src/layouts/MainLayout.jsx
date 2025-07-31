@@ -22,13 +22,13 @@ import { cn } from "@/lib/utils"; // For conditional class names
 
 const MainLayout = () => {
   const location = useLocation();
-  console.log('MainLayout location:', location); // Log location object
+  // MainLayout location tracking
 
   const showAlersSidebar = location.pathname !== '/';
 
   return (
     <SidebarProvider defaultOpen={false}>
-      {console.log('MainLayout rendering AppSidebar...')}
+      {/* MainLayout rendering AppSidebar */}
       <AppSidebar />
       <SidebarInset className="flex flex-col min-h-0">
         <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background sticky top-0 z-10">

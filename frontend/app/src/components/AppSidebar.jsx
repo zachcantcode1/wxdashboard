@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Briefcase, BarChart2, Settings, HelpCircle, Map, Radar, CloudSun, Tornado, Camera, List, Newspaper, ChevronDown, ExternalLink } from "lucide-react"; // Added Camera, List, Newspaper, ChevronDown, ExternalLink icons
+import { Home, Briefcase, BarChart2, Settings, HelpCircle, Map, Radar, CloudSun, Tornado, Camera, List, Newspaper, ChevronDown, ExternalLink, AlertTriangle } from "lucide-react"; // Added Camera, List, Newspaper, ChevronDown, ExternalLink, AlertTriangle icons
 import {
   Collapsible,
   CollapsibleContent,
@@ -42,14 +42,14 @@ const menuItems = [
     icon: List,
   },
   {
+    title: "Active Alerts",
+    path: "/active-alerts",
+    icon: AlertTriangle,
+  },
+  {
     title: "Top Storm Reports",
     path: "/top-storm-reports",
     icon: BarChart2,
-  },
-  {
-    title: "SPC Outlooks",
-    path: "/spc",
-    icon: Newspaper,
   },
   {
     title: "External Services",

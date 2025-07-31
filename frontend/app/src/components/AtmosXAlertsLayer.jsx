@@ -6,7 +6,7 @@ import L from 'leaflet';
  * AtmosXAlertsLayer - Displays severe weather alerts using AtmosphericX API
  * Provides real-time alerts with structured meteorological data
  */
-const AtmosXAlertsLayer = ({ isVisible = true }) => {
+const AtmosXAlertsLayer = ({ isVisible = true, onAlertsUpdate }) => {
   const map = useMap();
   const [alertsData, setAlertsData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -58,18 +58,8 @@ const AtmosXAlertsLayer = ({ isVisible = true }) => {
               currentAlert.alertType = eventType;
               currentAlert.description = lineData; // Store full line for details
               
-              // Determine severity based on event type
-              if (eventType.toLowerCase().includes('tornado')) {
-                currentAlert.severity = 'Extreme';
-              } else if (eventType.toLowerCase().includes('severe thunderstorm')) {
-                currentAlert.severity = 'Severe';
-              } else if (eventType.toLowerCase().includes('flash flood')) {
-                currentAlert.severity = 'Severe';
-              } else if (eventType.toLowerCase().includes('watch')) {
-                currentAlert.severity = 'Moderate';
-              } else {
-                currentAlert.severity = 'Moderate';
-              }
+              // Store the event type for sorting purposes
+              currentAlert.alertType = eventType;
             }
           }
         }
@@ -103,7 +93,7 @@ const AtmosXAlertsLayer = ({ isVisible = true }) => {
     }
 
     const filteredAlerts = alerts.filter(alert => alert.coordinates && alert.coordinates.length >= 3);
-    console.log('[AtmosXAlertsLayer] Successfully parsed', filteredAlerts.length, 'alerts');
+
     
     return filteredAlerts;
   };
@@ -119,7 +109,7 @@ const AtmosXAlertsLayer = ({ isVisible = true }) => {
       setLoading(true);
       setError(null);
       
-      console.log('[AtmosXAlertsLayer] Fetching alerts from AtmosphericX...');
+
       const response = await fetch('https://atmosx.calrp.com/placefiles/alerts');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -128,8 +118,12 @@ const AtmosXAlertsLayer = ({ isVisible = true }) => {
       const text = await response.text();
       const parsedAlerts = parseAtmosXData(text);
       
-      console.log('[AtmosXAlertsLayer] Fetched', parsedAlerts.length, 'alerts');
+
       setAlertsData(parsedAlerts);
+      // Notify parent component of alerts update
+      if (onAlertsUpdate) {
+        onAlertsUpdate(parsedAlerts);
+      }
       
     } catch (error) {
       console.error('[AtmosXAlertsLayer] Error fetching alerts:', error);
@@ -292,7 +286,7 @@ const AtmosXAlertsLayer = ({ isVisible = true }) => {
       }
     });
 
-    console.log('[AtmosXAlertsLayer] Added', layersRef.current.length, 'alert polygons to map');
+
 
     // Cleanup function
     return () => {

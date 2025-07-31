@@ -76,8 +76,26 @@ function TopStormReportsPage() {
               const reportTime = new Date(report.valid);
               return reportTime >= last24h && reportTime <= now;
             });
-          const hail = reports.filter(r => /hail/i.test(r.type)).sort((a, b) => b.magnitude - a.magnitude);
-          const wind = reports.filter(r => /wnd|wind|gust/i.test(r.type)).sort((a, b) => b.magnitude - a.magnitude);
+
+          // Deduplicate function to remove duplicate reports based on location and magnitude
+          const deduplicateReports = (reports) => {
+            const seen = new Set();
+            return reports.filter(report => {
+              // Create a unique key based on location, magnitude, and type
+              const key = `${report.city || 'unknown'}-${report.county || 'unknown'}-${report.state || 'unknown'}-${report.magnitude}-${report.type}`;
+              if (seen.has(key)) {
+                return false; // Skip duplicate
+              }
+              seen.add(key);
+              return true;
+            });
+          };
+
+          const hailFiltered = reports.filter(r => /hail/i.test(r.type));
+          const windFiltered = reports.filter(r => /wnd|wind|gust/i.test(r.type));
+          
+          const hail = deduplicateReports(hailFiltered).sort((a, b) => b.magnitude - a.magnitude);
+          const wind = deduplicateReports(windFiltered).sort((a, b) => b.magnitude - a.magnitude);
           setHailReports(hail);
           setWindReports(wind);
         } else {
@@ -122,7 +140,7 @@ function TopStormReportsPage() {
             ) : (
               <ol className="pl-0 divide-y divide-blue-100">
                 {hailReports.slice(0, 10).map((report, idx) => (
-                  <li key={report.objectid || report.remarks + report.lsr_validtime} className="flex justify-between items-center py-3">
+                  <li key={report.objectid || `hail-${idx}-${report.remarks || 'unknown'}-${report.lsr_validtime || Date.now()}`} className="flex justify-between items-center py-3">
                     <span className="flex items-center gap-2">
                       <span className="mr-3 text-lg font-bold text-blue-600">{idx + 1}.</span>
                       <span className="font-medium">
@@ -148,7 +166,7 @@ function TopStormReportsPage() {
             ) : (
               <ol className="pl-0 divide-y divide-green-100">
                 {windReports.slice(0, 10).map((report, idx) => (
-                  <li key={report.objectid || report.remarks + report.lsr_validtime} className="flex justify-between items-center py-3">
+                  <li key={report.objectid || `wind-${idx}-${report.remarks || 'unknown'}-${report.lsr_validtime || Date.now()}`} className="flex justify-between items-center py-3">
                     <span className="flex items-center gap-2">
                       <span className="mr-3 text-lg font-bold text-green-600">{idx + 1}.</span>
                       <span className="font-medium">

@@ -4,180 +4,185 @@ import L from 'leaflet';
 
 /**
  * IEMRadarLayer - Displays NEXRAD radar imagery from Iowa State University
- * Uses caching and opacity-based transitions for smooth time scrubbing
+ * Uses backend API for radar times and layer data, with caching and opacity-based transitions
  */
 const IEMRadarLayer = ({ isVisible = true, opacity = 0.7, selectedTime = null, overlayType = 'radar' }) => {
   const map = useMap();
   const [availableTimes, setAvailableTimes] = useState([]);
+  const [layerData, setLayerData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const layerCacheRef = useRef(new Map()); // Cache for radar layers
   const activeLayersRef = useRef(new Set()); // Track active layers on map
   const preloadQueueRef = useRef(new Set()); // Track layers being preloaded
 
-  // Generate recent radar times (every 5 minutes for the past 3 hours)
-  const generateRadarTimes = () => {
-    const times = [];
-    const now = new Date();
-    
-    // Round down to the nearest 5-minute mark
-    const currentMinutes = now.getUTCMinutes();
-    const roundedMinutes = Math.floor(currentMinutes / 5) * 5;
-    now.setUTCMinutes(roundedMinutes, 0, 0);
-    
-    // Generate times for the past 3 hours (36 intervals of 5 minutes)
-    for (let i = 0; i < 36; i++) {
-      const time = new Date(now.getTime() - (i * 5 * 60 * 1000));
-      times.unshift({
-        datetime: time,
-        timestamp: formatTimeForIEM(time),
-        display: formatTimeForDisplay(time)
-      });
+  // Fetch radar times and layer data from backend
+  const fetchRadarData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const response = await fetch('/api/radar/warnings/layers');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch radar data: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      setLayerData(data);
+      setAvailableTimes(data.times || []);
+    } catch (err) {
+      console.error('Error fetching radar data:', err);
+      setError(err.message);
+      setAvailableTimes([]);
+      setLayerData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Load radar data on component mount
+  useEffect(() => {
+    fetchRadarData();
+  }, []);
+
+  // Create a radar layer for a specific time using backend layer data
+  const createRadarLayer = (layerInfo) => {
+    if (!layerInfo || !layerInfo.layerConfig) {
+      console.error('Invalid layer info or missing layerConfig:', layerInfo);
+      return null;
     }
     
-    return times;
-  };
-
-  // Format time for IEM WMS-T service (ISO 8601 format)
-  const formatTimeForIEM = (date) => {
-    return date.toISOString();
-  };
-
-  // Format time for display in Chicago timezone
-  const formatTimeForDisplay = (date) => {
-    return date.toLocaleTimeString('en-US', {
-      timeZone: 'America/Chicago',
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
-    }) + ' CT';
-  };
-
-  // Get the WMS or overlay URL based on overlayType
-  const getRadarUrl = () => {
-    // Default: IEM NEXRAD WMS
-    return 'https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi';
-  };
-  // overlayType is now always received from props
-
-  // Create a radar layer for a specific time
-  const createRadarLayer = (timestamp) => {
+    const config = layerInfo.layerConfig;
+    
     if (overlayType === 'sigtor' || overlayType === 'cape') {
       // Use imageOverlay for backend PNG overlays
       const bounds = [[20, -130], [55, -60]];
-      const imageUrl = getRadarUrl();
-      const layer = L.imageOverlay(imageUrl, bounds, {
+      const layer = L.imageOverlay(config.wmsUrl, bounds, {
         opacity: 0,
         zIndex: 200,
         interactive: false
       });
       layer.on('load', () => {
-        console.log('[IEMRadarLayer] Layer loaded for time:', timestamp);
+        // Layer loaded successfully
       });
       return layer;
     } else {
-      // Use WMS for radar
-      const layer = L.tileLayer.wms(getRadarUrl(), {
-        layers: 'nexrad-n0r-wmst',
-        format: 'image/png',
-        transparent: true,
+      // Use WMS for radar with backend-provided configuration
+      const layer = L.tileLayer.wms(config.wmsUrl, {
+        layers: config.layers,
+        format: config.format,
+        transparent: config.transparent,
         opacity: 0, // Start invisible
-        time: timestamp,
-        version: '1.1.1',
-        crs: L.CRS.EPSG4326,
-        attribution: '© Iowa Environmental Mesonet',
+        time: config.time,
+        version: config.version,
+        crs: L.CRS[config.crs] || L.CRS.EPSG4326,
+        attribution: config.attribution,
         zIndex: 200
       });
       layer.on('load', () => {
-        console.log('[IEMRadarLayer] Layer loaded for time:', timestamp);
+        // Layer loaded successfully
       });
       return layer;
     }
   };
 
-  // Preload radar layers with smart prioritization
-  const preloadRadarLayers = async () => {
-    if (!map || !availableTimes.length) return;
+  // Create a radar layer for a specific timestamp (fallback method)
+  const createRadarLayerByTimestamp = async (timestamp) => {
+    try {
+      const response = await fetch(`/api/radar/warnings/layers/${encodeURIComponent(timestamp)}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch layer data for timestamp: ${response.status}`);
+      }
+      
+      const layerInfo = await response.json();
+      return createRadarLayer(layerInfo);
+    } catch (error) {
+      console.error('Error creating radar layer by timestamp:', error);
+      return null;
+    }
+  };
 
-    console.log('[IEMRadarLayer] Starting intelligent preload of', availableTimes.length, 'radar layers');
+  // Preload radar layers with smart prioritization using backend data
+  const preloadRadarLayers = async () => {
+    if (!map || !layerData || !layerData.layers.length) return;
+
     setLoading(true);
 
     // Prioritize loading: current time first, then recent times, then all others
     const currentIndex = selectedTime 
-      ? availableTimes.findIndex(t => t.timestamp === selectedTime)
-      : availableTimes.length - 1;
+      ? layerData.layers.findIndex(l => l.timestamp === selectedTime)
+      : layerData.layers.length - 1;
 
     const priorityQueue = [];
     
     // Add current time first
     if (currentIndex >= 0) {
-      priorityQueue.push(availableTimes[currentIndex]);
+      priorityQueue.push(layerData.layers[currentIndex]);
     }
     
     // Add surrounding times (±5 frames) for immediate scrubbing responsiveness
     const surroundingRange = 5;
     for (let i = 1; i <= surroundingRange; i++) {
       if (currentIndex - i >= 0) {
-        priorityQueue.push(availableTimes[currentIndex - i]);
+        priorityQueue.push(layerData.layers[currentIndex - i]);
       }
-      if (currentIndex + i < availableTimes.length) {
-        priorityQueue.push(availableTimes[currentIndex + i]);
+      if (currentIndex + i < layerData.layers.length) {
+        priorityQueue.push(layerData.layers[currentIndex + i]);
       }
     }
     
-    // Add all remaining times
-    availableTimes.forEach(timeObj => {
-      if (!priorityQueue.includes(timeObj)) {
-        priorityQueue.push(timeObj);
+    // Add all remaining layers
+    layerData.layers.forEach(layerInfo => {
+      if (!priorityQueue.includes(layerInfo)) {
+        priorityQueue.push(layerInfo);
       }
     });
 
     // Load layers in priority order
     for (let i = 0; i < priorityQueue.length; i++) {
-      const timeObj = priorityQueue[i];
+      const layerInfo = priorityQueue[i];
       
-      if (!layerCacheRef.current.has(timeObj.timestamp) && !preloadQueueRef.current.has(timeObj.timestamp)) {
-        preloadQueueRef.current.add(timeObj.timestamp);
+      if (!layerCacheRef.current.has(layerInfo.timestamp) && !preloadQueueRef.current.has(layerInfo.timestamp)) {
+        preloadQueueRef.current.add(layerInfo.timestamp);
         
-        const layer = createRadarLayer(timeObj.timestamp);
-        layerCacheRef.current.set(timeObj.timestamp, layer);
-        
-        // Add to map but keep invisible
-        layer.addTo(map);
+        const layer = createRadarLayer(layerInfo);
+        if (layer) {
+          layerCacheRef.current.set(layerInfo.timestamp, layer);
+          
+          // Add to map but keep invisible
+          layer.addTo(map);
+        }
         
         // Shorter delay for priority layers, longer for background loading
         const delay = i < 11 ? 50 : 200; // Fast load first 11 (current + surrounding)
         await new Promise(resolve => setTimeout(resolve, delay));
         
-        // Show progress for priority layers
-        if (i < 11) {
-          console.log(`[IEMRadarLayer] Loaded priority layer ${i + 1}/11`);
-        }
+        // Clean up preload queue
+        preloadQueueRef.current.delete(layerInfo.timestamp);
+        
+        // Manage cache size to prevent memory issues
+        manageCacheSize();
       }
     }
-
+    
     setLoading(false);
-    console.log('[IEMRadarLayer] Preload complete. Cached', layerCacheRef.current.size, 'layers');
   };
 
-  // Initialize available times and start preloading
+  // Start preloading when layer data is available
   useEffect(() => {
-    console.log('[IEMRadarLayer] Generating radar times...');
-    const times = generateRadarTimes();
-    setAvailableTimes(times);
-    console.log('[IEMRadarLayer] Generated', times.length, 'radar times');
-    
-    // Start preloading after a short delay
-    setTimeout(() => {
-      preloadRadarLayers();
-    }, 1000);
-  }, [map]);
+    if (layerData && layerData.layers.length > 0) {
+      // Start preloading after a short delay
+      setTimeout(() => {
+        preloadRadarLayers();
+      }, 1000);
+    }
+  }, [layerData, map]);
 
   // Memory management - limit cache size and clean up old layers
   const manageCacheSize = () => {
     const maxCacheSize = 50; // Limit to prevent memory issues
     if (layerCacheRef.current.size > maxCacheSize) {
-      console.log('[IEMRadarLayer] Cache size exceeded, cleaning up oldest layers');
+      // Cache size exceeded, cleaning up oldest layers
       
       // Convert to array and sort by timestamp
       const entries = Array.from(layerCacheRef.current.entries())
@@ -193,26 +198,39 @@ const IEMRadarLayer = ({ isVisible = true, opacity = 0.7, selectedTime = null, o
         activeLayersRef.current.delete(timestamp);
       });
       
-      console.log('[IEMRadarLayer] Cleaned up', toRemove.length, 'old layers');
+      // Cleaned up old layers
     }
   };
 
   // Enhanced layer transition with on-demand loading fallback
-  const transitionToLayer = (targetTime) => {
-    if (!map || !targetTime) return;
+  const transitionToLayer = async (targetTime) => {
+    if (!map || !targetTime || !layerData) return;
 
     let targetLayer = layerCacheRef.current.get(targetTime);
     
     // If layer not cached, create it immediately (fallback)
     if (!targetLayer) {
-      console.log('[IEMRadarLayer] Creating on-demand layer for:', targetTime);
-      targetLayer = createRadarLayer(targetTime);
-      layerCacheRef.current.set(targetTime, targetLayer);
-      targetLayer.addTo(map);
-      
-      // Manage cache size
-      manageCacheSize();
+      // Find layer info from backend data
+      const layerInfo = layerData.layers.find(l => l.timestamp === targetTime);
+      if (layerInfo) {
+        targetLayer = createRadarLayer(layerInfo);
+        if (targetLayer) {
+          layerCacheRef.current.set(targetTime, targetLayer);
+          targetLayer.addTo(map);
+          manageCacheSize();
+        }
+      } else {
+        // Fallback: fetch layer data from backend API
+        targetLayer = await createRadarLayerByTimestamp(targetTime);
+        if (targetLayer) {
+          layerCacheRef.current.set(targetTime, targetLayer);
+          targetLayer.addTo(map);
+          manageCacheSize();
+        }
+      }
     }
+
+    if (!targetLayer) return;
 
     // Hide currently visible layers instantly
     activeLayersRef.current.forEach(timestamp => {
@@ -262,7 +280,7 @@ const IEMRadarLayer = ({ isVisible = true, opacity = 0.7, selectedTime = null, o
   // Cleanup layers when component unmounts
   useEffect(() => {
     return () => {
-      console.log('[IEMRadarLayer] Cleaning up cached layers');
+      // Cleaning up cached layers
       layerCacheRef.current.forEach((layer) => {
         if (map && map.hasLayer(layer)) {
           map.removeLayer(layer);

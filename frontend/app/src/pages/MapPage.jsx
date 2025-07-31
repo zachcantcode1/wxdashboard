@@ -17,7 +17,8 @@ import RadarTimeSlider from '../components/RadarTimeSlider';
 import FutureRadarLayer from '../components/FutureRadarLayer';
 import FutureRadarTimeSlider from '../components/FutureRadarTimeSlider';
 import SPCKMLLayer from '../components/SPCKMLLayer';
-import PNGRadarLayer from '../components/PNGRadarLayer';
+import WarningCountDisplay from '../components/WarningCountDisplay';
+
 
 // Helper component to adjust map view based on alert geometry
 function MapController({ alertGeometry }) {
@@ -28,7 +29,6 @@ function MapController({ alertGeometry }) {
       const popupPane = map.getPane('popupPane');
       if (popupPane) {
         popupPane.style.zIndex = 1000; // Ensure popups are above other layers
-        console.log('[MapPage] MapController: Set popupPane z-index to 1000');
       }
     }
   }, [map]);
@@ -69,24 +69,14 @@ function MapController({ alertGeometry }) {
   return null; // This component does not render anything itself
 }
 
-const getLsrIcon = (descript) => {
-  let iconClass = 'fas fa-circle-info'; // Default icon
-  let color = '#007bff'; // Default color (blue)
+const getLsrIcon = (feature) => {
+  // Use pre-processed icon information from backend
+  const props = feature?.properties || {};
+  
 
-  const lowerDescript = descript.toLowerCase();
-
-  if (lowerDescript.includes('rain')) { iconClass = 'fas fa-cloud-showers-heavy'; color = '#4682B4'; } 
-  else if (lowerDescript.includes('hail')) { iconClass = 'fas fa-cloud-meatball'; color = '#ADD8E6'; } 
-  else if (lowerDescript.includes('tstm wnd gst') || lowerDescript.includes('tstm wnd dmg') || lowerDescript.includes('non-tstm wnd gst')) { iconClass = 'fas fa-wind'; color = '#87CEEB'; } 
-  else if (lowerDescript.includes('tornado')) { iconClass = 'fas fa-tornado'; color = '#FF0000'; } 
-  else if (lowerDescript.includes('funnel cloud')) { iconClass = 'fas fa-tornado'; color = '#FFA500'; } // Orange for funnel cloud 
-  else if (lowerDescript.includes('flash flood') || lowerDescript.includes('flood')) { iconClass = 'fas fa-water'; color = '#0000FF'; } 
-  else if (lowerDescript.includes('debris flow') || lowerDescript.includes('mudslide')) { iconClass = 'fas fa-house-flood-water'; color = '#A0522D'; } 
-  else if (lowerDescript.includes('snow')) { iconClass = 'fas fa-snowflake'; color = '#FFFFFF'; } 
-  else if (lowerDescript.includes('sleet') || lowerDescript.includes('freezing rain')) { iconClass = 'fas fa-icicles'; color = '#AFEEEE'; } 
-  else if (lowerDescript.includes('lightning')) { iconClass = 'fas fa-bolt'; color = '#FFFF00'; }
-  // Add more specific cases as needed
-  // e.g., 'Funnel Cloud', 'Waterspout', 'Dust Devil', 'Wildfire', 'Volcanic Ash'
+  
+  const iconClass = props.iconClass || 'fas fa-circle-info';
+  const color = props.iconColor || '#007bff';
 
   return L.divIcon({
     html: `<i class="${iconClass}" style="color: ${color}; font-size: 20px; text-shadow: 0 0 3px #000;"></i>`,
@@ -98,7 +88,7 @@ const getLsrIcon = (descript) => {
 };
 
 const pointToLayerLsr = (feature, latlng) => {
-  return L.marker(latlng, { icon: getLsrIcon(feature.properties.descript) });
+  return L.marker(latlng, { icon: getLsrIcon(feature) });
 };
 
 const onEachFeatureLsr = (feature, layer) => {
@@ -140,11 +130,17 @@ const EsriFeatureLayer = (url, style) => createLayerComponent((props, ctx) => {
 });
 
 export function MapPage() {
-  console.log('[MapPage] Component rendering/re-rendering');
   const [radarOpacity, setRadarOpacity] = useState(0.75);
   // Map layer selection state - single selection for all layers
   const [selectedLayer, setSelectedLayer] = useState('radar-warnings'); // 'radar-warnings', 'storm-reports', 'spc-outlooks'
   const [spcOutlookLayer, setSpcOutlookLayer] = useState('day1-categorical'); // Default to Day 1 Categorical
+  
+  // Separate visibility states for radar and warnings
+  const [showRadar, setShowRadar] = useState(true);
+  const [showWwa, setShowWwa] = useState(true);
+  
+  // State for alerts data
+  const [alertsData, setAlertsData] = useState([]);
 
   // Helper function to get layer details from layer ID
   const getSpcLayerDetails = (layerId) => {
@@ -170,7 +166,7 @@ export function MapPage() {
 
   // Debug log for SPC layer changes
   useEffect(() => {
-    console.log('SPC Outlook Layer changed to:', spcOutlookLayer);
+    // SPC Outlook Layer changed
   }, [spcOutlookLayer]);
   
   // Radar-specific state
@@ -180,13 +176,6 @@ export function MapPage() {
   const [radarLooping, setRadarLooping] = useState(false);
   const loopIntervalRef = useRef(null);
 
-  // PNG Radar-specific state
-  const [pngRadarSelectedTime, setPngRadarSelectedTime] = useState(null);
-  const [pngRadarAvailableTimes, setPngRadarAvailableTimes] = useState([]);
-  const [pngRadarLoading, setPngRadarLoading] = useState(false);
-  const [pngRadarLooping, setPngRadarLooping] = useState(false);
-  const pngLoopIntervalRef = useRef(null);
-
   // Future radar state
   const [futureRadarForecastMinute, setFutureRadarForecastMinute] = useState(0);
   const [futureRadarModelRun, setFutureRadarModelRun] = useState(null);
@@ -194,14 +183,20 @@ export function MapPage() {
   const [futureRadarError, setFutureRadarError] = useState(null);
 
   const [lsrData, setLsrData] = useState(null);
+  const [spcData, setSpcData] = useState(null);
+  const [spcLoading, setSpcLoading] = useState(false);
+  const [spcError, setSpcError] = useState(null);
 
   // Derived states based on selection
-  const showRadar = selectedLayer === 'radar-warnings';
-  const showWwa = selectedLayer === 'radar-warnings';
   const showLsrLayer = selectedLayer === 'storm-reports';
   const showFutureRadar = selectedLayer === 'future-radar';
   const showSpcOutlooks = selectedLayer === 'spc-outlooks';
-  const showSingleRadar = selectedLayer === 'single-radar';
+  
+  // Update showRadar and showWwa to use the separate visibility states when on the radar-warnings layer
+  const isRadarWarningsLayer = selectedLayer === 'radar-warnings';
+  const effectiveShowRadar = isRadarWarningsLayer && showRadar;
+  const effectiveShowWwa = isRadarWarningsLayer && showWwa;
+
   
   // Expose functions for IEM radar layer to communicate with parent
   useEffect(() => {
@@ -223,32 +218,8 @@ export function MapPage() {
     };
   }, [radarSelectedTime]);
 
-  // Expose functions for PNG radar layer to communicate with parent
-  useEffect(() => {
-    window.setPngRadarTimes = (times) => {
-      console.log('[MapPage] setPngRadarTimes called with', times.length, 'times');
-      console.log('[MapPage] PNG radar times:', times.map(t => t.timestamp));
-      setPngRadarAvailableTimes(times);
-      // Set initial time to the latest available
-      if (times.length > 0 && !pngRadarSelectedTime) {
-        console.log('[MapPage] Setting initial PNG radar time to:', times[times.length - 1].timestamp);
-        setPngRadarSelectedTime(times[times.length - 1].timestamp);
-      }
-    };
-    
-    window.setPngRadarLoading = (loading) => {
-      setPngRadarLoading(loading);
-    };
-    
-    return () => {
-      delete window.setPngRadarTimes;
-      delete window.setPngRadarLoading;
-    };
-  }, [pngRadarSelectedTime]);
-
   const debounceTimerRef = useRef(null);
   const location = useLocation();
-  console.log('MapPage: selectedLayer state:', selectedLayer); // Log map selection state
   const alertGeometry = location.state?.alertGeometry;
 
   // Clear alertGeometry from history state after first render to avoid persistence on refresh
@@ -267,60 +238,23 @@ export function MapPage() {
   const initialCenter = defaultUsaCenter;
 
   useEffect(() => {
-    console.log('MapPage: LSR useEffect triggered. selectedLayer:', selectedLayer, 'lsrData exists:', !!lsrData); // Log effect trigger
     if (showLsrLayer && !lsrData) {
-      console.log('MapPage: Fetching LSR GeoJSON data...'); // Log fetch initiation
-      fetch('https://mapservices.weather.noaa.gov/vector/rest/services/obs/nws_local_storm_reports/MapServer/0/query?where=1%3D1&outFields=*&f=geojson')
-        .then(response => response.json())
-        .then(data => {
-          console.log('MapPage: Received LSR GeoJSON data:', data); // Log received data
-          
-          // Filter data for current day only and exclude rain reports
-          if (data && data.features) {
-            const today = new Date();
-            const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-            const todayEnd = new Date(todayStart.getTime() + 24 * 60 * 60 * 1000); // Next day start
-            
-            const filteredFeatures = data.features.filter(feature => {
-              const props = feature.properties;
-              
-              // Filter for current day only
-              if (props.lsr_validtime) {
-                const reportTime = new Date(props.lsr_validtime);
-                if (reportTime < todayStart || reportTime >= todayEnd) {
-                  return false; // Not from today
-                }
-              }
-              
-              // Filter out rain reports
-              const description = (props.descript || '').toLowerCase();
-              if (description.includes('rain') || 
-                  description.includes('heavy rain') || 
-                  description.includes('excessive rainfall') ||
-                  description.includes('rainfall') ||
-                  description.includes('precipitation') ||
-                  description.includes('flooding rain') ||
-                  description.includes('flood')) {
-                return false; // Skip rain/flood reports
-              }
-              
-              return true;
-            });
-            
-            // Update data with filtered features
-            const filteredData = {
-              ...data,
-              features: filteredFeatures
-            };
-            
-            console.log(`MapPage: Filtered LSR data - ${filteredFeatures.length} reports from today (excluding rain)`);
-            setLsrData(filteredData);
-          } else {
-            setLsrData(data);
+      // Fetching LSR data from backend
+      fetch('/api/lsr/today')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Backend returned ${response.status}: ${response.statusText}`);
           }
+          return response.json();
+        })
+        .then(data => {
+          // Received processed LSR data from backend
+          setLsrData(data);
         })
         .catch(error => {
-          console.error('MapPage: Error fetching LSR GeoJSON data:', error); // Log fetch error
+          console.error('MapPage: Error fetching LSR data from backend:', error);
+          // Fallback to empty data
+          setLsrData({ type: 'FeatureCollection', features: [] });
         });
     } else if (selectedLayer !== 'storm-reports' && lsrData) {
       // Optional: Consider clearing data if layer is turned off and you want to re-fetch next time
@@ -329,6 +263,48 @@ export function MapPage() {
       // setLsrData(null); // Uncomment if you want to clear data on toggle off
     }
   }, [selectedLayer]);
+
+  // SPC data fetching effect
+  useEffect(() => {
+    // SPC useEffect triggered
+    
+    if (showSpcOutlooks && spcOutlookLayer) {
+      // Parse the layer ID to get outlook type and day
+      const layerDetails = getSpcLayerDetails(spcOutlookLayer);
+      const { type: outlookType, day } = layerDetails;
+      
+      // Layer details parsed and fetching SPC data
+      
+      // Clear previous data immediately to show loading state
+      setSpcData(null);
+      setSpcLoading(true);
+      setSpcError(null);
+      
+      fetch(`/api/spc/${outlookType}/${day}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Backend returned ${response.status}: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          setSpcData(data);
+          setSpcLoading(false);
+        })
+        .catch(error => {
+          console.error('MapPage: Error fetching SPC data from backend:', error);
+          setSpcError(error.message);
+          setSpcData({ type: 'FeatureCollection', features: [] });
+          setSpcLoading(false);
+        });
+    } else if (!showSpcOutlooks) {
+      // Clear SPC data when layer is turned off
+      // Clearing SPC data - layer turned off
+      setSpcData(null);
+      setSpcError(null);
+      setSpcLoading(false);
+    }
+  }, [showSpcOutlooks, spcOutlookLayer]);
 
   const handleTimeChange = (newIndex, newTime) => {
     // Stop looping when user manually changes time
@@ -367,45 +343,6 @@ export function MapPage() {
     }
   };
 
-  // PNG Radar time handling functions
-  const handlePngTimeChange = (newIndex, newTime) => {
-    console.log('[MapPage] PNG radar time changed to index:', newIndex, 'time:', newTime);
-    // Stop looping when user manually changes time
-    if (pngRadarLooping) {
-      setPngRadarLooping(false);
-      if (pngLoopIntervalRef.current) {
-        clearInterval(pngLoopIntervalRef.current);
-        pngLoopIntervalRef.current = null;
-      }
-    }
-    
-    // Update selected PNG radar time
-    setPngRadarSelectedTime(newTime);
-  };
-
-  const handlePngLoopToggle = (isLooping) => {
-    setPngRadarLooping(isLooping);
-    
-    if (isLooping) {
-      // Start looping animation
-      pngLoopIntervalRef.current = setInterval(() => {
-        setPngRadarSelectedTime(currentTime => {
-          if (!pngRadarAvailableTimes.length) return currentTime;
-          
-          const currentIndex = pngRadarAvailableTimes.findIndex(time => time.timestamp === currentTime);
-          const nextIndex = currentIndex >= pngRadarAvailableTimes.length - 1 ? 0 : currentIndex + 1;
-          return pngRadarAvailableTimes[nextIndex]?.timestamp || currentTime;
-        });
-      }, 800); // Change frame every 800ms
-    } else {
-      // Stop looping
-      if (pngLoopIntervalRef.current) {
-        clearInterval(pngLoopIntervalRef.current);
-        pngLoopIntervalRef.current = null;
-      }
-    }
-  };
-
   // Future radar callback functions
   const handleFutureRadarTimeChange = (minutes) => {
     setFutureRadarForecastMinute(minutes);
@@ -417,6 +354,8 @@ export function MapPage() {
     setFutureRadarError(error);
   };
 
+
+
   // Cleanup loop interval on unmount
   useEffect(() => {
     return () => {
@@ -425,8 +364,6 @@ export function MapPage() {
       }
     };
   }, []);
-
-  console.log("MapPage: Rendering with radarAvailableTimes:", radarAvailableTimes.length, "times");
 
   // Cleanup debounce timer on unmount
   useEffect(() => {
@@ -463,26 +400,18 @@ export function MapPage() {
           scrollWheelZoom
           style={{ height: '100%', width: '100%' }}
         >
-          {/* Basemap - ArcGIS Dark Gray Canvas */}
+          {/* Mapbox Navigation Night Basemap */}
           <TileLayer
-            key="arcgis-base"
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-            attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
+            key="mapbox-navigation-night"
+            url="https://api.mapbox.com/styles/v1/mapbox/navigation-night-v1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemFjaG1pbGxlOTYiLCJhIjoiY200cmR2bXJ5MDNvbzJqb3F6dHQ0NDF6ZSJ9.ZbynfFycdWjRz1Bf-2iluQ"
+            attribution='&copy; <a href="https://www.mapbox.com/">Mapbox</a>'
             zIndex={1}
-          />
-          
-          {/* Reference Layer - labels and borders on top */}
-          <TileLayer
-            key="arcgis-reference"
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}"
-            attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
-            zIndex={1000}
           />
 
 
           {/* IEM NEXRAD Radar */}
-          <IEMRadarLayer 
-            isVisible={showRadar}
+          <IEMRadarLayer
+            isVisible={effectiveShowRadar}
             opacity={radarOpacity}
             selectedTime={radarSelectedTime}
             overlayType="radar"
@@ -499,19 +428,15 @@ export function MapPage() {
             />
           )}
 
-          {/* Single PNG Radar */}
-          {showSingleRadar && (
-            <PNGRadarLayer
-              isVisible={showSingleRadar}
-              opacity={radarOpacity}
-              selectedTime={pngRadarSelectedTime}
+          {/* AtmosphericX Weather Alerts */}
+          {effectiveShowWwa && (
+            <AtmosXAlertsLayer
+              isVisible={true}
+              onAlertsUpdate={setAlertsData}
             />
           )}
 
-          {/* AtmosphericX Weather Alerts */}
-          {showWwa && (
-            <AtmosXAlertsLayer isVisible={true} />
-          )}
+
 
           {/* Local Storm Reports */}
           {showLsrLayer && (
@@ -558,11 +483,52 @@ export function MapPage() {
           )}
 
           {/* SPC Weather Outlooks */}
-          {showSpcOutlooks && (
-            <SPCKMLLayer
+          {showSpcOutlooks && spcData && (
+            <GeoJSON
               key={`spc-outlook-${spcOutlookLayer}`}
-              outlookType={getSpcLayerDetails(spcOutlookLayer).type}
-              day={getSpcLayerDetails(spcOutlookLayer).day}
+              data={spcData}
+              style={(feature) => {
+                const props = feature?.properties || {};
+                return {
+                  color: props.strokeColor || '#3388ff',
+                  weight: props.strokeWeight || 2,
+                  opacity: props.strokeOpacity || 0.9,
+                  fillColor: props.fillColor || '#87CEEB',
+                  fillOpacity: props.fillOpacity || 0.3
+                };
+              }}
+              onEachFeature={(feature, layer) => {
+                const props = feature.properties || {};
+                const { outlookType, day, layerName } = props;
+                
+                let popupContent = `<div style="font-family: Arial, sans-serif;">`;
+                popupContent += `<h4 style="margin: 0 0 8px 0; color: #333;">${layerName || 'SPC Outlook'}</h4>`;
+                
+                // Add specific information based on outlook type
+                if (outlookType === 'categorical') {
+                  const risk = props.LABEL || props.DN || 'Unknown';
+                  const description = props.LABEL2 || risk;
+                  popupContent += `<p><strong>Risk Level:</strong> ${description}</p>`;
+                  popupContent += `<p><strong>Code:</strong> ${risk}</p>`;
+                } else {
+                  const prob = props.LABEL || props.DN || 0;
+                  popupContent += `<p><strong>Probability:</strong> ${prob}</p>`;
+                }
+                
+                // Add timing information
+                if (props.EXPIRE) {
+                  popupContent += `<p><strong>Expires:</strong> ${props.EXPIRE}</p>`;
+                }
+                if (props.ISSUE) {
+                  popupContent += `<p><strong>Issued:</strong> ${props.ISSUE}</p>`;
+                }
+                
+                popupContent += `<p><strong>Source:</strong> NOAA/NWS Storm Prediction Center</p>`;
+                popupContent += `</div>`;
+                
+                layer.bindPopup(popupContent);
+              }}
+              attribution="SPC/NOAA"
             />
           )}
 
@@ -570,6 +536,11 @@ export function MapPage() {
           <MapController alertGeometry={alertGeometry} />
         </MapContainer>
 
+        {/* Warning Count Display - now positioned within the map container */}
+        <div className="absolute top-4 right-4 z-[1001]">
+          <WarningCountDisplay alertsData={alertsData} />
+        </div>
+        
         {/* Legend */}
         {showLsrLayer && <LsrLegend items={legendItems} />}
         
@@ -580,17 +551,22 @@ export function MapPage() {
             layerName={getSpcLayerDetails(spcOutlookLayer).name}
           />
         )}
+{/* Controls overlay */}
+<MapControls
+  selectedLayer={selectedLayer}
+  setSelectedLayer={setSelectedLayer}
+  spcOutlookLayer={spcOutlookLayer}
+  setSpcOutlookLayer={setSpcOutlookLayer}
+  showRadar={showRadar}
+  setShowRadar={setShowRadar}
+  showWwa={showWwa}
+  setShowWwa={setShowWwa}
+  positionClass="absolute top-4 left-1/2 transform -translate-x-1/2"
+/>
 
-        {/* Controls overlay */}
-        <MapControls
-          selectedLayer={selectedLayer}
-          setSelectedLayer={setSelectedLayer}
-          spcOutlookLayer={spcOutlookLayer}
-          setSpcOutlookLayer={setSpcOutlookLayer}
-        />
 
         {/* Radar Time Slider - positioned outside map to avoid interaction conflicts */}
-        {showRadar && (
+        {effectiveShowRadar && (
           <RadarTimeSlider
             radarTimes={radarAvailableTimes}
             selectedTime={radarSelectedTime}
@@ -614,18 +590,7 @@ export function MapPage() {
           />
         )}
 
-        {/* PNG Radar Time Slider - positioned outside map to avoid interaction conflicts */}
-        {showSingleRadar && (
-          <RadarTimeSlider
-            radarTimes={pngRadarAvailableTimes}
-            selectedTime={pngRadarSelectedTime}
-            onTimeChange={handlePngTimeChange}
-            isLoading={pngRadarLoading}
-            isLooping={pngRadarLooping}
-            onLoopToggle={handlePngLoopToggle}
-            positionClass="absolute bottom-4 left-4"
-          />
-        )}
+
       </div>
     </div>
   );
