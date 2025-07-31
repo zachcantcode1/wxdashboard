@@ -48,6 +48,16 @@ setInterval(async () => {
 
 console.log('[Cleanup] Scheduled hourly cleanup of expired alerts');
 
+// Root route for Railway health checks
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'Weather Dashboard Backend API',
+    timestamp: new Date().toISOString(),
+    version: '1.0.0'
+  });
+});
+
 // Serve radar images from cache
 app.get('/api/radar/:time', (req, res) => {
   const time = req.params.time;
