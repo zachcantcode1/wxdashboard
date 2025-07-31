@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:match*",
+      "destination": "https://wxdashboard-production.up.railway.app/api/:match*"
+    }
+  ]
+}
