@@ -34,7 +34,9 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils"; // Import cn utility
 
-const SOCKET_SERVER_URL = 'http://localhost:3001';
+const SOCKET_SERVER_URL = import.meta.env.PROD 
+  ? 'https://wxdashboard-production.up.railway.app' 
+  : 'http://localhost:3001';
 
 export function AlertsSidebar({ className }) { // Accept className prop
   const [alerts, setAlerts] = useState([]);
