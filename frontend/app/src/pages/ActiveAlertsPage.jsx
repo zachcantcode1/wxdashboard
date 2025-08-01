@@ -3,7 +3,9 @@ import { io } from 'socket.io-client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-const SOCKET_SERVER_URL = 'http://localhost:3001';
+const SOCKET_SERVER_URL = import.meta.env.PROD 
+  ? 'https://wxdashboard-production.up.railway.app' 
+  : 'http://localhost:3001';
 
 const stateAbbreviationsToNames = {
   AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
