@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Briefcase, BarChart2, Settings, HelpCircle, Map, Radar, CloudSun, Tornado, Camera, List, Newspaper, ChevronDown, ExternalLink, AlertTriangle } from "lucide-react"; // Added Camera, List, Newspaper, ChevronDown, ExternalLink, AlertTriangle icons
+import { Home, Briefcase, BarChart2, Settings, HelpCircle, Map, Radar, CloudSun, Tornado, List, Newspaper, ChevronDown, ExternalLink, AlertTriangle } from "lucide-react"; // Added List, Newspaper, ChevronDown, ExternalLink, AlertTriangle icons
 import {
   Collapsible,
   CollapsibleContent,
@@ -27,15 +28,11 @@ const menuItems = [
     icon: Home,
   },
   {
-    title: "Interactive Map",
-    path: "/map",
-    icon: Map,
+    title: "Current Weather",
+    path: "/current-weather",
+    icon: CloudSun, // You might need to import this icon
   },
-  {
-    title: "Live Cams",
-    path: "/live-cams",
-    icon: Camera,
-  },
+
   {
     title: "Recent Storm Reports",
     path: "/recent-lsr",
@@ -70,8 +67,8 @@ const menuItems = [
     ],
   },
   {
-    title: "Analytics",
-    path: "#", // Placeholder
+    title: "Weather Stats",
+    path: "/weather-stats",
     icon: BarChart2,
   },
   {

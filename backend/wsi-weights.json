@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "halfLives": {
+    "alertsHours": 6,
+    "reportsHours": 9
+  },
+  "caps": {
+    "alertsScore": 250,
+    "reportsScore": 250
+  },
+  "blend": {
+    "alertsWeight": 0.6,
+    "reportsWeight": 0.4
+  },
+  "alertBase": {
+    "tornado warning": 10,
+    "severe thunderstorm warning": 6,
+    "flash flood warning": 5,
+    "tornado watch": 4,
+    "severe thunderstorm watch": 3,
+    "special weather statement": 2,
+    "advisory": 2,
+    "other": 1
+  },
+  "alertBonuses": {
+    "tornadoDetection": {
+      "observed": 12,
+      "radar": 8
+    },
+    "thunderstormDamageThreat": {
+      "destructive": 8,
+      "considerable": 5,
+      "base": 2
+    },
+    "hail": {
+      "thresholdInches": 0.75,
+      "perQuarterInch": 0.5,
+      "maxBonus": 8
+    },
+    "wind": {
+      "thresholdMph": 50,
+      "atThreshold": 1,
+      "per5Mph": 0.5,
+      "maxBonus": 8
+    },
+    "multiState": {
+      "perStateBeyondOne": 1,
+      "maxBonus": 5
+    }
+  },
+  "reportBase": {
+    "tornado": 12,
+    "significant wind damage": 6,
+    "wind damage": 6,
+    "wind gust": 4,
+    "hail": 4,
+    "funnel cloud": 5,
+    "flash flood": 5,
+    "blizzard": 6,
+    "ice": 6,
+    "other": 3
+  },
+  "reportBonuses": {
+    "tornado": {
+      "ef": {
+        "0": 1,
+        "1": 2,
+        "2": 4,
+        "3": 7,
+        "4": 10,
+        "5": 14
+      },
+      "debris": 4
+    },
+    "hail": {
+      "thresholdInches": 0.75,
+      "perQuarterInch": 0.5,
+      "maxBonus": 6
+    },
+    "wind": {
+      "thresholdMph": 50,
+      "atThreshold": 1,
+      "per5Mph": 0.5,
+      "maxBonus": 6
+    },
+    "remarksBoosts": {
+      "widespread": 2,
+      "significant": 3,
+      "catastrophic": 4
+    }
+  }
+}

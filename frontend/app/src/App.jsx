@@ -1,32 +1,40 @@
 // src/App.jsx
 import 'leaflet/dist/leaflet.css'; // Required for react-leaflet
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { WeatherProvider } from './context/WeatherContext';
+import { AuthProvider } from './contexts/AuthContext';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage'; // Default export
-import { MapPage } from './pages/MapPage'; // Named export - RESTORED TO ORIGINAL
-import { LiveCamsPage } from './pages/LiveCamsPage'; // Named export
 import LsrListPage from './pages/LsrListPage'; // Default export
 import ActiveAlertsPage from './pages/ActiveAlertsPage'; // Default export
+import CurrentWeatherPage from './pages/CurrentWeatherPage'; // Default export
 import TopStormReportsPage from './pages/TopStormReportsPage'; // Default export
+import WeatherStatsPage from './pages/WeatherStatsPage'; // Default export
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          {/* Routes for Weather Services sub-pages */}
+    <AuthProvider>
+      <WeatherProvider>
+        <Router>
+          <ProtectedRoute>
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<HomePage />} />
+                {/* Routes for Weather Services sub-pages */}
+                <Route path="recent-lsr" element={<LsrListPage />} />
+                <Route path="active-alerts" element={<ActiveAlertsPage />} />
+                <Route path="current-weather" element={<CurrentWeatherPage />} />
+                <Route path="top-storm-reports" element={<TopStormReportsPage />} />
+                <Route path="weather-stats" element={<WeatherStatsPage />} />
 
-          <Route path="map" element={<MapPage />} />
-          <Route path="live-cams" element={<LiveCamsPage />} />
-          <Route path="recent-lsr" element={<LsrListPage />} />
-          <Route path="active-alerts" element={<ActiveAlertsPage />} />
-          <Route path="top-storm-reports" element={<TopStormReportsPage />} />
-
-          {/* Add other routes here later */}
-        </Route>
-      </Routes>
-    </Router>
+                {/* Add other routes here later */}
+              </Route>
+            </Routes>
+          </ProtectedRoute>
+        </Router>
+      </WeatherProvider>
+    </AuthProvider>
   );
 }
 

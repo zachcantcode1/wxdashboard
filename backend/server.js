@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
@@ -5,6 +6,7 @@ const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
 const { spawn } = require('child_process');
+const { createClient } = require('@supabase/supabase-js');
 
 const RADAR_CACHE_DIR = path.join(__dirname, 'radar_cache');
 
@@ -12,8 +14,8 @@ const RADAR_CACHE_DIR = path.join(__dirname, 'radar_cache');
 const VERBOSE = process.env.XMPP_VERBOSE === 'true';
 // Replace old XMPP client with AtmosX parser
 const { setupAtmosXClient } = require('./atmosxClient');
-// Import alerts database
-const AlertsDatabase = require('./alertsDatabase');
+// Import Supabase alerts database
+const SupabaseAlertsDatabase = require('./supabaseAlertsDatabase');
 
 const app = express();
 const server = http.createServer(app);
@@ -31,8 +33,28 @@ const io = new Server(server, {
   },
 });
 
-// Initialize alerts database
-const alertsDB = new AlertsDatabase();
+// Initialize Supabase client for user authentication
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+
+// Middleware to authenticate requests
+const authenticateToken = async (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+
+  if (token == null) return res.sendStatus(401); // if there isn't any token
+
+  const { data: { user }, error } = await supabase.auth.getUser(token);
+
+  if (error || !user) {
+    return res.sendStatus(403); // if token is no longer valid
+  }
+
+  req.user = user;
+  next();
+};
+
+// Initialize Supabase alerts database
+const alertsDB = new SupabaseAlertsDatabase();
 
 // Schedule hourly cleanup of expired alerts
 setInterval(async () => {
@@ -94,154 +116,7 @@ app.get('/api/alerts/all', async (req, res) => {
   }
 });
 
-// SPC (Storm Prediction Center) endpoint with server-side processing
-app.get('/api/spc/:outlookType/:day', async (req, res) => {
-  try {
-    const { outlookType, day } = req.params;
-    const dayNum = parseInt(day, 10);
-    
-    console.log(`Fetching SPC ${outlookType} outlook for day ${dayNum}...`);
-    
-    // Generate KML URL based on outlook type and day
-    const getKMLUrl = (type, dayNumber) => {
-      const baseUrl = 'https://www.spc.noaa.gov/products/outlook/';
-      
-      switch (type) {
-        case 'categorical':
-          if (dayNumber === 1) return `${baseUrl}day1otlk_cat.kml`;
-          if (dayNumber === 2) return `${baseUrl}day2otlk_cat.kml`;
-          if (dayNumber === 3) return `${baseUrl}day3otlk_cat.kml`;
-          break;
-        case 'tornado':
-          if (dayNumber === 1) return `${baseUrl}day1otlk_torn.kml`;
-          if (dayNumber === 2) return `${baseUrl}day2otlk_torn.kml`;
-          break;
-        case 'hail':
-          if (dayNumber === 1) return `${baseUrl}day1otlk_hail.kml`;
-          if (dayNumber === 2) return `${baseUrl}day2otlk_hail.kml`;
-          break;
-        case 'wind':
-          if (dayNumber === 1) return `${baseUrl}day1otlk_wind.kml`;
-          if (dayNumber === 2) return `${baseUrl}day2otlk_wind.kml`;
-          break;
-        case 'probabilistic':
-          if (dayNumber === 3) return `${baseUrl}day3otlk_prob.kml`;
-          if (dayNumber >= 4 && dayNumber <= 8) return `${baseUrl}day${dayNumber}otlk_prob.kml`;
-          break;
-      }
-      return null;
-    };
-    
-    const kmlUrl = getKMLUrl(outlookType, dayNum);
-    
-    if (!kmlUrl) {
-      return res.status(400).json({ 
-        error: 'Invalid outlook type or day', 
-        message: `No KML available for ${outlookType} day ${dayNum}` 
-      });
-    }
-    
-    // Fetch KML data from NOAA
-    const fetch = require('node-fetch');
-    const response = await fetch(kmlUrl);
-    
-    if (!response.ok) {
-      throw new Error(`NOAA SPC API returned ${response.status}: ${response.statusText}`);
-    }
-    
-    const kmlText = await response.text();
-    
-    // Convert KML to GeoJSON using tj library
-    const tj = require('@mapbox/togeojson');
-    const DOMParser = require('xmldom').DOMParser;
-    
-    const kmlDoc = new DOMParser().parseFromString(kmlText, 'text/xml');
-    const geoJsonData = tj.kml(kmlDoc);
-    
-    if (!geoJsonData || !geoJsonData.features) {
-      return res.json({ type: 'FeatureCollection', features: [] });
-    }
-    
-    // Pre-process features with styling information
-    const processedFeatures = geoJsonData.features.map(feature => {
-      const props = feature.properties || {};
-      
-      // Add pre-computed style information based on outlook type
-      let styleInfo = {};
-      
-      if (outlookType === 'categorical') {
-        styleInfo = getCategoricalStyle(props);
-      } else {
-        styleInfo = getProbabilisticStyle(props, outlookType);
-      }
-      
-      return {
-        ...feature,
-        properties: {
-          ...props,
-          // Add pre-computed style properties
-          strokeColor: styleInfo.color,
-          strokeWeight: styleInfo.weight,
-          strokeOpacity: styleInfo.opacity,
-          fillColor: styleInfo.fillColor,
-          fillOpacity: styleInfo.fillOpacity,
-          // Add outlook metadata
-          outlookType,
-          day: dayNum,
-          layerName: `Day ${dayNum} ${outlookType.charAt(0).toUpperCase() + outlookType.slice(1)}`
-        }
-      };
-    });
-    
-    // Helper functions for styling (moved from frontend)
-    function getCategoricalStyle(props) {
-      const strokeColor = props.stroke || props.STROKE || '#3388ff';
-      const fillColor = props.fill || props.FILL || '#87CEEB';
-      
-      return {
-        color: strokeColor,
-        weight: 2,
-        opacity: 0.9,
-        fillColor: fillColor,
-        fillOpacity: 0.3
-      };
-    }
-    
-    function getProbabilisticStyle(props, hazardType) {
-      const strokeColor = props.stroke || props.STROKE || '#3388ff';
-      const fillColor = props.fill || props.FILL || '#87CEEB';
-      
-      return {
-        color: strokeColor,
-        weight: 2,
-        opacity: 0.9,
-        fillColor: fillColor,
-        fillOpacity: 0.3
-      };
-    }
-    
-    // Cache response for 30 minutes (SPC data updates less frequently)
-    res.setHeader('Cache-Control', 'public, max-age=1800');
-    res.json({ 
-      type: 'FeatureCollection', 
-      features: processedFeatures,
-      metadata: {
-        outlookType,
-        day: dayNum,
-        layerName: `Day ${dayNum} ${outlookType.charAt(0).toUpperCase() + outlookType.slice(1)}`,
-        source: 'NOAA/NWS Storm Prediction Center',
-        url: kmlUrl
-      }
-    });
-    
-  } catch (error) {
-    console.error('Error fetching SPC data:', error);
-    res.status(500).json({ 
-      error: 'Failed to fetch SPC data', 
-      message: error.message 
-    });
-  }
-});
+
 
 // LSR (Local Storm Reports) endpoint with server-side processing
 app.get('/api/lsr/today', async (req, res) => {
@@ -375,7 +250,225 @@ function getLsrIconInfo(description) {
 
 
 
+// ===================== WSI Config and History Endpoints =====================
+
+// Serve read-only WSI weights from a JSON file
+const WSI_WEIGHTS_PATH = path.join(__dirname, 'wsi-weights.json');
+
+// Ensure default weights file exists with sane defaults
+function ensureDefaultWsiWeights() {
+ try {
+   if (!fs.existsSync(WSI_WEIGHTS_PATH)) {
+     const defaultWeights = {
+       version: 1,
+       halfLives: { alertsHours: 6, reportsHours: 9 },
+       caps: { alertsScore: 250, reportsScore: 250 },
+       blend: { alertsWeight: 0.6, reportsWeight: 0.4 },
+       alertBase: {
+         "tornado warning": 10,
+         "severe thunderstorm warning": 6,
+         "flash flood warning": 5,
+         "tornado watch": 4,
+         "severe thunderstorm watch": 3,
+         "special weather statement": 2,
+         "advisory": 2,
+         "other": 1
+       },
+       alertBonuses: {
+         tornadoDetection: { observed: 12, radar: 8 },
+         thunderstormDamageThreat: { destructive: 8, considerable: 5, base: 2 },
+         hail: { thresholdInches: 0.75, perQuarterInch: 0.5, maxBonus: 8 },
+         wind: { thresholdMph: 50, atThreshold: 1, per5Mph: 0.5, maxBonus: 8 },
+         multiState: { perStateBeyondOne: 1, maxBonus: 5 }
+       },
+       reportBase: {
+         "tornado": 12,
+         "significant wind damage": 6,
+         "wind damage": 6,
+         "wind gust": 4,
+         "hail": 4,
+         "funnel cloud": 5,
+         "flash flood": 5,
+         "blizzard": 6,
+         "ice": 6,
+         "other": 3
+       },
+       reportBonuses: {
+         tornado: { ef: { "0": 1, "1": 2, "2": 4, "3": 7, "4": 10, "5": 14 }, debris: 4 },
+         hail: { thresholdInches: 0.75, perQuarterInch: 0.5, maxBonus: 6 },
+         wind: { thresholdMph: 50, atThreshold: 1, per5Mph: 0.5, maxBonus: 6 },
+         remarksBoosts: { widespread: 2, significant: 3, catastrophic: 4 }
+       }
+     };
+     fs.writeFileSync(WSI_WEIGHTS_PATH, JSON.stringify(defaultWeights, null, 2), 'utf-8');
+     console.log('[WSI] Created default wsi-weights.json');
+   }
+ } catch (err) {
+   console.error('[WSI] Failed to ensure default weights:', err);
+ }
+}
+ensureDefaultWsiWeights();
+
+app.get('/api/wsi-weights', (req, res) => {
+ try {
+   const raw = fs.readFileSync(WSI_WEIGHTS_PATH, 'utf-8');
+   const json = JSON.parse(raw);
+   res.setHeader('Cache-Control', 'no-store');
+   res.json(json);
+ } catch (err) {
+   console.error('[WSI] Error reading weights:', err);
+   res.status(500).json({ error: 'Failed to read WSI weights' });
+ }
+});
+
+// In-memory WSI history (rolling 24h)
+let wsiHistory = []; // [{ ts: ISOString, value: number }]
+
+// Trim history to last 24 hours
+function trimWsiHistory() {
+ const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+ wsiHistory = wsiHistory.filter(p => {
+   const t = new Date(p.ts).getTime();
+   return !isNaN(t) && t >= cutoff;
+ });
+}
+
+app.get('/api/wsi-history', (req, res) => {
+ try {
+   trimWsiHistory();
+   res.setHeader('Cache-Control', 'no-store');
+   res.json({ points: wsiHistory });
+ } catch (err) {
+   console.error('[WSI] Error reading history:', err);
+   res.status(500).json({ error: 'Failed to read WSI history' });
+ }
+});
+
+app.post('/api/wsi-history', (req, res) => {
+ try {
+   const { value, ts } = req.body || {};
+   const num = Number(value);
+   if (!isFinite(num)) {
+     return res.status(400).json({ error: 'Invalid value' });
+   }
+   const timestamp = ts ? new Date(ts) : new Date();
+   if (isNaN(timestamp.getTime())) {
+     return res.status(400).json({ error: 'Invalid timestamp' });
+   }
+   wsiHistory.push({ ts: timestamp.toISOString(), value: Math.round(num) });
+   trimWsiHistory();
+   res.json({ success: true, count: wsiHistory.length });
+ } catch (err) {
+   console.error('[WSI] Error writing history:', err);
+   res.status(500).json({ error: 'Failed to write WSI history' });
+ }
+});
+
+// ===========================================================================
+
 const PORT = process.env.PORT || 3001;
+
+// Current Weather endpoint
+app.get('/api/weather/:zipcode', async (req, res) => {
+  const { zipcode } = req.params;
+  const apiKey = process.env.OPENWEATHERMAP_API_KEY;
+  console.log('Using OpenWeatherMap API Key:', apiKey ? `${apiKey.substring(0, 4)}...` : 'Not found');
+  const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode},us&appid=${apiKey}&units=imperial`;
+
+  try {
+    const fetch = require('node-fetch');
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (response.ok) {
+      res.json(data);
+    } else {
+      res.status(response.status).json({ error: data.message || 'Error fetching weather data' });
+    }
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    res.status(500).json({ error: 'Failed to fetch weather data' });
+  }
+});
+
+// Geocoding endpoint
+app.get('/api/geocode/:zipcode', async (req, res) => {
+  const { zipcode } = req.params;
+  const apiKey = process.env.OPENWEATHERMAP_API_KEY;
+  const url = `http://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},US&appid=${apiKey}`;
+
+  try {
+    const fetch = require('node-fetch');
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (response.ok && data) {
+      res.json({ lat: data.lat, lon: data.lon, name: data.name });
+    } else {
+      res.status(response.status).json({ error: data.message || 'Error fetching geocoding data' });
+    }
+  } catch (error) {
+    console.error('Error fetching geocoding data:', error);
+    res.status(500).json({ error: 'Failed to fetch geocoding data' });
+  }
+});
+
+// One Call Weather endpoint
+app.get('/api/one-call-weather', async (req, res) => {
+  const { lat, lon } = req.query;
+  if (!lat || !lon) {
+    return res.status(400).json({ error: 'Latitude and longitude are required' });
+  }
+  const apiKey = process.env.OPENWEATHERMAP_API_KEY;
+  const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${apiKey}&units=imperial`;
+
+  try {
+    const fetch = require('node-fetch');
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (response.ok) {
+      res.json(data);
+    } else {
+      res.status(response.status).json({ error: data.message || 'Error fetching one-call weather data' });
+    }
+  } catch (error) {
+    console.error('Error fetching one-call weather data:', error);
+    res.status(500).json({ error: 'Failed to fetch one-call weather data' });
+  }
+});
+
+// User-specific endpoints for home location
+app.get('/api/user/home-location', authenticateToken, (req, res) => {
+  const homeZipcode = req.user.user_metadata?.home_zipcode;
+  if (homeZipcode) {
+    res.json({ home_zipcode: homeZipcode });
+  } else {
+    // It's okay if a user doesn't have one set, so we don't send an error status
+    res.json({ home_zipcode: null });
+  }
+});
+
+app.put('/api/user/home-location', authenticateToken, async (req, res) => {
+  const { zipcode } = req.body;
+  if (!zipcode) {
+    return res.status(400).json({ error: 'Zipcode is required.' });
+  }
+
+  try {
+    const { data, error } = await supabase.auth.admin.updateUserById(
+      req.user.id,
+      { user_metadata: { ...req.user.user_metadata, home_zipcode: zipcode } }
+    );
+
+    if (error) throw error;
+
+    res.json({ success: true, message: 'Home location updated successfully.' });
+  } catch (error) {
+    console.error('Error updating user home location:', error);
+    return res.status(500).json({ error: 'Failed to update home location.' });
+  }
+});
 
 // --- Socket.IO Connection Handling ---
 io.on('connection', (socket) => {

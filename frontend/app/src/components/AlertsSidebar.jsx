@@ -96,17 +96,7 @@ export function AlertsSidebar({ className }) { // Accept className prop
     setIsDetailsDialogOpen(true);
   };
 
-  const handleViewOnMap = (alert) => {
-    console.log('AlertsSidebar: handleViewOnMap called with alert:', JSON.parse(JSON.stringify(alert))); // Log the whole alert (deep copy for better inspection)
-    console.log('AlertsSidebar: alert.geometry before navigating:', alert.geometry); // Log just the geometry
-    if (alert.geometry) {
-      navigate('/map', { state: { alertGeometry: alert.geometry } });
-    } else {
-      // Optionally, navigate to map with a default view or show a message
-      console.warn('No geometry data available for this alert to view on map.');
-      navigate('/map'); // Navigate to map even without specific geometry
-    }
-  };
+
 
   return (
     // Apply className using cn
@@ -123,12 +113,12 @@ export function AlertsSidebar({ className }) { // Accept className prop
                       <TooltipTrigger asChild>
                         <Card className="hover:shadow-md transition-shadow cursor-default mb-3">
                           <CardHeader className="p-3">
-                            <CardTitle className="text-base truncate">{alert.productType}</CardTitle>
-                            <CardDescription>{alert.affectedArea}</CardDescription>
+                            <CardTitle className="text-base truncate">{alert.producttype}</CardTitle>
+                            <CardDescription>{alert.affectedarea}</CardDescription>
                           </CardHeader>
                           <CardContent className="p-3 pt-0">
                             {alert.states && alert.states.length > 0 && (
-                                <p className="text-sm text-muted-foreground"><span className="font-semibold">State(s):</span> {alert.states.join(', ')}</p>
+                                <p className="text-sm text-muted-foreground"><span className="font-semibold">State(s):</span> {alert.state_list}</p>
                             )}
                             <p className="text-sm text-muted-foreground">Expires: {alert.expires && alert.expires !== 'N/A' ? formatInTimeZone(new Date(alert.expires), 'America/Chicago', 'h:mm a zzz') : 'N/A'}</p>
                           </CardContent>

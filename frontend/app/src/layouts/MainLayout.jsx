@@ -17,14 +17,30 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { AppSidebar } from '@/components/AppSidebar';
 import { AlertsSidebar } from '@/components/AlertsSidebar';
-import { Menu } from 'lucide-react';
+import { Menu, User, LogOut } from 'lucide-react';
 import { cn } from "@/lib/utils"; // For conditional class names
+import { useAuth } from '../contexts/AuthContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const MainLayout = () => {
   const location = useLocation();
+  const { user, signOut } = useAuth();
   // MainLayout location tracking
 
   const showAlersSidebar = location.pathname !== '/';
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <SidebarProvider defaultOpen={false}>
@@ -58,8 +74,35 @@ const MainLayout = () => {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-          {/* Future placeholder for user profile/actions in header */}
-          <div className="ml-auto"></div>
+          {/* User profile dropdown */}
+          <div className="ml-auto px-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="bg-blue-600 text-white">
+                      {user?.email?.charAt(0).toUpperCase() || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">Weather Dashboard</p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                      {user?.email}
+                    </p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </header>
 
         {/* Wrapper for main content and right sidebar */}

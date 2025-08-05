@@ -12,9 +12,11 @@
   "description": "",
   "dependencies": {
     "@mapbox/togeojson": "^0.16.2",
+    "@supabase/supabase-js": "^2.53.0",
     "@xmpp/client": "^0.13.4",
     "atmosx-nwws-parser": "^1.0.154",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "he": "^1.2.0",
     "node-fetch": "^2.7.0",

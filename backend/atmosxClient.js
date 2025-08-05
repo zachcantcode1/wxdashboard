@@ -42,7 +42,7 @@ const setupAtmosXClient = (io, alertsDB) => {
       reconnectInterval: 60, // Reconnect every 60 seconds if disconnected
     },
     cacheSettings: {
-      maxMegabytes: 5, // Increase cache size for better performance
+      maxMegabytes: 20, // Increase cache size for better performance
       cacheDir: cacheDir, // Use the created cache directory
     },
     authentication: {

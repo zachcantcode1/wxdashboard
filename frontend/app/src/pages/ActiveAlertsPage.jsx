@@ -189,41 +189,36 @@ function ActiveAlertsPage() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div className="flex-1">
                   <CardTitle className={`text-lg ${getAlertTextColor(alert.productType)}`}>
-                    {alert.productType || 'Weather Alert'}
+                    {alert.producttype || 'Weather Alert'}
                   </CardTitle>
                   <CardDescription className="mt-1">
-                    {alert.affectedArea || 'Area not specified'}
+                    {alert.affectedarea || 'Area not specified'}
                   </CardDescription>
                 </div>
                 <div className="mt-2 md:mt-0 md:text-right space-y-1 text-sm">
                   {/* Display specific parameters if available */}
-                  {alert.parameters && (
-                    <div className="space-y-1 mb-2">
-                      {alert.parameters.maxWindGust && alert.parameters.maxWindGust !== 'N/A' && alert.parameters.maxWindGust !== null && alert.parameters.maxWindGust.trim() !== '' && (
-                        <p className="text-yellow-300 font-medium">
-                          🌪️ Winds: {alert.parameters.maxWindGust}
-                        </p>
-                      )}
-                      {alert.parameters.maxHailSize && alert.parameters.maxHailSize !== 'N/A' && alert.parameters.maxHailSize !== null && alert.parameters.maxHailSize.trim() !== '' && (
-                        <p className="text-blue-300 font-medium">
-                          🧊 Hail: {alert.parameters.maxHailSize}
-                        </p>
-                      )}
-                      {alert.parameters.tornadoDetection && alert.parameters.tornadoDetection !== 'N/A' && alert.parameters.tornadoDetection !== null && alert.parameters.tornadoDetection.trim() !== '' && (
-                        <p className="text-red-300 font-medium">
-                          🌪️ Tornado: {alert.parameters.tornadoDetection}
-                        </p>
-                      )}
-                      {(() => {
-                        const threat = Array.isArray(alert.parameters.thunderstormDamageThreat) ? alert.parameters.thunderstormDamageThreat[0] : alert.parameters.thunderstormDamageThreat;
-                        return threat && threat !== 'N/A' && threat !== null && threat.trim() !== '' && (
-                          <p className="text-orange-300 font-medium">
-                            ⚡ Threat: {threat}
-                          </p>
-                        );
-                      })()}
-                    </div>
-                  )}
+                  <div className="space-y-1 mb-2">
+                    {alert.max_wind_gust && alert.max_wind_gust !== 'N/A' && alert.max_wind_gust !== null && alert.max_wind_gust.trim() !== '' && (
+                      <p className="text-yellow-300 font-medium">
+                        🌪️ Winds: {alert.max_wind_gust}
+                      </p>
+                    )}
+                    {alert.max_hail_size && alert.max_hail_size !== 'N/A' && alert.max_hail_size !== null && alert.max_hail_size.trim() !== '' && (
+                      <p className="text-blue-300 font-medium">
+                        🧊 Hail: {alert.max_hail_size}
+                      </p>
+                    )}
+                    {alert.tornado_detection && alert.tornado_detection !== 'N/A' && alert.tornado_detection !== null && alert.tornado_detection.trim() !== '' && (
+                      <p className="text-red-300 font-medium">
+                        🌪️ Tornado: {alert.tornado_detection}
+                      </p>
+                    )}
+                    {alert.thunderstormDamageThreat && alert.thunderstormDamageThreat !== 'N/A' && alert.thunderstormDamageThreat !== null && alert.thunderstormDamageThreat.trim() !== '' && (
+                      <p className="text-orange-300 font-medium">
+                        ⚡ Threat: {alert.thunderstormDamageThreat}
+                      </p>
+                    )}
+                  </div>
                   
                   <p className="text-gray-400">
                     <span className="font-medium">Expires:</span> {formatTime(alert.expires)}
