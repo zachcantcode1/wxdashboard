@@ -232,6 +232,11 @@ function ActiveAlertsPage() {
                       }
                     </p>
                   )}
+                  {alert.population_formatted && (
+                    <p className="text-blue-300 font-medium">
+                      <span className="font-medium">👥 Population Affected:</span> {alert.population_formatted}
+                    </p>
+                  )}
                 </div>
               </div>
             </CardHeader>

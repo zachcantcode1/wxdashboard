@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { AppSidebar } from '@/components/AppSidebar';
-import { AlertsSidebar } from '@/components/AlertsSidebar';
 import { Menu, User, LogOut } from 'lucide-react';
 import { cn } from "@/lib/utils"; // For conditional class names
 import { useAuth } from '../contexts/AuthContext';
@@ -34,9 +33,6 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 const MainLayout = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
-  // MainLayout location tracking
-
-  const showAlersSidebar = location.pathname !== '/';
 
   const handleSignOut = async () => {
     await signOut();
@@ -110,15 +106,10 @@ const MainLayout = () => {
           {/* New wrapper for rounding and clipping main content area */}
           <div className="flex-1 relative rounded-lg overflow-hidden m-2 shadow-lg">
             {/* Main content area that scrolls */}
-            <main className="h-full w-full overflow-y-auto p-6">
+            <main className="flex-1 p-4 md:p-6 overflow-auto">
               <Outlet />
             </main>
           </div>
-          {showAlersSidebar && (
-            <AlertsSidebar
-              className="h-full z-20"
-            />
-          )}
         </div>
 
         <footer className="bg-background border-t p-4 text-center text-sm text-muted-foreground mt-auto shrink-0">

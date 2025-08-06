@@ -4,10 +4,10 @@ require('dotenv').config();
 class SupabaseAlertsDatabase {
   constructor() {
     this.supabaseUrl = process.env.SUPABASE_URL || 'https://xztrjjveapihqqbsgjwk.supabase.co';
-    this.supabaseKey = process.env.SUPABASE_ANON_KEY || '';
+    this.supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
     
     if (!this.supabaseUrl || !this.supabaseKey) {
-      throw new Error('Missing Supabase credentials. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.');
+      throw new Error('Missing Supabase credentials. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables.');
     }
     
     this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
@@ -40,7 +40,11 @@ class SupabaseAlertsDatabase {
         tornado_detection: parameters?.tornadoDetection || 'N/A',
         wmo_identifier: Array.isArray(parameters?.WMOidentifier) ? parameters.WMOidentifier[0] : (parameters?.WMOidentifier || 'N/A'),
         geometry_type: geometry?.type || 'N/A',
-        coordinates_summary: geometry?.coordinates ? `${geometry.coordinates.length} coordinate sets` : 'N/A'
+        coordinates_summary: geometry?.coordinates ? `${geometry.coordinates.length} coordinate sets` : 'N/A',
+        // Population data (if available in alert object)
+        population_total: alert.population_total || null,
+        population_formatted: alert.population_formatted || null,
+        population_counties: alert.population_counties || null
       };
 
       const { data, error } = await this.supabase

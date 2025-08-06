@@ -8,9 +8,11 @@ const VERBOSE = process.env.XMPP_VERBOSE === 'true';
 /**
  * Sets up the AtmosX NWWS parser as a replacement for the custom XMPP client
  * @param {SocketIO.Server} io - Socket.IO server instance for emitting alerts
+ * @param {SupabaseAlertsDatabase} alertsDB - Database instance for storing alerts
+ * @param {PopulationService} populationService - Service for calculating population estimates
  * @returns {AtmosXWireParser} The configured parser instance
  */
-const setupAtmosXClient = (io, alertsDB) => {
+const setupAtmosXClient = (io, alertsDB, populationService) => {
   // Ensure required directories exist
   const cacheDir = path.join(__dirname, 'atmosx_cache');
   const dbPath = path.join(__dirname, 'atmosx_database.db');
@@ -86,15 +88,51 @@ const setupAtmosXClient = (io, alertsDB) => {
       }
       
       if (transformedAlert) {
-        // Store alert in database
-        if (alertsDB) {
-          alertsDB.storeAlert(transformedAlert).catch(err => {
-            console.error('Error storing alert in database:', err);
-          });
-        }
+        // Calculate population estimates and store complete alert in Supabase
+        const storeCompleteAlert = async () => {
+          try {
+            // Calculate population if populationService is available
+            if (populationService) {
+              const ugcCodes = alert.properties?.geocode?.UGC || [];
+              if (ugcCodes.length > 0) {
+                const fipsCodes = populationService.extractCountyFipsFromUGC(ugcCodes);
+                
+                if (fipsCodes.length > 0) {
+                  try {
+                    const populationData = await populationService.getCountyPopulations(fipsCodes);
+                    if (populationData && populationData.totalPopulation > 0) {
+                      // Add population data to the alert before storing
+                      transformedAlert.population_total = populationData.totalPopulation;
+                      transformedAlert.population_formatted = populationService.formatPopulation(populationData.totalPopulation);
+                      transformedAlert.population_counties = populationData.counties;
+                      
+                      console.log(`Population calculated for alert ${transformedAlert.id}: ${transformedAlert.population_formatted} people affected`);
+                    }
+                  } catch (popError) {
+                    console.error('Error calculating population for alert:', popError);
+                    // Continue without population data
+                  }
+                }
+              }
+            }
+            
+            // Store complete alert (with population if calculated) in Supabase
+            if (alertsDB) {
+              await alertsDB.storeAlert(transformedAlert);
+              console.log(`Alert ${transformedAlert.id} stored in Supabase with complete data`);
+            }
+            
+            // Emit complete alert to frontend via Socket.IO
+            io.emit('new-alert', transformedAlert);
+            
+          } catch (error) {
+            console.error('Error in alert processing:', error);
+          }
+        };
         
-        // Emit alert to connected clients
-        io.emit('new-alert', transformedAlert);
+        // Store complete alert with population data
+        // Frontend will receive this via Supabase real-time subscriptions
+        storeCompleteAlert();
       }
     });
   });
@@ -178,13 +216,13 @@ function transformAlertFormat(alert) {
     // Extract hazard parameters if available
     const parameters = props.parameters || {};
     
-    // Extract parameters data directly
+    // Extract parameters data directly and convert arrays to strings
     const alertParameters = {
-      WMOidentifier: parameters.WMOidentifier || null,
-      tornadoDetection: parameters.tornadoDetection || null,
-      maxHailSize: parameters.maxHailSize || null,
-      maxWindGust: parameters.maxWindGust || null,
-      thunderstormDamageThreat: parameters.thunderstormDamageThreat || null
+      WMOidentifier: Array.isArray(parameters.WMOidentifier) ? parameters.WMOidentifier.join(', ') : parameters.WMOidentifier || null,
+      tornadoDetection: Array.isArray(parameters.tornadoDetection) ? parameters.tornadoDetection.join(', ') : parameters.tornadoDetection || null,
+      maxHailSize: Array.isArray(parameters.maxHailSize) ? parameters.maxHailSize.join(', ') : parameters.maxHailSize || null,
+      maxWindGust: Array.isArray(parameters.maxWindGust) ? parameters.maxWindGust.join(', ') : parameters.maxWindGust || null,
+      thunderstormDamageThreat: Array.isArray(parameters.thunderstormDamageThreat) ? parameters.thunderstormDamageThreat.join(', ') : parameters.thunderstormDamageThreat || null
     };
     
     console.log('=== ALERT TRANSFORMATION DEBUG ===');
@@ -195,8 +233,10 @@ function transformAlertFormat(alert) {
     // Create the transformed alert matching your frontend structure
     const transformed = {
       id: alert.id || Date.now().toString(),
-      productType: event,
+      productType: event, // Used for styling
+      producttype: event, // Used for display - must match productType
       affectedArea: areaDesc,
+      affectedarea: areaDesc, // Frontend expects lowercase
       headline: headline,
       description: description,
       expires: expires,
@@ -204,7 +244,15 @@ function transformAlertFormat(alert) {
       vtecString: vtecString,
       geometry: alert.geometry || null,
       states: states,
-      parameters: alertParameters, // Add parameters information
+      
+      // Extract parameters to match frontend field expectations
+      max_wind_gust: alertParameters.maxWindGust,
+      max_hail_size: alertParameters.maxHailSize,
+      tornado_detection: alertParameters.tornadoDetection,
+      thunderstormDamageThreat: alertParameters.thunderstormDamageThreat,
+      
+      // Keep parameters object for backward compatibility
+      parameters: alertParameters,
       
       // Additional fields for debugging
       _original: VERBOSE ? alert : undefined

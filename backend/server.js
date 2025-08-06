@@ -16,6 +16,8 @@ const VERBOSE = process.env.XMPP_VERBOSE === 'true';
 const { setupAtmosXClient } = require('./atmosxClient');
 // Import Supabase alerts database
 const SupabaseAlertsDatabase = require('./supabaseAlertsDatabase');
+// Import Population service
+const PopulationService = require('./populationService');
 
 const app = express();
 const server = http.createServer(app);
@@ -33,8 +35,11 @@ const io = new Server(server, {
   },
 });
 
-// Initialize Supabase client for user authentication
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+// Initialize Supabase client for user authentication (anon key for auth)
+const supabaseAuth = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+
+// Initialize Supabase client for backend operations (service role key for database operations)
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 // Middleware to authenticate requests
 const authenticateToken = async (req, res, next) => {
@@ -55,6 +60,9 @@ const authenticateToken = async (req, res, next) => {
 
 // Initialize Supabase alerts database
 const alertsDB = new SupabaseAlertsDatabase();
+
+// Initialize Population service
+const populationService = new PopulationService();
 
 // Schedule hourly cleanup of expired alerts
 setInterval(async () => {
@@ -98,7 +106,13 @@ app.get('/api/radar/:time', (req, res) => {
 app.get('/api/alerts', async (req, res) => {
   try {
     const alerts = await alertsDB.getActiveAlerts();
-    res.json(alerts);
+    // Transform database alerts to match Socket.IO format
+    const transformedAlerts = alerts.map(alert => ({
+      ...alert,
+      productType: alert.producttype, // Add camelCase for styling consistency
+      affectedArea: alert.affectedarea // Add camelCase for consistency
+    }));
+    res.json(transformedAlerts);
   } catch (error) {
     console.error('Error fetching alerts:', error);
     res.status(500).json({ error: 'Failed to fetch alerts' });
@@ -344,6 +358,33 @@ app.get('/api/wsi-history', (req, res) => {
  }
 });
 
+app.get('/api/wsi-current', (req, res) => {
+ try {
+   trimWsiHistory();
+   res.setHeader('Cache-Control', 'no-store');
+   
+   // Get the most recent WSI value from history
+   const currentWsi = wsiHistory.length > 0 ? wsiHistory[wsiHistory.length - 1] : null;
+   
+   if (currentWsi) {
+     res.json({ 
+       value: currentWsi.value, 
+       timestamp: currentWsi.ts,
+       hasValue: true 
+     });
+   } else {
+     res.json({ 
+       value: 0, 
+       timestamp: new Date().toISOString(),
+       hasValue: false 
+     });
+   }
+ } catch (err) {
+   console.error('[WSI] Error reading current WSI:', err);
+   res.status(500).json({ error: 'Failed to read current WSI' });
+ }
+});
+
 app.post('/api/wsi-history', (req, res) => {
  try {
    const { value, ts } = req.body || {};
@@ -467,6 +508,145 @@ app.put('/api/user/home-location', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error('Error updating user home location:', error);
     return res.status(500).json({ error: 'Failed to update home location.' });
+  }
+});
+
+// Population API endpoints
+app.get('/api/population/counties', async (req, res) => {
+  try {
+    const { fips } = req.query;
+    
+    if (!fips) {
+      return res.status(400).json({ error: 'FIPS codes are required' });
+    }
+    
+    // Parse FIPS codes (can be comma-separated string or array)
+    let fipsCodes = [];
+    if (typeof fips === 'string') {
+      fipsCodes = fips.split(',').map(f => f.trim()).filter(f => f.length === 5);
+    } else if (Array.isArray(fips)) {
+      fipsCodes = fips.filter(f => f && f.length === 5);
+    }
+    
+    if (fipsCodes.length === 0) {
+      return res.status(400).json({ error: 'Valid 5-digit FIPS codes are required' });
+    }
+    
+    const result = await populationService.getCountyPopulations(fipsCodes);
+    
+    res.json({
+      success: true,
+      totalPopulation: result.totalPopulation,
+      formattedPopulation: populationService.formatPopulation(result.totalPopulation),
+      counties: result.counties,
+      notFound: result.notFound,
+      requestedCount: fipsCodes.length,
+      foundCount: result.counties.length
+    });
+    
+  } catch (error) {
+    console.error('Population API error:', error);
+    res.status(500).json({ error: 'Failed to fetch population data' });
+  }
+});
+
+app.post('/api/population/ugc', async (req, res) => {
+  try {
+    const { ugcCodes } = req.body;
+    
+    if (!Array.isArray(ugcCodes) || ugcCodes.length === 0) {
+      return res.status(400).json({ error: 'UGC codes array is required' });
+    }
+    
+    // Extract county FIPS codes from UGC codes
+    const fipsCodes = populationService.extractCountyFipsFromUGC(ugcCodes);
+    
+    if (fipsCodes.length === 0) {
+      return res.json({
+        success: true,
+        totalPopulation: 0,
+        formattedPopulation: '0',
+        counties: [],
+        message: 'No county-level UGC codes found (zones not supported)'
+      });
+    }
+    
+    const result = await populationService.getCountyPopulations(fipsCodes);
+    
+    res.json({
+      success: true,
+      totalPopulation: result.totalPopulation,
+      formattedPopulation: populationService.formatPopulation(result.totalPopulation),
+      counties: result.counties,
+      ugcCodes: ugcCodes,
+      extractedFips: fipsCodes,
+      notFound: result.notFound
+    });
+    
+  } catch (error) {
+    console.error('UGC Population API error:', error);
+    res.status(500).json({ error: 'Failed to process UGC codes for population data' });
+  }
+});
+
+// Population update endpoint for existing alerts
+app.post('/api/population/update-alerts', async (req, res) => {
+  try {
+    console.log('Starting population update for existing alerts...');
+    
+    // Import the update function
+    const { updateAllAlerts } = require('./updateAlertPopulation');
+    
+    // Run the update in the background
+    updateAllAlerts().then(() => {
+      console.log('Population update completed successfully');
+    }).catch(error => {
+      console.error('Population update failed:', error);
+    });
+    
+    // Return immediately to avoid timeout
+    res.json({
+      success: true,
+      message: 'Population update started in background. Check server logs for progress.'
+    });
+    
+  } catch (error) {
+    console.error('Error starting population update:', error);
+    res.status(500).json({ error: 'Failed to start population update' });
+  }
+});
+
+// Get population statistics
+app.get('/api/population/stats', async (req, res) => {
+  try {
+    const { data: totalAlerts, error: totalError } = await supabase
+      .from('alerts')
+      .select('id', { count: 'exact', head: true });
+    
+    const { data: populatedAlerts, error: populatedError } = await supabase
+      .from('alerts')
+      .select('id', { count: 'exact', head: true })
+      .not('population_total', 'is', null);
+    
+    if (totalError || populatedError) {
+      throw new Error('Database query failed');
+    }
+    
+    const totalCount = totalAlerts?.length || 0;
+    const populatedCount = populatedAlerts?.length || 0;
+    const unpopulatedCount = totalCount - populatedCount;
+    
+    res.json({
+      success: true,
+      totalAlerts: totalCount,
+      populatedAlerts: populatedCount,
+      unpopulatedAlerts: unpopulatedCount,
+      completionPercentage: totalCount > 0 ? Math.round((populatedCount / totalCount) * 100) : 0
+    });
+    
+  } catch (error) {
+    console.error('Error getting population stats:', error);
+    res.status(500).json({ error: 'Failed to get population statistics' });
   }
 });
 
@@ -801,6 +981,15 @@ app.get('/api/radar/warnings/layers/:timestamp', (req, res) => {
     res.status(500).json({ error: 'Failed to generate radar layer' });
   }
 });
+
+// --- Initialize AtmosX Client ---
+try {
+  const atmosxClient = setupAtmosXClient(io, alertsDB, populationService);
+  console.log('AtmosX client initialized successfully');
+} catch (error) {
+  console.error('Failed to initialize AtmosX client:', error);
+  console.log('Server will continue without real-time weather alerts');
+}
 
 // --- Start the Express Server ---
 server.listen(PORT, () => {
