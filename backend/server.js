@@ -22,17 +22,53 @@ const PopulationService = require('./populationService');
 const app = express();
 const server = http.createServer(app);
 
+// CORS configuration for production
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://wxdashboard.vercel.app',
+    'https://wxdashboard-production.up.railway.app'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+app.use(cors(corsOptions)); // Enable CORS for all routes
+
+// Additional CORS headers middleware
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Setup Socket.IO with CORS configuration to allow our frontend to connect
 const io = new Server(server, {
   cors: {
-    origin: '*', // Allow all origins for maximum compatibility
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:5173', 
+      'https://wxdashboard.vercel.app',
+      'https://wxdashboard-production.up.railway.app'
+    ],
     methods: ['GET', 'POST'],
+    credentials: true
   },
+  allowEIO3: true // Enable Engine.IO v3 compatibility if needed
 });
 
 // Initialize Supabase client for user authentication (anon key for auth)
