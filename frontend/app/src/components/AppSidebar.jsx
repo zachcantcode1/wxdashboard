@@ -30,13 +30,7 @@ const menuItems = [
   {
     title: "Current Weather",
     path: "/current-weather",
-    icon: CloudSun, // You might need to import this icon
-  },
-
-  {
-    title: "Recent Storm Reports",
-    path: "/recent-lsr",
-    icon: List,
+    icon: CloudSun,
   },
   {
     title: "Active Alerts",
@@ -44,13 +38,23 @@ const menuItems = [
     icon: AlertTriangle,
   },
   {
+    title: "Recent Storm Reports",
+    path: "/recent-lsr",
+    icon: List,
+  },
+  {
     title: "Top Storm Reports",
     path: "/top-storm-reports",
     icon: BarChart2,
   },
   {
+    title: "Weather Stats",
+    path: "/weather-stats",
+    icon: BarChart2,
+  },
+  {
     title: "External Services",
-    icon: ExternalLink, // Using a generic external link icon for the dropdown
+    icon: ExternalLink,
     subItems: [
       {
         title: "Pivotal Weather",
@@ -65,11 +69,6 @@ const menuItems = [
         icon: Radar,
       },
     ],
-  },
-  {
-    title: "Weather Stats",
-    path: "/weather-stats",
-    icon: BarChart2,
   },
   {
     title: "Settings",
