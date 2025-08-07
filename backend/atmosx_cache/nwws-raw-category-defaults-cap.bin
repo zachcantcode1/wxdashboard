@@ -210643,3 +210643,423 @@ safe shelter inside a building or vehicle.</instruction>
 
 
 
+=================================================
+2025-08-07T00-39-15-413Z
+
+[{"xmlns":"nwws-oi","id":"nwws_processor.536","issue":"2025-08-07T00:39:00Z","ttaaii":"SRUS52","cccc":"KKEY","awipsid":"HMLKEY"}]
+=================================================
+
+
+
+637
+
+SRUS52 KKEY 070039
+
+HMLKEY
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="KYWF1"
+
+      timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:05+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Gulf of Mexico  AT Key West Tide Station"
+
+      originator="KEY"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HCIRG"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryName="Water Height (MHHW)"
+
+            primaryUnits="ft"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>-0.81</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>-0.82</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:05+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="KYWF1"
+
+      originator="KEY"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Gulf of Mexico  AT Key West Tide Station">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            secondaryUnits="kcfs"
+
+            pedts="HMIRG"
+
+            timezone="UTC"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>1</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>0.99</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:06+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="SUKF1"
+
+      originator="KEY"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Florida Bay  AT Sunset Cove Key Largo">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            primaryName="Water Height (MHHW)"
+
+            pedts="HCIRP"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-06T23:54:00-00:00</valid>
+
+      <primary>0.44</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:07+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="UWMF1"
+
+      originator="KEY"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Hawk Channel  AT Upper Matecumbe West End">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryName="Flow"
+
+            primaryName="Water Height (MHHW)"
+
+            pedts="HCIRP"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:54:00-00:00</valid>
+
+      <primary>-0.2</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Gulf of Mexico  AT Vaca Key, Florida Bay Tide Station"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="KEY"
+
+      id="VCAF1"
+
+      generationtime="2025-08-07T00:39:07+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      timezone="EST5EDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            primaryName="Water Height (MHHW)"
+
+            pedts="HCIRG"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>-0.66</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>-0.66</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="VCAF1"
+
+      generationtime="2025-08-07T00:39:07+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      timezone="EST5EDT"
+
+      name="Gulf of Mexico  AT Vaca Key, Florida Bay Tide Station"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="KEY">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HCIRP"
+
+            secondaryUnits="kcfs"
+
+            primaryName="Water Height (MHHW)"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>-0.66</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="VCAF1"
+
+      generationtime="2025-08-07T00:39:07+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      timezone="EST5EDT"
+
+      name="Gulf of Mexico  AT Vaca Key, Florida Bay Tide Station"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="KEY">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryUnits="ft"
+
+            primaryName="Tide Height"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            pedts="HMIRG">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>0.31</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>0.32</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+
+
