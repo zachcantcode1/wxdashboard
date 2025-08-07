@@ -1,122 +1,30 @@
 // src/layouts/MainLayout.jsx
 import React from 'react';
-import { Outlet, Link, NavLink, useLocation } from 'react-router-dom'; // Added Link and NavLink for Breadcrumb and navigation
-import {
-  SidebarProvider,
-  SidebarTrigger,
-  SidebarInset,
-} from "@/components/ui/sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import { AppSidebar } from '@/components/AppSidebar';
-import { Menu, User, LogOut } from 'lucide-react';
-import { cn } from "@/lib/utils"; // For conditional class names
-import { useAuth } from '../contexts/AuthContext';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Outlet } from 'react-router-dom';
+import { TopNavigation } from '@/components/TopNavigation';
 
 const MainLayout = () => {
-  const location = useLocation();
-  const { user, signOut } = useAuth();
-
-  const handleSignOut = async () => {
-    await signOut();
-  };
-
   return (
-    <SidebarProvider defaultOpen={false}>
-      {/* MainLayout rendering AppSidebar */}
-      <AppSidebar />
-      <SidebarInset className="flex flex-col min-h-0">
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background sticky top-0 z-10">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1 p-2 rounded-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring">
-              <Menu className="h-6 w-6" />
-            </SidebarTrigger>
-            <Separator
-              orientation="vertical"
-              className="mr-2 data-[orientation=vertical]:h-6" // Adjusted height to match Menu icon
-            />
-
-            {/* TODO: Make Breadcrumb dynamic based on route */}
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  {/* Using Link from react-router-dom for navigation */}
-                  <BreadcrumbLink asChild>
-                    <Link to="/">Home</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  {/* This should ideally be dynamic based on the current page */}
-                  <BreadcrumbPage>Current Page</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-          {/* User profile dropdown */}
-          <div className="ml-auto px-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-blue-600 text-white">
-                      {user?.email?.charAt(0).toUpperCase() || 'U'}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
-                <DropdownMenuLabel className="font-normal">
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">Weather Dashboard</p>
-                    <p className="text-xs leading-none text-muted-foreground">
-                      {user?.email}
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </header>
-
-        {/* Wrapper for main content and right sidebar */}
-        <div className="flex flex-1 overflow-hidden">
-          {/* New wrapper for rounding and clipping main content area */}
-          <div className="flex-1 relative rounded-lg overflow-hidden m-2 shadow-lg">
-            {/* Main content area that scrolls */}
-            <main className="flex-1 p-4 md:p-6 overflow-auto">
-              <Outlet />
-            </main>
-          </div>
+    <div className="min-h-screen bg-background">
+      {/* Top Navigation Bar */}
+      <TopNavigation />
+      
+      {/* Main Content Area */}
+      <main className="flex-1">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <Outlet />
         </div>
-
-        <footer className="bg-background border-t p-4 text-center text-sm text-muted-foreground mt-auto shrink-0">
-          <p>&copy; {new Date().getFullYear()} WX DASHBOARD. All rights reserved.</p>
-        </footer>
-      </SidebarInset>
-    </SidebarProvider>
+      </main>
+      
+      {/* Footer */}
+      <footer className="bg-background border-t border-border mt-auto">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <p className="text-center text-sm text-muted-foreground">
+            &copy; {new Date().getFullYear()} WX DASHBOARD. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
   );
 };
 

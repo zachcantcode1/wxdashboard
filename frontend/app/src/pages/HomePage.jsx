@@ -4,9 +4,9 @@ import LightningStormPro from '../components/LightningStormPro';
 
 const HomePage = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center h-full overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center min-h-[calc(100vh-200px)] overflow-hidden rounded-lg">
       {/* Animated Gradient Background - CSS will be in index.css */}
-      <div className="animated-gradient-bg absolute inset-0 -z-10 w-full h-full"></div>
+      <div className="animated-gradient-bg absolute inset-0 -z-10 w-full h-full rounded-lg"></div>
       {/* Canvas-based lightning storm overlay */}
       <LightningStormPro />
       <div className="z-10 text-center px-4">

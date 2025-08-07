@@ -8,40 +8,36 @@ export function useWeather() {
 }
 
 export const WeatherProvider = ({ children }) => {
-  const { user, token } = useAuth();
+  const { user, homeZip, saveHomeZip } = useAuth();
   const [zipcode, setZipcode] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [locationName, setLocationName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Auto-fetch when user logs in and has a saved home zip
   useEffect(() => {
-    const fetchHomeLocation = async () => {
-      if (user && token) {
-        try {
-          const response = await fetch('/api/user/home-location', {
-            headers: { 'Authorization': `Bearer ${token}` }
-          });
-          const data = await response.json();
-          if (response.ok && data.home_zipcode) {
-            fetchWeatherData(data.home_zipcode);
-          }
-        } catch (err) {
-          console.error("Could not fetch home location", err);
-        }
-      }
-    };
-    fetchHomeLocation();
-  }, [user, token]);
+    if (user && homeZip) {
+      fetchWeatherData(homeZip);
+    }
+    // If user logs out, clear weather state
+    if (!user) {
+      setZipcode('');
+      setWeatherData(null);
+      setLocationName('');
+      setError(null);
+    }
+  }, [user, homeZip]);
 
   const fetchWeatherData = async (newZipcode) => {
-    if (!newZipcode) {
+    const newZip = (newZipcode || '').trim();
+    if (!newZip) {
       setError('Please enter a zipcode.');
       return;
     }
 
     // Prevent re-fetching for the same zipcode
-    if (newZipcode === zipcode && weatherData) {
+    if (newZip === zipcode && weatherData) {
         return;
     }
 
@@ -49,7 +45,7 @@ export const WeatherProvider = ({ children }) => {
     setError(null);
 
     try {
-      const geoResponse = await fetch(`/api/geocode/${newZipcode}`);
+      const geoResponse = await fetch(`/api/geocode/${newZip}`);
       const geoData = await geoResponse.json();
 
       if (!geoResponse.ok) {
@@ -67,7 +63,7 @@ export const WeatherProvider = ({ children }) => {
 
       setWeatherData(newWeatherData);
       setLocationName(name || 'Unknown Location');
-      setZipcode(newZipcode);
+      setZipcode(newZip);
 
     } catch (err) {
       setError(err.message);
@@ -78,26 +74,20 @@ export const WeatherProvider = ({ children }) => {
     }
   };
 
+  // Persist user's home zip in Supabase user_metadata via AuthContext
   const setHomeLocation = async (homeZipcode) => {
-    if (!token) return; // or handle error
     try {
-      const response = await fetch('/api/user/home-location', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ zipcode: homeZipcode }),
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to set home location');
+      const trimmed = (homeZipcode || '').trim();
+      if (!trimmed) {
+        throw new Error('Zip is required');
       }
-      // Optionally, show a success message to the user
+      const { error } = await saveHomeZip(trimmed);
+      if (error) {
+        throw error;
+      }
       console.log('Home location set successfully!');
     } catch (err) {
       console.error('Error setting home location:', err);
-      // Optionally, show an error message to the user
     }
   };
 

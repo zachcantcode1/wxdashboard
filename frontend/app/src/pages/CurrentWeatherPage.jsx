@@ -13,11 +13,18 @@ const CurrentWeatherPage = () => {
     fetchWeatherData(inputZipcode);
   };
 
-  const handleSetHome = () => {
-    if (zipcode) {
-      setHomeLocation(zipcode);
-      // Optionally, add a toast notification here to confirm to the user.
+  // Save inputZipcode if provided, else fall back to the currently viewed zipcode
+  const handleSetHome = async () => {
+    const toSave = (inputZipcode || zipcode || '').trim();
+    if (!toSave) {
+      alert('Enter a zipcode or search first before setting home.');
+      return;
+    }
+    try {
+      await setHomeLocation(toSave);
       alert('Home location has been set!');
+    } catch {
+      alert('Failed to set home location. Please try again.');
     }
   };
 
@@ -39,11 +46,9 @@ const CurrentWeatherPage = () => {
         <Button onClick={handleSearch} disabled={loading}>
             {loading ? 'Searching...' : 'Get Weather'}
         </Button>
-        {weatherData && (
-            <Button onClick={handleSetHome} variant="outline">
-                Set as Home
-            </Button>
-        )}
+        <Button onClick={handleSetHome} variant="outline" disabled={loading}>
+            Save as Home
+        </Button>
         </div>
       </div>
 

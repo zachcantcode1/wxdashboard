@@ -89,6 +89,84 @@ const formatTime = (timeString) => {
   }
 };
 
+// Build Weatherwise URL using alert coordinates and VTEC/WFO
+function buildWeatherwiseUrl(alert) {
+  try {
+    // Extract WFO from VTEC-like string. Expect formats like:
+    // - "KMHX-FA-Y-0044" (use first 4 chars => KMHX)
+    // - "O.NEW.KRAX.SV.W.0123...." (use parts[2] => KRAX)
+    let wfo = null;
+    const rawVtec = alert?.vtecString || alert?.vtec || alert?.vtec_string || alert?.vtecstr || '';
+
+    if (typeof rawVtec === 'string' && rawVtec.length >= 4) {
+      if (rawVtec.includes('.')) {
+        const parts = rawVtec.split('.');
+        if (parts.length >= 3 && parts[2] && parts[2].length >= 4) {
+          wfo = parts[2].substring(0, 4);
+        }
+      }
+      if (!wfo) {
+        wfo = rawVtec.substring(0, 4);
+      }
+    }
+
+    // Fallback if not present on transformed DB alert: try backend camelCase alias
+    if (!wfo && typeof alert?.office === 'string' && alert.office.length >= 4) {
+      wfo = alert.office.substring(0, 4);
+    }
+
+    // Coordinates: prefer centroid if geometry polygon exists, else attempt provided lat/lon fields
+    let lat = null;
+    let lon = null;
+
+    // Common field variations from backend DB
+    if (typeof alert?.lat === 'number' && typeof alert?.lon === 'number') {
+      lat = alert.lat;
+      lon = alert.lon;
+    } else if (typeof alert?.latitude === 'number' && typeof alert?.longitude === 'number') {
+      lat = alert.latitude;
+      lon = alert.longitude;
+    }
+
+    // Try to compute a simple centroid from polygon if no direct lat/lon
+    if ((lat == null || lon == null) && alert?.geometry && alert.geometry.type === 'Polygon' && Array.isArray(alert.geometry.coordinates) && alert.geometry.coordinates.length > 0) {
+      const ring = alert.geometry.coordinates[0]; // [[lon, lat], ...]
+      if (Array.isArray(ring) && ring.length > 0) {
+        let sumLat = 0;
+        let sumLon = 0;
+        let count = 0;
+        for (const pair of ring) {
+          if (Array.isArray(pair) && pair.length >= 2) {
+            const [plon, plat] = pair;
+            if (Number.isFinite(plat) && Number.isFinite(plon)) {
+              sumLat += plat;
+              sumLon += plon;
+              count += 1;
+            }
+          }
+        }
+        if (count > 0) {
+          lat = sumLat / count;
+          lon = sumLon / count;
+        }
+      }
+    }
+
+    // If still missing, bail
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+
+    // Default map zoom similar to example
+    const zoom = 9.14;
+    // Build URL; rt param uses WFO if available; if missing, omit it
+    const base = `https://web.weatherwise.app/#map=${zoom.toFixed(2)}/${lat.toFixed(4)}/${lon.toFixed(4)}`;
+    const rt = wfo ? `&rt=${encodeURIComponent(wfo)}` : '';
+    const rp = `&rp=REF0`;
+    return `${base}${rt}${rp}`;
+  } catch {
+    return null;
+  }
+}
+
 function ActiveAlertsPage() {
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -178,65 +256,90 @@ function ActiveAlertsPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">Active Weather Alerts</h1>
-      <div className="space-y-4">
+      <h1 className="text-3xl font-bold mb-3 text-center">Active Weather Alerts</h1>
+      <div className="space-y-2.5">
         {activeAlerts.map((alert) => (
-          <Card 
-            key={alert.id || alert.headline + alert.expires} 
+          <Card
+            key={alert.id || alert.headline + alert.expires}
             className={`${getAlertSeverityColor(alert.productType)}`}
           >
-            <CardHeader>
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                <div className="flex-1">
-                  <CardTitle className={`text-lg ${getAlertTextColor(alert.productType)}`}>
-                    {alert.producttype || 'Weather Alert'}
-                  </CardTitle>
-                  <CardDescription className="mt-1">
+            <CardHeader className="py-4">
+              <div className="flex items-start justify-between gap-4">
+                {/* Left: Title + area + meta stacked compactly */}
+                <div className="min-w-0 flex-1 overflow-hidden">
+                  <div className="flex items-center gap-2">
+                    <CardTitle className={`text-sm leading-relaxed ${getAlertTextColor(alert.productType)} break-words`}>
+                      {alert.producttype || 'Weather Alert'}
+                    </CardTitle>
+                  </div>
+                  <CardDescription className="mt-1.5 text-[13px] leading-relaxed break-words">
                     {alert.affectedarea || 'Area not specified'}
                   </CardDescription>
-                </div>
-                <div className="mt-2 md:mt-0 md:text-right space-y-1 text-sm">
-                  {/* Display specific parameters if available */}
-                  <div className="space-y-1 mb-2">
-                    {alert.max_wind_gust && alert.max_wind_gust !== 'N/A' && alert.max_wind_gust !== null && alert.max_wind_gust.trim() !== '' && (
-                      <p className="text-yellow-300 font-medium">
-                        🌪️ Winds: {alert.max_wind_gust}
-                      </p>
+
+                  {/* Meta line compact */}
+                  <div className="mt-2 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-x-2.5 gap-y-1 text-[12px] leading-relaxed">
+                    <span className="text-gray-300 break-words">
+                      <span className="font-medium text-gray-200">Expires:</span> {formatTime(alert.expires)}
+                    </span>
+                    {alert.states && alert.states.length > 0 && (
+                      <span className="text-gray-300 break-words">
+                        <span className="font-medium text-gray-200">States:</span>{' '}
+                        {alert.states
+                          .map(state => stateAbbreviationsToNames[state.toUpperCase()] || state)
+                          .join(', ')}
+                      </span>
                     )}
-                    {alert.max_hail_size && alert.max_hail_size !== 'N/A' && alert.max_hail_size !== null && alert.max_hail_size.trim() !== '' && (
-                      <p className="text-blue-300 font-medium">
-                        🧊 Hail: {alert.max_hail_size}
-                      </p>
-                    )}
-                    {alert.tornado_detection && alert.tornado_detection !== 'N/A' && alert.tornado_detection !== null && alert.tornado_detection.trim() !== '' && (
-                      <p className="text-red-300 font-medium">
-                        🌪️ Tornado: {alert.tornado_detection}
-                      </p>
-                    )}
-                    {alert.thunderstormDamageThreat && alert.thunderstormDamageThreat !== 'N/A' && alert.thunderstormDamageThreat !== null && alert.thunderstormDamageThreat.trim() !== '' && (
-                      <p className="text-orange-300 font-medium">
-                        ⚡ Threat: {alert.thunderstormDamageThreat}
-                      </p>
+                    {alert.population_formatted && (
+                      <span className="text-blue-300 font-medium break-words">
+                        <span className="font-medium">👥 Population Affected:</span> {alert.population_formatted}
+                      </span>
                     )}
                   </div>
-                  
-                  <p className="text-gray-400">
-                    <span className="font-medium">Expires:</span> {formatTime(alert.expires)}
-                  </p>
-                  {alert.states && alert.states.length > 0 && (
-                    <p className="text-gray-400">
-                      <span className="font-medium">States:</span> {
-                        alert.states.map(state => 
-                          stateAbbreviationsToNames[state.toUpperCase()] || state
-                        ).join(', ')
-                      }
-                    </p>
+                </div>
+
+                {/* Right: Weather parameters + CTA button */}
+                <div className="shrink-0 flex flex-col items-end gap-3">
+                  {/* Weather parameters in tiny pills - stacked vertically */}
+                  {(alert.max_wind_gust || alert.max_hail_size || alert.tornado_detection || alert.thunderstormDamageThreat) && (
+                    <div className="flex flex-col items-end gap-1.5 text-[11px] leading-relaxed">
+                      {alert.max_wind_gust && alert.max_wind_gust !== 'N/A' && alert.max_wind_gust !== null && alert.max_wind_gust.trim() !== '' && (
+                        <span className="inline-flex items-center rounded-full bg-yellow-900/40 text-yellow-200 px-2 py-1 break-words">
+                          🌪️ Winds: {alert.max_wind_gust}
+                        </span>
+                      )}
+                      {alert.max_hail_size && alert.max_hail_size !== 'N/A' && alert.max_hail_size !== null && alert.max_hail_size.trim() !== '' && (
+                        <span className="inline-flex items-center rounded-full bg-blue-900/40 text-blue-200 px-2 py-1 break-words">
+                          🧊 Hail: {alert.max_hail_size}
+                        </span>
+                      )}
+                      {alert.tornado_detection && alert.tornado_detection !== 'N/A' && alert.tornado_detection !== null && alert.tornado_detection.trim() !== '' && (
+                        <span className="inline-flex items-center rounded-full bg-red-900/40 text-red-200 px-2 py-1 break-words">
+                          🌪️ Tornado: {alert.tornado_detection}
+                        </span>
+                      )}
+                      {alert.thunderstormDamageThreat && alert.thunderstormDamageThreat !== 'N/A' && alert.thunderstormDamageThreat !== null && alert.thunderstormDamageThreat.trim() !== '' && (
+                        <span className="inline-flex items-center rounded-full bg-orange-900/40 text-orange-200 px-2 py-1 break-words">
+                          ⚡ Threat: {alert.thunderstormDamageThreat}
+                        </span>
+                      )}
+                    </div>
                   )}
-                  {alert.population_formatted && (
-                    <p className="text-blue-300 font-medium">
-                      <span className="font-medium">👥 Population Affected:</span> {alert.population_formatted}
-                    </p>
-                  )}
+
+                  {/* CTA button below parameters */}
+                  {(() => {
+                    const url = buildWeatherwiseUrl(alert);
+                    return url ? (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center h-8 px-3 rounded-md border border-blue-400/40 bg-blue-600/90 hover:bg-blue-500 text-white text-[12px] font-medium transition-colors shadow-sm whitespace-nowrap"
+                        title="Open this alert on Weatherwise"
+                      >
+                        View on Weatherwise
+                      </a>
+                    ) : null;
+                  })()}
                 </div>
               </div>
             </CardHeader>
@@ -245,7 +348,7 @@ function ActiveAlertsPage() {
       </div>
       
       {alerts.length > activeAlerts.length && (
-        <div className="mt-8 text-center text-gray-400">
+        <div className="mt-5 text-center text-gray-400 text-sm">
           <p>Showing {activeAlerts.length} active alerts ({alerts.length - activeAlerts.length} expired alerts hidden)</p>
         </div>
       )}
