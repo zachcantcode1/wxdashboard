@@ -211063,3 +211063,9821 @@ HMLKEY
 
 
 
+=================================================
+2025-08-07T00-39-19-402Z
+
+[{"xmlns":"nwws-oi","id":"nwws_processor.537","issue":"2025-08-07T00:39:00Z","ttaaii":"SRUS52","cccc":"KKEY","awipsid":"HMLKEY"}]
+=================================================
+
+
+
+638
+
+SRUS52 KKEY 070039
+
+HMLKEY
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      originator="KEY"
+
+      name="Industrial Canal  AT Clewiston Ind. Canal"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      id="INDF1"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>12.07</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>12.06</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>12</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>11.97</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="1234"
+
+      originator="KEY"
+
+      name="Florida Bay  AT Florida Bay at Jewfish Creek"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:11+00:00"
+
+      id="JCRF1"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HCIRP"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryName="Water Height (MHHW)"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:54:00-00:00</valid>
+
+      <primary>0.18</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="KEY"
+
+      name="Atlantic Ocean  AT Lake Worth"
+
+      timezone="EST5EDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:11+00:00"
+
+      id="LKWF1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            primaryName="Tide Height"
+
+            timezone="UTC"
+
+            pedts="HMIRG"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>0.25</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>0.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Atlantic Ocean  AT South Port Everglades"
+
+      originator="KEY"
+
+      timezone="EST5EDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="PEGF1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:11+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryName="Tide Height"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            pedts="HMIRG"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>0.13</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="VAKF1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:13+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      timezone="EST5EDT"
+
+      name="Atlantic Ocean  AT Virginia Key"
+
+      originator="KEY">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HMIRG"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryName="Tide Height"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>0.19</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+
+
+=================================================
+2025-08-07T00-39-23-853Z
+
+[{"xmlns":"nwws-oi","id":"nwws_processor.539","issue":"2025-08-07T00:39:00Z","ttaaii":"SRUS51","cccc":"KOKX","awipsid":"HMLOKX"}]
+=================================================
+
+
+
+640
+
+SRUS51 KOKX 070039
+
+HMLOKX
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      originator="VUY"
+
+      name="New York Harbor  AT Battery"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="BATN6"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:06+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HMIRG"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            primaryName="Tide Height"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>5.12</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="VUY"
+
+      timezone="EST5EDT"
+
+      name="New York Harbor  AT Battery"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="BATN6"
+
+      generationtime="2025-08-07T00:39:06+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            pedts="HMIRP"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      originator="VUY"
+
+      name="Long Island Sound  AT Bridgeport Harbor"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="BRHC3"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:07+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Tide Height"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            pedts="HMIRG"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>6.16</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="BRHC3"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      generationtime="2025-08-07T00:39:07+00:00"
+
+      originator="VUY"
+
+      timezone="EST5EDT"
+
+      name="Long Island Sound  AT Bridgeport Harbor">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            secondaryUnits="kcfs"
+
+            pedts="HMIRP">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>6.16</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Passaic River  AT Clifton"
+
+      originator="VUY"
+
+      timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:07+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="DDCN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            pedts="HGIRG"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.01</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.01</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.01</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.01</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      originator="VUY"
+
+      name="Salmon River 4 SE East Hampton"
+
+      id="EHMC3"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:07+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HGIRG"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>2.12</primary>
+
+      <secondary>0.0175</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>2.13</primary>
+
+      <secondary>0.0183</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.13</primary>
+
+      <secondary>0.0183</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>2.14</primary>
+
+      <secondary>0.0192</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>2.13</primary>
+
+      <secondary>0.0183</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      originator="VUY"
+
+      name="Long Island Sound  AT Flax pond"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="FLXN6"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:08+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            timezone="UTC"
+
+            primaryName="Tide Height"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            pedts="HMIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>3.97</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:36:00-00:00</valid>
+
+      <primary>4.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:42:00-00:00</valid>
+
+      <primary>4.13</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:48:00-00:00</valid>
+
+      <primary>4.22</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:54:00-00:00</valid>
+
+      <primary>4.32</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>4.43</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:06:00-00:00</valid>
+
+      <primary>4.55</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>4.67</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>4.81</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:24:00-00:00</valid>
+
+      <primary>4.94</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Hudson Bay  AT Freeport"
+
+      timezone="EST5EDT"
+
+      originator="VUY"
+
+      generationtime="2025-08-07T00:39:08+00:00"
+
+      id="FRPN6"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HMIRG"
+
+            timezone="UTC"
+
+            primaryName="Tide Height"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:36:00-00:00</valid>
+
+      <primary>4.94</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:42:00-00:00</valid>
+
+      <primary>4.87</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:48:00-00:00</valid>
+
+      <primary>4.82</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:54:00-00:00</valid>
+
+      <primary>4.75</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>4.68</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:06:00-00:00</valid>
+
+      <primary>4.62</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>4.52</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>4.44</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:24:00-00:00</valid>
+
+      <primary>4.37</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>4.3</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Hohokus Brook  AT Ho-ho-kus"
+
+      timezone="EST5EDT"
+
+      originator="VUY"
+
+      generationtime="2025-08-07T00:39:08+00:00"
+
+      id="HOHN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HGIRG"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.38</primary>
+
+      <secondary>0.0194</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="VUY"
+
+      timezone="EST5EDT"
+
+      name="Long Island Sound  AT Kings Point"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="KPTN6"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      generationtime="2025-08-07T00:39:08+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            pedts="HMIRG"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>6.4</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>6.57</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:09+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="KPTN6"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Long Island Sound  AT Kings Point"
+
+      originator="VUY"
+
+      timezone="EST5EDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Tide Height"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            pedts="HMIRP"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>6.57</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="COASTAL - LONG ISLAND  AT Fort Pond Bay"
+
+      timezone="EST5EDT"
+
+      originator="VUY"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="MTKN6"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HMIRG"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>2.87</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>2.88</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="COASTAL - LONG ISLAND  AT Fort Pond Bay"
+
+      originator="VUY"
+
+      timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="MTKN6"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HMIRP"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>2.88</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Hackensack River  AT New Milford"
+
+      originator="VUY"
+
+      timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="NMLN4">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.56</primary>
+
+      <secondary>0.0148</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.56</primary>
+
+      <secondary>0.0148</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.56</primary>
+
+      <secondary>0.0148</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.56</primary>
+
+      <secondary>0.0148</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:10+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="NWHC3"
+
+      name="Long Island Sound  AT New Haven "
+
+      originator="VUY"
+
+      timezone="EST5EDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            timezone="UTC"
+
+            pedts="HMIRG"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>5.58</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>5.67</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Passaic River  AT Newark"
+
+      originator="VUY"
+
+      timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="NWKN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            timezone="UTC"
+
+            pedts="HMIRG"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-06T23:36:00-00:00</valid>
+
+      <primary>5.95</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:42:00-00:00</valid>
+
+      <primary>5.94</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:48:00-00:00</valid>
+
+      <primary>5.93</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:54:00-00:00</valid>
+
+      <primary>5.92</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>5.9</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:06:00-00:00</valid>
+
+      <primary>5.89</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>5.87</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>5.84</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:24:00-00:00</valid>
+
+      <primary>5.8</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>5.76</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      originator="VUY"
+
+      name="Peckman River  AT Little Falls"
+
+      id="PEKN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:11+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            primaryName="Stage"
+
+            secondaryName="Flow"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.89</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>0.89</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0.89</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Pascack Brook  AT Park Ridge"
+
+      originator="VUY"
+
+      timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:11+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="PKRN4">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HGIRG"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>2.77</primary>
+
+      <secondary>0.0087</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>2.77</primary>
+
+      <secondary>0.0087</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>2.77</primary>
+
+      <secondary>0.0087</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="VUY"
+
+      timezone="EST5EDT"
+
+      name="Hackensack River  AT Rivervale"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="RIVN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      generationtime="2025-08-07T00:39:12+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HGIRG"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.59</primary>
+
+      <secondary>0.0239</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.59</primary>
+
+      <secondary>0.0239</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.59</primary>
+
+      <secondary>0.0239</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.59</primary>
+
+      <secondary>0.0239</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="VUY"
+
+      timezone="EST5EDT"
+
+      name="Saddle River  AT Ridgewood"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="RWDN4"
+
+      generationtime="2025-08-07T00:39:12+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HGIRG"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>0.67</primary>
+
+      <secondary>0.0077</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>0.67</primary>
+
+      <secondary>0.0077</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.68</primary>
+
+      <secondary>0.0084</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>0.67</primary>
+
+      <secondary>0.0077</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="RWYN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      timezone="EST5EDT"
+
+      originator="VUY"
+
+      name="Rahway River  AT Rahway">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.45</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.45</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.45</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>1.45</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Saddle River  AT Saddle"
+
+      originator="VUY"
+
+      timezone="EST5EDT"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="SADN4">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.55</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.55</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.55</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.55</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="SDHN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      timezone="EST5EDT"
+
+      originator="VUY"
+
+      name="ATLANTIC OCEAN  AT SANDY HOOK">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            primaryName="Tide Height"
+
+            secondaryUnits="kcfs"
+
+            pedts="HMIRG">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>4.92</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>4.85</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Ramapo River  AT Suffern"
+
+      timezone="EST5EDT"
+
+      originator="VUY"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      id="SFFN6"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HGIRG"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>2.58</primary>
+
+      <secondary>0.03</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>2.57</primary>
+
+      <secondary>0.029</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.57</primary>
+
+      <secondary>0.029</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>2.58</primary>
+
+      <secondary>0.03</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="EST5EDT"
+
+      originator="VUY"
+
+      name="Rahway 2 NW Springfield"
+
+      id="SPGN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:12+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.33</primary>
+
+      <secondary>0.0182</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.33</primary>
+
+      <secondary>0.0182</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.33</primary>
+
+      <secondary>0.0182</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>1.33</primary>
+
+      <secondary>0.0182</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Long Island Sound  AT Stamford"
+
+      timezone="EST5EDT"
+
+      originator="VUY"
+
+      generationtime="2025-08-07T00:39:13+00:00"
+
+      id="STDC3"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            pedts="HMIRG"
+
+            timezone="UTC"
+
+            primaryName="Tide Height"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>6.85</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:14+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="WSDN4"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Pascack Brook  AT Westwood"
+
+      originator="VUY"
+
+      timezone="EST5EDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            pedts="HGIRG"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.5</primary>
+
+      <secondary>0.022</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>1.49</primary>
+
+      <secondary>0.0212</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>1.49</primary>
+
+      <secondary>0.0212</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+
+
+=================================================
+2025-08-07T00-39-30-506Z
+
+[{"xmlns":"nwws-oi","id":"nwws_processor.542","issue":"2025-08-07T00:39:00Z","ttaaii":"SRAK58","cccc":"PACR","awipsid":"HMLACR"}]
+=================================================
+
+
+
+644
+
+SRAK58 PACR 070039
+
+HMLACR
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="EF Kawela Gulch  AT EF Kawela Gulch"
+
+      generationtime="2025-08-07T00:39:06+00:00"
+
+      timezone="HST10"
+
+      id="EFKH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRA"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>2.7</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.7</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>2.7</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="HFON"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Heeia Stream  AT Heeia Stream - Haiku Plantation"
+
+      generationtime="2025-08-07T00:39:07+00:00"
+
+      timezone="HST10"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="HEPH1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>3.17</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>3.17</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>3.18</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="HFON"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="HALAWA STREAM  AT Halawa Stream"
+
+      generationtime="2025-08-07T00:39:08+00:00"
+
+      timezone="HST10"
+
+      id="HLWH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRA"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>2.24</primary>
+
+      <secondary>0.0165</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.23</primary>
+
+      <secondary>0.0161</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>2.23</primary>
+
+      <secondary>0.0161</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:08+00:00"
+
+      timezone="HST10"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="HOHH1"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="HONOULIULI STREAM  AT Honouliuli Stream - H1"
+
+      originator="HFON">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:20:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:25:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>5.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="HONOPOU STREAM  AT Honopou Stream Nr Huelo"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:08+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="HPOH1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-06T23:15:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:20:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:25:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>0.6</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:09+00:00"
+
+      timezone="HST10"
+
+      id="HPPH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="HANAPEPE RIVER  AT Hanapepe River">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRA"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.35</primary>
+
+      <secondary>0.0229</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.35</primary>
+
+      <secondary>0.0229</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.36</primary>
+
+      <secondary>0.0235</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="Hanalei River  AT Hanalei River Bridge"
+
+      id="HRBH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:09+00:00"
+
+      timezone="HST10">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>6.84</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>6.84</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>6.84</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="HEEIA STREAM  AT Heeia Stream at Haiku Valley"
+
+      generationtime="2025-08-07T00:39:09+00:00"
+
+      timezone="HST10"
+
+      id="HUSH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            primaryName="Stage"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-06T23:25:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>0.0011</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>1.1</primary>
+
+      <secondary>0.001</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="IAO STREAM  AT Wailuku River"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      id="IAOH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:09+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.67</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.67</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.67</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="HFON"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="KALIHI STREAM  AT Kalihi Stream"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="KHSH1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>2.22</primary>
+
+      <secondary>0.0022</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.22</primary>
+
+      <secondary>0.0022</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>2.21</primary>
+
+      <secondary>0.0021</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="KISH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      timezone="HST10"
+
+      name="Kaupuni Stream  AT Kaupuni Stream"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>3.05</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>3.05</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>3.05</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="KALOKO RESERVOIR  AT Kaloko Reservoir"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="KLKH1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HPIRA"
+
+            primaryName="Pool"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>17.56</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>17.56</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>17.56</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:11+00:00"
+
+      timezone="HST10"
+
+      id="KMAH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="Kahoma Stream  AT Kahoma Stream">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRA"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>0.29</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.29</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>0.29</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="HST10"
+
+      generationtime="2025-08-07T00:39:11+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="KNEH1"
+
+      name="KANEOHE STREAM  AT Kaneohe Stream"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>16.08</primary>
+
+      <secondary>0.0443</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>16.08</primary>
+
+      <secondary>0.0443</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>16.08</primary>
+
+      <secondary>0.0443</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>16.08</primary>
+
+      <secondary>0.0443</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>16.08</primary>
+
+      <secondary>0.0443</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>16.07</primary>
+
+      <secondary>0.043</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>16.08</primary>
+
+      <secondary>0.0443</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>16.08</primary>
+
+      <secondary>0.0443</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>16.08</primary>
+
+      <secondary>0.0443</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>16.07</primary>
+
+      <secondary>0.043</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>16.07</primary>
+
+      <secondary>0.043</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="KAMANANUI STREAM  AT Kamananui Stream at Maunawai"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="KNNH1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            primaryName="Stage"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.38</primary>
+
+      <secondary>0.0001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.38</primary>
+
+      <secondary>0.0001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.38</primary>
+
+      <secondary>0.0001</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>1.38</primary>
+
+      <secondary>0.0001</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="HFON"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="KAUKONAHUA STREAM  AT Kaukonahua Stream - Waialua"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="KOWH1"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      timezone="HST10">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>17.58</primary>
+
+      <secondary>0.16</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="HST10"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      id="KUSH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="KAHALUU STREAM  AT Kahaluu Stream"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-06T23:25:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>1.24</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="KAWAIKOI STREAM  AT Kawaikoi Stream"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="KWKH1"
+
+      generationtime="2025-08-07T00:39:13+00:00"
+
+      timezone="HST10">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:25:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>1.9</primary>
+
+      <secondary>0.003</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="MKHH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:13+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="MAKAHA STREAM  AT Makaha Stream">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0.71</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="MNWH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:14+00:00"
+
+      originator="HFON"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="MANOA STREAM   AT Manoa Stream - Woodlawn">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            primaryName="Stage"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>2.74</primary>
+
+      <secondary>0.0037</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0.0035</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0.0035</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0.0035</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0.0035</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>2.74</primary>
+
+      <secondary>0.0037</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.74</primary>
+
+      <secondary>0.0037</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0.0035</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0.0035</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>2.74</primary>
+
+      <secondary>0.0037</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0.0035</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="Manowaiopae Stream  AT Manowaiopae Stream"
+
+      generationtime="2025-08-07T00:39:14+00:00"
+
+      timezone="HST10"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="MWPH1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRA"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>9.28</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>9.28</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>9.28</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="North Halawa Stream  AT North Halawa Stream"
+
+      originator="HFON"
+
+      generationtime="2025-08-07T00:39:14+00:00"
+
+      timezone="HST10"
+
+      id="NHSH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            timezone="UTC"
+
+            primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>2.73</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>2.72</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>2.72</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="WEBH1"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:16+00:00"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="WAILUA RIVER  AT EB NF Wailua River"
+
+      originator="HFON">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:25:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>0.05</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.04</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="WAIHEE RIVER  AT Waihee River"
+
+      originator="HFON"
+
+      generationtime="2025-08-07T00:39:17+00:00"
+
+      timezone="HST10"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="WHRH1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.49</primary>
+
+      <secondary>0.0324</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.49</primary>
+
+      <secondary>0.0324</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.49</primary>
+
+      <secondary>0.0324</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="HFON"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="WAIALAE STREAM  AT Waialae Stream"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:17+00:00"
+
+      id="WIEH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRA"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>0.9</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>0.9</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:17+00:00"
+
+      timezone="HST10"
+
+      id="WISH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="WAIHI STREAM  AT Waihi Stream">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.65</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>1.66</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>1.66</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.66</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>1.65</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.66</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.65</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.65</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>1.65</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.65</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>1.65</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>1.66</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="WAIKANE STREAM  AT Waikane Stream"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:18+00:00"
+
+      id="WKNH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>3.06</primary>
+
+      <secondary>0.0071</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>3.06</primary>
+
+      <secondary>0.0071</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>3.06</primary>
+
+      <secondary>0.0071</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>3.06</primary>
+
+      <secondary>0.0071</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>3.04</primary>
+
+      <secondary>0.0067</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>3.04</primary>
+
+      <secondary>0.0067</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>3.04</primary>
+
+      <secondary>0.0067</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>3.05</primary>
+
+      <secondary>0.0069</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>3.06</primary>
+
+      <secondary>0.0071</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>3.06</primary>
+
+      <secondary>0.0071</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>3.06</primary>
+
+      <secondary>0.0071</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>3.06</primary>
+
+      <secondary>0.0071</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="Waikele Stream  AT Waikele Stream"
+
+      id="WKSH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:18+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.79</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>1.79</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.79</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="HFON"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Waimanalo Stream  AT Waimanalo Stream"
+
+      id="WLSH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:18+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRG"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>7.1</primary>
+
+      <secondary>0.002</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:18+00:00"
+
+      timezone="HST10"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="WMSH1"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Waikamoi Stream  AT Waikamoi Stream"
+
+      originator="HFON">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>0.47</primary>
+
+      <secondary>0</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:19+00:00"
+
+      timezone="HST10"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="WMVH1"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="Waimea River  AT Waimea River abv Kekaha-Waiahulu Intake">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRA"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryName="Stage"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.02</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.03</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.03</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Wainiha River  AT Wainiha River"
+
+      originator="HFON"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="WNIH1"
+
+      generationtime="2025-08-07T00:39:19+00:00"
+
+      timezone="HST10">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>2.84</primary>
+
+      <secondary>0.447</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="HFON"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Waikolu Stream  AT Waikolu Stream"
+
+      id="WOSH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:19+00:00"
+
+      timezone="HST10">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>0.86</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.86</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>0.86</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Waikapu Stream  AT Waikapu Stream"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="WPUH1"
+
+      timezone="HST10"
+
+      generationtime="2025-08-07T00:39:19+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRA"
+
+            primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>1.51</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.51</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>1.51</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="WRIH1"
+
+      generationtime="2025-08-07T00:39:19+00:00"
+
+      timezone="HST10"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Wailuku River  AT Wailuku River at Iao Valley Road"
+
+      originator="HFON">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            primaryName="Stage"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRA">
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>3.69</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>3.67</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>3.69</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="HST10"
+
+      generationtime="2025-08-07T00:39:19+00:00"
+
+      id="WRSH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="HFON"
+
+      name="Wahiawa Reservoir  AT Wahiawa Reservoir Spillway">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HPIRA"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            primaryName="Pool"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>64.78</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>64.79</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>64.79</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="HST10"
+
+      generationtime="2025-08-07T00:39:20+00:00"
+
+      id="WRVH1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      name="Waimea River  AT Waimea River"
+
+      originator="HFON">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:35:00-00:00</valid>
+
+      <primary>6.04</primary>
+
+      <secondary>0.0202</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:40:00-00:00</valid>
+
+      <primary>6.04</primary>
+
+      <secondary>0.0202</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:50:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:55:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:05:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:10:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>6.03</primary>
+
+      <secondary>0.0196</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+
+
+=================================================
+2025-08-07T00-39-34-243Z
+
+[{"xmlns":"nwws-oi","id":"nwws_processor.543","issue":"2025-08-07T00:39:00Z","ttaaii":"SRUS54","cccc":"KBRO","awipsid":"HMLBRO"}]
+=================================================
+
+
+
+645
+
+SRUS54 KBRO 070039
+
+HMLBRO
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      timezone="CST6CDT"
+
+      name="Adams Bayou  AT Adams Bayou at SH 87"
+
+      id="ADMT2"
+
+      generationtime="2025-08-07T00:39:10+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>0.64</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="AMRL1"
+
+      name="Gulf of Mexico  AT Amerada Pass"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      timezone="CST6CDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            pedts="HMIRG"
+
+            secondaryName="Flow"
+
+            primaryName="Tide Height">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>0.4</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>0.38</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="AMRL1"
+
+      name="Gulf of Mexico  AT Amerada Pass"
+
+      generationtime="2025-08-07T00:39:10+00:00"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HMIRP"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryName="Tide Height">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>0.38</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:11+00:00"
+
+      name="Bayou Des Cannes  AT Eunice"
+
+      id="BDCL1"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>2.79</primary>
+
+      <secondary>0.0462</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>2.8</primary>
+
+      <secondary>0.0467</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.87</primary>
+
+      <secondary>0.0496</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>2.93</primary>
+
+      <secondary>0.0538</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Sabine River 10 NE Burkeville"
+
+      id="BRVT2"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      timezone="CST6CDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>17.05</primary>
+
+      <secondary>4.39</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>17.41</primary>
+
+      <secondary>4.81</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>17.74</primary>
+
+      <secondary>5.21</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>18.04</primary>
+
+      <secondary>5.59</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      name="Sabine River  AT CR 2082"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      id="BUKT2"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>71.23</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>71.23</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>71.23</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>71.23</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      name="BUNDICK CREEK  AT BUNDICK CREEK NEAR DE RIDDER"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      id="BUNL1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>2.87</primary>
+
+      <secondary>0.0184</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>2.87</primary>
+
+      <secondary>0.0184</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.88</primary>
+
+      <secondary>0.0189</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>2.88</primary>
+
+      <secondary>0.0189</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Bayou Vermilion  AT Carencro"
+
+      id="BVCL1"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>5.57</primary>
+
+      <secondary>0.0504</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>5.58</primary>
+
+      <secondary>0.0506</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>5.58</primary>
+
+      <secondary>0.0506</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>5.57</primary>
+
+      <secondary>0.0504</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Sabine River 2 E Bon Wier"
+
+      generationtime="2025-08-07T00:39:12+00:00"
+
+      id="BWRT2"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>17.68</primary>
+
+      <secondary>4.79</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>17.68</primary>
+
+      <secondary>4.79</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>17.65</primary>
+
+      <secondary>4.75</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>17.64</primary>
+
+      <secondary>4.74</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      name="Bayou Serpent 7 NNW Iowa"
+
+      generationtime="2025-08-07T00:39:13+00:00"
+
+      id="CACL1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>1.07</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      timezone="CST6CDT"
+
+      generationtime="2025-08-07T00:39:13+00:00"
+
+      name="GULF OF MEXICO  AT CALCASIEU PASS"
+
+      id="CAPL1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryName="Flow"
+
+            pedts="HMIRG"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            primaryName="Tide Height">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>-0.05</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>-0.03</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="CAPL1"
+
+      name="GULF OF MEXICO  AT CALCASIEU PASS"
+
+      generationtime="2025-08-07T00:39:13+00:00"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Tide Height"
+
+            pedts="HMIRP"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>-0.03</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Mermentau  AT GRAND CHENIER 10NE"
+
+      id="CFPL1"
+
+      generationtime="2025-08-07T00:39:14+00:00"
+
+      timezone="CST6CDT"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.28</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:14+00:00"
+
+      name="Calcasieu River  AT Calcasieu River at Goos Ferry Road"
+
+      id="CGFL1"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.46</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Cole Creek  AT Cole Creek at I-10"
+
+      id="CKET2"
+
+      generationtime="2025-08-07T00:39:15+00:00"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.48</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:15+00:00"
+
+      name="LACASSINE BAYOU  AT HAYES 1 NNE"
+
+      id="CLHL1"
+
+      timezone="GMT0GMT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryName="Flow"
+
+            pedts="HGIRR"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.36</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      timezone="CST6CDT"
+
+      name="BAYOU COCODRIE 1.5 E CLEARWATER"
+
+      id="CLWL1"
+
+      generationtime="2025-08-07T00:39:15+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>6</primary>
+
+      <secondary>0.233</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>6</primary>
+
+      <secondary>0.233</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:15+00:00"
+
+      name="Bess Branch  AT Bess Branch at Alligator Park"
+
+      id="CSSL1"
+
+      timezone="CST6CDT"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>12.73</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="  AT FRESH WATER CANAL LOCKS"
+
+      generationtime="2025-08-07T00:39:16+00:00"
+
+      id="FRWL1"
+
+      timezone="CST6CDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Tide Height"
+
+            primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HMIRG"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>-0.21</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>-0.21</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:16+00:00"
+
+      name="  AT FRESH WATER CANAL LOCKS"
+
+      id="FRWL1"
+
+      timezone="CST6CDT"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HMIRP"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryName="Tide Height">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>-0.21</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      id="HNLT2"
+
+      name="Little Cypress Creek  AT County Road 3114"
+
+      generationtime="2025-08-07T00:39:17+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="N. Fork Taylor Bayou  AT Craigen Road @ Taylors Bayou"
+
+      id="JAIT2"
+
+      generationtime="2025-08-07T00:39:17+00:00"
+
+      timezone="CST6CDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>1.31</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>1.32</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      timezone="CST6CDT"
+
+      id="JYBT2"
+
+      name="Neches River  AT Downtown Beaumont"
+
+      generationtime="2025-08-07T00:39:17+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>0.94</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:17+00:00"
+
+      name="Pine Island Bayou  AT BATSON 2 ENE"
+
+      id="JYKT2"
+
+      timezone="CST6CDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>54.05</primary>
+
+      <secondary>0.0695</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>54.05</primary>
+
+      <secondary>0.0695</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:18+00:00"
+
+      name="Black Creek  AT SOUR LAKE 8 NNE"
+
+      id="JYMT2"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>42.49</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:18+00:00"
+
+      name="Hillebrandt Bayou  AT BEAUMONT 4 S"
+
+      id="JZHT2"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRR">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>1.22</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>1.22</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      generationtime="2025-08-07T00:39:18+00:00"
+
+      name="Green Pond Gully  AT FANNETT 5 WNW"
+
+      id="JZVT2"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>5.26</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:25:00-00:00</valid>
+
+      <primary>6.18</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      timezone="CST6CDT"
+
+      name="N. Fork Taylor Bayou  AT F.M. 1406"
+
+      generationtime="2025-08-07T00:39:18+00:00"
+
+      id="JZWT2">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryName="Flow"
+
+            pedts="HGIRR"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryUnits="ft"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>22.76</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Taylor Bayou  AT Labelle Road"
+
+      generationtime="2025-08-07T00:39:18+00:00"
+
+      id="JZYT2"
+
+      timezone="CST6CDT"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRR">
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>1.46</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      timezone="CST6CDT"
+
+      name="Village Creek 4 NE Kountze"
+
+      id="KOUT2"
+
+      generationtime="2025-08-07T00:39:19+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC">
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>4.95</primary>
+
+      <secondary>0.361</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>4.95</primary>
+
+      <secondary>0.361</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>4.95</primary>
+
+      <secondary>0.361</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>4.95</primary>
+
+      <secondary>0.361</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      generationtime="2025-08-07T00:39:19+00:00"
+
+      name="Atchafalaya River  AT Krotz Springs"
+
+      id="KRZL1"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>9.74</primary>
+
+      <secondary>189</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      timezone="CST6CDT"
+
+      name="Calcasieu River  AT Lake Charles, LA"
+
+      generationtime="2025-08-07T00:39:19+00:00"
+
+      id="LCLL1">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Tide Height"
+
+            primaryUnits="ft"
+
+            pedts="HMIRG"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>0.96</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>0.93</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Calcasieu River  AT Lake Charles, LA"
+
+      generationtime="2025-08-07T00:39:19+00:00"
+
+      id="LCLL1"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Tide Height"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            pedts="HMIRP"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>0.93</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="LEPL1"
+
+      name="LAKE PALOURDE  AT Lake Palourde"
+
+      generationtime="2025-08-07T00:39:20+00:00"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            pedts="HPIRG"
+
+            primaryUnits="ft"
+
+            primaryName="Pool">
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>3.43</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      timezone="CST6CDT"
+
+      id="LKHL1"
+
+      name="CALCASIEU RIVER  AT LAKE CHARLES/I-10"
+
+      generationtime="2025-08-07T00:39:20+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.27</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.25</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.2</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.15</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Atchafalaya River  AT Morgan City"
+
+      id="MCGL1"
+
+      generationtime="2025-08-07T00:39:20+00:00"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>2.63</primary>
+
+      <secondary>103</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site name="Big Cow Creek  AT Newton"
+
+      generationtime="2025-08-07T00:39:21+00:00"
+
+      id="NCCT2"
+
+      timezone="CST6CDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>6.13</primary>
+
+      <secondary>0.0329</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>6.13</primary>
+
+      <secondary>0.0329</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>6.13</primary>
+
+      <secondary>0.0329</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>6.13</primary>
+
+      <secondary>0.0329</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      id="NSBT2"
+
+      name="Neches River  AT Neches River Saltwater Barrier"
+
+      generationtime="2025-08-07T00:39:21+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.49</primary>
+
+      <secondary>12.8</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.42</primary>
+
+      <secondary>12.5</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.36</primary>
+
+      <secondary>12.3</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.31</primary>
+
+      <secondary>12</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:21+00:00"
+
+      name="Adams bayou  AT Adams Bayou at FM 4247"
+
+      id="OABT2"
+
+      timezone="CST6CDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>0.45</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      name="Coon Bayou  AT Coon Bayou at Lane of the Oaks"
+
+      generationtime="2025-08-07T00:39:21+00:00"
+
+      id="OCOT2"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.28</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0.26</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site id="ORFT2"
+
+      name="Cow Bayou  AT Cow Bayou at Fm 1442"
+
+      generationtime="2025-08-07T00:39:22+00:00"
+
+      timezone="CST6CDT"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0.39</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      timezone="CST6CDT"
+
+      name="Sabine River 1.5 NE Orange"
+
+      id="ORNT2"
+
+      generationtime="2025-08-07T00:39:22+00:00">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>0.52</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>0.5</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.45</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>0.44</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      timezone="CST6CDT"
+
+      generationtime="2025-08-07T00:39:22+00:00"
+
+      name="Pin Oak Creek  AT Pink Oak Creek @ S. Elizabeth Ave. "
+
+      id="PIKT2">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRR"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.9</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0.92</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      name="Neches  AT Neches River at Lee Avenue"
+
+      generationtime="2025-08-07T00:39:22+00:00"
+
+      id="PNPT2"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            secondaryName="Flow"
+
+            pedts="HGIRR"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.3</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0.28</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      name="SABINE LAKE  AT RAINBOW BRIDGE"
+
+      id="RBBT2"
+
+      generationtime="2025-08-07T00:39:22+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed pedts="HMIRG"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryUnits="ft"
+
+            primaryName="Tide Height">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>0.75</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      name="SABINE LAKE  AT RAINBOW BRIDGE"
+
+      id="RBBT2"
+
+      generationtime="2025-08-07T00:39:22+00:00"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Tide Height"
+
+            primaryUnits="ft"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            pedts="HMIRP"
+
+            secondaryName="Flow">
+
+    <datum>
+
+      <valid>2025-08-07T00:18:00-00:00</valid>
+
+      <primary>0.77</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      id="RGBT2"
+
+      name="Rhodair Gully  AT Rhodair Gully at Wellspring Dr."
+
+      generationtime="2025-08-07T00:39:23+00:00"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site generationtime="2025-08-07T00:39:23+00:00"
+
+      name="Rhodair Gully  AT Rhodair Gully at 5th Street"
+
+      id="RGIT2"
+
+      timezone="CST6CDT"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            pedts="HGIRR"
+
+            secondaryName="Flow"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:20:00-00:00</valid>
+
+      <primary>0.11</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:30:00-00:00</valid>
+
+      <primary>0.12</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="1234"
+
+      name="Sabine River  AT Sabine River at I-10"
+
+      generationtime="2025-08-07T00:39:25+00:00"
+
+      id="TMYT2"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRA"
+
+            primaryUnits="ft"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>0.57</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>0.54</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site timezone="CST6CDT"
+
+      name="Sabine River  AT Texas Point"
+
+      generationtime="2025-08-07T00:39:25+00:00"
+
+      id="TXPT2"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            pedts="HMIRG"
+
+            primaryUnits="ft"
+
+            primaryName="Tide Height">
+
+    <datum>
+
+      <valid>2025-08-07T00:12:00-00:00</valid>
+
+      <primary>-0.03</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Vermilion Bay  AT VERMILION BAY NEAR CYPREMORT POINT"
+
+      generationtime="2025-08-07T00:39:25+00:00"
+
+      id="VCPL1"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            pedts="HGIRG"
+
+            secondaryName="Flow"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            primaryUnits="ft">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>1.26</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>1.21</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>1.16</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>1.11</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site originator="BRO"
+
+      xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      name="Vermillion River  AT Vermillion River North of I-10 at Lafayette"
+
+      id="VRIL1"
+
+      generationtime="2025-08-07T00:39:25+00:00"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryName="Stage"
+
+            primaryUnits="ft"
+
+            secondaryUnits="kcfs"
+
+            timezone="UTC"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>5.14</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>5.14</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>5.14</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>5.14</primary>
+
+      <secondary>-999</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+<?xml version="1.0" standalone="yes"?>
+
+<site xsi:noNamespaceSchemaLocation="http://weather.gov/ohd/hydroxc/schemas/hydrogen/HydData.xsd"
+
+      originator="BRO"
+
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      generationtime="2025-08-07T00:39:25+00:00"
+
+      name="VERMILION RIVER  AT PERRY"
+
+      id="VRPL1"
+
+      timezone="CST6CDT">
+
+  <disclaimers>
+
+    <AHPSXMLversion>2.0</AHPSXMLversion>
+
+    <status>Experimental</status>
+
+    <quality trace="observed">not manually quality-controlled</quality>
+
+  </disclaimers>
+
+  <observed primaryUnits="ft"
+
+            timezone="UTC"
+
+            secondaryUnits="kcfs"
+
+            secondaryName="Flow"
+
+            pedts="HGIRG"
+
+            primaryName="Stage">
+
+    <datum>
+
+      <valid>2025-08-06T23:30:00-00:00</valid>
+
+      <primary>5.07</primary>
+
+      <secondary>0.184</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-06T23:45:00-00:00</valid>
+
+      <primary>5.03</primary>
+
+      <secondary>0.173</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:00:00-00:00</valid>
+
+      <primary>5.01</primary>
+
+      <secondary>0.168</secondary>
+
+    </datum>
+
+    <datum>
+
+      <valid>2025-08-07T00:15:00-00:00</valid>
+
+      <primary>4.98</primary>
+
+      <secondary>0.162</secondary>
+
+    </datum>
+
+  </observed>
+
+</site>    
+
+
+
