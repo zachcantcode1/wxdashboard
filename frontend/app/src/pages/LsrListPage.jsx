@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const stateAbbreviationsToNames = {
   AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
@@ -134,7 +135,12 @@ function LsrListPage() {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <motion.div 
+      className="container mx-auto p-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <h1 className="text-3xl font-bold mb-6 text-center">Recent Storm Reports</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {lsrReports.map((report) => (
@@ -158,7 +164,7 @@ function LsrListPage() {
           </Card>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

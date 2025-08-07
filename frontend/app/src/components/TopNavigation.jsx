@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, BarChart2, Settings, HelpCircle, CloudSun, AlertTriangle, List, ExternalLink, ChevronDown, User, LogOut } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+} from '../components/ui/dropdown-menu';
+import { Button } from '../components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
+import { cn } from '../lib/utils';
+import {
+  Home,
+  CloudSun,
+  AlertTriangle,
+  List,
+  BarChart2,
+  ExternalLink,
+  Settings,
+  HelpCircle,
+  ChevronDown,
+  User,
+  LogOut,
+  Radar,
+} from 'lucide-react';
 
 const navigationItems = [
   {
@@ -84,9 +98,15 @@ export function TopNavigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-sm sm:text-base font-bold text-foreground hover:text-primary transition-colors">
-              WX DASHBOARD
-            </Link>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <Link to="/" className="text-sm sm:text-base font-bold text-foreground hover:text-primary transition-colors">
+                WX DASHBOARD
+              </Link>
+            </motion.div>
           </div>
 
           {/* Navigation Links - Preserve meaningful labels */}
@@ -94,38 +114,65 @@ export function TopNavigation() {
             {navigationItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
-                <Link
+                <motion.div
                   key={item.title}
-                  to={item.path}
-                  className={cn(
-                    "flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
-                    isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  )}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <item.icon className="h-4 w-4 mr-1.5" />
-                  {item.title}
-                </Link>
+                  <Link
+                    to={item.path}
+                    className={cn(
+                      "flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
+                      isActive
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    )}
+                  >
+                    <motion.div
+                      animate={{ rotate: isActive ? 360 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <item.icon className="h-4 w-4 mr-1.5" />
+                    </motion.div>
+                    {item.title}
+                  </Link>
+                </motion.div>
               );
             })}
 
             {/* Storm Reports Dropdown */}
             <DropdownMenu open={isStormReportsOpen} onOpenChange={setIsStormReportsOpen}>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className={cn(
-                    "flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
-                    isStormReportsActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  )}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <List className="h-4 w-4 mr-1.5" />
-                  Storm Reports
-                  <ChevronDown className="h-4 w-4 ml-1" />
-                </Button>
+                  <Button
+                    variant="ghost"
+                    className={cn(
+                      "flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
+                      isStormReportsActive
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    )}
+                  >
+                    <motion.div
+                      animate={{ rotate: isStormReportsActive ? 360 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <List className="h-4 w-4 mr-1.5" />
+                    </motion.div>
+                    Storm Reports
+                    <motion.div
+                      animate={{ rotate: isStormReportsOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="h-4 w-4 ml-1" />
+                    </motion.div>
+                  </Button>
+                </motion.div>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
                 {stormReportsItems.map((item) => (
@@ -145,14 +192,25 @@ export function TopNavigation() {
             {/* External Services Dropdown */}
             <DropdownMenu open={isExternalOpen} onOpenChange={setIsExternalOpen}>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent whitespace-nowrap"
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <ExternalLink className="h-4 w-4 mr-1.5" />
-                  External Services
-                  <ChevronDown className="h-4 w-4 ml-1" />
-                </Button>
+                  <Button
+                    variant="ghost"
+                    className="flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent whitespace-nowrap"
+                  >
+                    <ExternalLink className="h-4 w-4 mr-1.5" />
+                    External Services
+                    <motion.div
+                      animate={{ rotate: isExternalOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="h-4 w-4 ml-1" />
+                    </motion.div>
+                  </Button>
+                </motion.div>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
                 {externalServices.map((service) => (
@@ -259,13 +317,24 @@ export function TopNavigation() {
           <div className="flex items-center">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-primary text-primary-foreground">
-                      {user?.email?.charAt(0).toUpperCase() || 'U'}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    <motion.div
+                      animate={{ rotate: [0, 5, -5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                    >
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback className="bg-primary text-primary-foreground">
+                          {user?.email?.charAt(0).toUpperCase() || 'U'}
+                        </AvatarFallback>
+                      </Avatar>
+                    </motion.div>
+                  </Button>
+                </motion.div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">

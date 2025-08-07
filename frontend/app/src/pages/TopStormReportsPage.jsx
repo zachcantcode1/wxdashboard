@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -127,7 +128,12 @@ function TopStormReportsPage() {
     return <div className="container mx-auto p-4 text-center">No significant storm reports in the last 24 hours.</div>;
   }
   return (
-    <div className="container mx-auto p-4">
+    <motion.div 
+      className="container mx-auto p-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <h1 className="text-3xl font-bold mb-6 text-center">Top 10 Storm Reports in the Last 24 Hours</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="shadow-lg border border-blue-900 bg-zinc-900">
@@ -183,7 +189,7 @@ function TopStormReportsPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

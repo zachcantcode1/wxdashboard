@@ -1,5 +1,6 @@
 // src/pages/HomePage.jsx
 import React from 'react';
+import { motion } from 'framer-motion';
 import LightningStormPro from '../components/LightningStormPro';
 
 const HomePage = () => {
@@ -8,29 +9,58 @@ const HomePage = () => {
       {/* Animated Gradient Background - CSS will be in index.css */}
       <div className="animated-gradient-bg absolute inset-0 -z-10 w-full h-full rounded-lg"></div>
       {/* Canvas-based lightning storm overlay */}
-      <LightningStormPro />
+      <motion.div 
+        className="absolute inset-0 z-0"
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      >
+        <LightningStormPro />
+      </motion.div>
       <div className="z-10 text-center px-4">
-        <h1 
-          className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 
-                     animate-fadeInScaleUp opacity-0"
-          style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
+        <motion.h1 
+          className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6"
+          initial={{ opacity: 0, scale: 0.8, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ 
+            duration: 0.8, 
+            delay: 0.5,
+            type: "spring",
+            stiffness: 150,
+            damping: 20
+          }}
+          whileHover={{ 
+            scale: 1.05,
+            textShadow: "0px 0px 20px rgba(255,255,255,0.8)",
+            transition: { duration: 0.3 }
+          }}
         >
           WX DASHBOARD
-        </h1>
-        <p 
-          className="text-xl md:text-2xl text-gray-200 mb-4 
-                     animate-fadeInUp opacity-0"
-          style={{ animationDelay: '1s', animationFillMode: 'forwards' }}
+        </motion.h1>
+        <motion.p 
+          className="text-xl md:text-2xl text-gray-200 mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.6, 
+            delay: 0.8,
+            ease: "easeOut"
+          }}
         >
           Your central hub for comprehensive weather intelligence.
-        </p>
-        <p 
-          className="text-lg md:text-xl text-gray-300 
-                     animate-fadeInUp opacity-0"
-          style={{ animationDelay: '1.5s', animationFillMode: 'forwards' }}
+        </motion.p>
+        <motion.p 
+          className="text-lg md:text-xl text-gray-300"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.6, 
+            delay: 1.1,
+            ease: "easeOut"
+          }}
         >
           Stay informed. Stay ahead.
-        </p>
+        </motion.p>
       </div>
     </div>
   );

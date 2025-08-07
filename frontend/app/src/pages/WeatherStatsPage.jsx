@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line } from 'recharts';
@@ -436,7 +437,12 @@ function WeatherStatsPage() {
   const categoryClass = 'text-slate-300';
 
   return (
-    <div className="container mx-auto p-2 md:p-3">
+    <motion.div 
+      className="container mx-auto p-2 md:p-3"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <h1 className="text-2xl md:text-3xl font-bold mb-1 text-center">Weather Stats</h1>
       {/* WSI Display */}
       <div className="mx-auto max-w-5xl mb-4">
@@ -674,7 +680,7 @@ function WeatherStatsPage() {
       <div className="mt-4 text-xs md:text-sm text-muted-foreground text-center">
         {alertsLoading || lsrLoading ? 'Loading data…' : 'Statistics updated periodically.'}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

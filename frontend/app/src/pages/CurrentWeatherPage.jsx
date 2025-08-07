@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useWeather } from '../context/WeatherContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,12 @@ const CurrentWeatherPage = () => {
   const formatDate = (timestamp) => new Date(timestamp * 1000).toLocaleDateString([], { weekday: 'short' });
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 text-white">
+    <motion.div 
+      className="p-4 sm:p-6 md:p-8 text-white"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div className="flex flex-col items-center mb-8">
         <h1 className="text-3xl font-bold mb-6">Current & Forecast Weather</h1>
         <div className="flex w-full max-w-sm items-center space-x-2">
@@ -111,7 +117,7 @@ const CurrentWeatherPage = () => {
           </Card>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
