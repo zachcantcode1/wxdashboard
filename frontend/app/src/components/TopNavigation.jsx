@@ -23,10 +23,13 @@ import {
   Settings,
   HelpCircle,
   ChevronDown,
+  Menu,
   User,
   LogOut,
   Radar,
 } from 'lucide-react';
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger, NavigationMenuLink } from "../components/ui/navigation-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/popover";
 
 const navigationItems = [
   {
@@ -108,301 +111,144 @@ export function TopNavigation() {
       <div className="max-w-full px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16">
           {/* Logo/Brand */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center gap-2">
+            {/* Mobile menu trigger */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="md:hidden" variant="ghost" size="icon" aria-label="Open menu">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-64 p-1 md:hidden">
+                <NavigationMenu className="max-w-none *:w-full">
+                  <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
+                    {/* Home removed per UX: avoid navigating back to greeting */}
+                    {/* Current Weather */}
+                    <NavigationMenuItem className="w-full">
+                      <NavigationMenuLink asChild>
+                        <Link to="/current-weather" className="py-1.5 w-full block">Current Weather</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                    {/* Storm Reports */}
+                    <NavigationMenuItem className="w-full">
+                      <div className="text-muted-foreground px-2 py-1.5 text-xs font-medium">Storm Reports</div>
+                      <ul>
+                        {stormReportsItems.map((item) => (
+                          <li key={item.title}>
+                            <NavigationMenuLink asChild>
+                              <Link to={item.path} className="py-1.5 w-full block">{item.title}</Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuItem>
+                    {/* Severe Weather */}
+                    <NavigationMenuItem className="w-full">
+                      <div className="text-muted-foreground px-2 py-1.5 text-xs font-medium">Severe Weather</div>
+                      <ul>
+                        {severeWeatherItems.map((item) => (
+                          <li key={item.title}>
+                            <NavigationMenuLink asChild>
+                              <Link to={item.path} className="py-1.5 w-full block">{item.title}</Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuItem>
+                    {/* External */}
+                    <NavigationMenuItem className="w-full">
+                      <div className="text-muted-foreground px-2 py-1.5 text-xs font-medium">External</div>
+                      <ul>
+                        {externalServices.map((service) => (
+                          <li key={service.title}>
+                            <NavigationMenuLink href={service.url} className="py-1.5" target="_blank" rel="noopener noreferrer">
+                              {service.title}
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+              </PopoverContent>
+            </Popover>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <Link to="/" className="text-sm sm:text-base font-bold text-foreground hover:text-primary transition-colors">
-                WX DASHBOARD
+                Impact Weather
               </Link>
             </motion.div>
           </div>
 
-          {/* Navigation Links - Preserve meaningful labels */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navigationItems.map((item) => {
-              const isActive = location.pathname === item.path;
-              return (
-                <motion.div
-                  key={item.title}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <Link
-                    to={item.path}
-                    className={cn(
-                      "flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
-                      isActive
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    )}
-                  >
-                    <motion.div
-                      animate={{ rotate: isActive ? 360 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <item.icon className="h-4 w-4 mr-1.5" />
-                    </motion.div>
-                    {item.title}
-                  </Link>
-                </motion.div>
-              );
-            })}
-
-            {/* Storm Reports Dropdown */}
-            <DropdownMenu open={isStormReportsOpen} onOpenChange={setIsStormReportsOpen}>
-              <DropdownMenuTrigger asChild>
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <Button
-                    variant="ghost"
-                    className={cn(
-                      "flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
-                      isStormReportsActive
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    )}
-                  >
-                    <motion.div
-                      animate={{ rotate: isStormReportsActive ? 360 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <List className="h-4 w-4 mr-1.5" />
-                    </motion.div>
-                    Storm Reports
-                    <motion.div
-                      animate={{ rotate: isStormReportsOpen ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <ChevronDown className="h-4 w-4 ml-1" />
-                    </motion.div>
-                  </Button>
-                </motion.div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {stormReportsItems.map((item) => (
-                  <DropdownMenuItem key={item.title} asChild>
-                    <Link
-                      to={item.path}
-                      className="flex items-center cursor-pointer"
-                    >
-                      <item.icon className="h-4 w-4 mr-2" />
-                      {item.title}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Severe Weather Dropdown */}
-            <DropdownMenu open={isSevereOpen} onOpenChange={setIsSevereOpen}>
-              <DropdownMenuTrigger asChild>
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <Button
-                    variant="ghost"
-                    className={cn(
-                      "flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
-                      isSevereActive
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    )}
-                  >
-                    <motion.div
-                      animate={{ rotate: isSevereActive ? 360 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <AlertTriangle className="h-4 w-4 mr-1.5" />
-                    </motion.div>
-                    Severe Weather
-                    <motion.div
-                      animate={{ rotate: isSevereOpen ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <ChevronDown className="h-4 w-4 ml-1" />
-                    </motion.div>
-                  </Button>
-                </motion.div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {severeWeatherItems.map((item) => (
-                  <DropdownMenuItem key={item.title} asChild>
-                    <Link
-                      to={item.path}
-                      className="flex items-center cursor-pointer"
-                    >
-                      <item.icon className="h-4 w-4 mr-2" />
-                      {item.title}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* External Services Dropdown */}
-            <DropdownMenu open={isExternalOpen} onOpenChange={setIsExternalOpen}>
-              <DropdownMenuTrigger asChild>
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <Button
-                    variant="ghost"
-                    className="flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent whitespace-nowrap"
-                  >
-                    <ExternalLink className="h-4 w-4 mr-1.5" />
-                    External Services
-                    <motion.div
-                      animate={{ rotate: isExternalOpen ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <ChevronDown className="h-4 w-4 ml-1" />
-                    </motion.div>
-                  </Button>
-                </motion.div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {externalServices.map((service) => (
-                  <DropdownMenuItem key={service.title} asChild>
-                    <a
-                      href={service.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center cursor-pointer"
-                    >
-                      <service.icon className="h-4 w-4 mr-2" />
-                      {service.title}
-                    </a>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          {/* Medium screens - Show main items plus Storm Reports dropdown */}
-          <div className="hidden md:flex lg:hidden items-center space-x-1">
-            {navigationItems.map((item) => {
-              const isActive = location.pathname === item.path;
-              return (
-                <Link
-                  key={item.title}
-                  to={item.path}
-                  className={cn(
-                    "flex items-center px-2 py-2 rounded-md text-xs font-medium transition-colors whitespace-nowrap",
-                    isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  )}
-                >
-                  <item.icon className="h-4 w-4 mr-1" />
-                  {item.title}
-                </Link>
-              );
-            })}
-
-            {/* Storm Reports Dropdown for medium screens */}
-            <DropdownMenu open={isStormReportsMediumOpen} onOpenChange={setIsStormReportsMediumOpen}>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className={cn(
-                    "flex items-center px-2 py-2 rounded-md text-xs font-medium transition-colors whitespace-nowrap",
-                    isStormReportsActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  )}
-                >
-                  <List className="h-4 w-4 mr-1" />
+          {/* Desktop Navigation Menu (OriginUI style) */}
+          <NavigationMenu viewport={false} className="hidden lg:flex">
+            <NavigationMenuList className="gap-2">
+              {/* Home removed per UX: avoid navigating back to greeting */}
+              {/* Current Weather */}
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link to="/current-weather" className="px-2 py-1.5">Current Weather</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              {/* Storm Reports */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-muted-foreground hover:text-primary bg-transparent px-2 py-1.5 font-medium *:[svg]:-me-0.5 *:[svg]:size-3.5">
                   Storm Reports
-                  <ChevronDown className="h-4 w-4 ml-1" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {stormReportsItems.map((item) => (
-                  <DropdownMenuItem key={item.title} asChild>
-                    <Link
-                      to={item.path}
-                      className="flex items-center cursor-pointer"
-                    >
-                      <item.icon className="h-4 w-4 mr-2" />
-                      {item.title}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Severe Weather Dropdown for medium screens */}
-            <DropdownMenu open={isSevereMediumOpen} onOpenChange={setIsSevereMediumOpen}>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className={cn(
-                    "flex items-center px-2 py-2 rounded-md text-xs font-medium transition-colors whitespace-nowrap",
-                    isSevereActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  )}
-                >
-                  <AlertTriangle className="h-4 w-4 mr-1" />
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="z-50 p-1">
+                  <ul className="min-w-48">
+                    {stormReportsItems.map((item) => (
+                      <li key={item.title}>
+                        <NavigationMenuLink asChild>
+                          <Link to={item.path} className="py-1.5 block px-2">{item.title}</Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              {/* Severe Weather */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-muted-foreground hover:text-primary bg-transparent px-2 py-1.5 font-medium *:[svg]:-me-0.5 *:[svg]:size-3.5">
                   Severe Weather
-                  <ChevronDown className="h-4 w-4 ml-1" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {severeWeatherItems.map((item) => (
-                  <DropdownMenuItem key={item.title} asChild>
-                    <Link
-                      to={item.path}
-                      className="flex items-center cursor-pointer"
-                    >
-                      <item.icon className="h-4 w-4 mr-2" />
-                      {item.title}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            
-            {/* External Services for medium screens */}
-            <DropdownMenu open={isExternalMediumOpen} onOpenChange={setIsExternalMediumOpen}>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex items-center px-2 py-2 rounded-md text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-accent whitespace-nowrap"
-                >
-                  <ExternalLink className="h-4 w-4 mr-1" />
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="z-50 p-1">
+                  <ul className="min-w-48">
+                    {severeWeatherItems.map((item) => (
+                      <li key={item.title}>
+                        <NavigationMenuLink asChild>
+                          <Link to={item.path} className="py-1.5 block px-2">{item.title}</Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              {/* External */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-muted-foreground hover:text-primary bg-transparent px-2 py-1.5 font-medium *:[svg]:-me-0.5 *:[svg]:size-3.5">
                   External
-                  <ChevronDown className="h-4 w-4 ml-1" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {externalServices.map((service) => (
-                  <DropdownMenuItem key={service.title} asChild>
-                    <a
-                      href={service.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center cursor-pointer"
-                    >
-                      <service.icon className="h-4 w-4 mr-2" />
-                      {service.title}
-                    </a>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="z-50 p-1">
+                  <ul className="min-w-48">
+                    {externalServices.map((service) => (
+                      <li key={service.title}>
+                        <NavigationMenuLink href={service.url} target="_blank" rel="noopener noreferrer" className="py-1.5 block px-2">
+                          {service.title}
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+
+          {/* Medium screens: keep the desktop NavigationMenu visible */}
+          <div className="hidden md:flex lg:hidden" />
 
           {/* User Profile Dropdown */}
           <div className="flex items-center">
@@ -430,7 +276,7 @@ export function TopNavigation() {
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">Weather Dashboard</p>
+                    <p className="text-sm font-medium leading-none">Impact Weather</p>
                     <p className="text-xs leading-none text-muted-foreground">
                       {user?.email}
                     </p>
@@ -446,65 +292,7 @@ export function TopNavigation() {
           </div>
         </div>
 
-        {/* Mobile Navigation - Collapsible */}
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navigationItems.map((item) => {
-              const isActive = location.pathname === item.path;
-              return (
-                <Link
-                  key={item.title}
-                  to={item.path}
-                  className={cn(
-                    "flex items-center px-3 py-2 rounded-md text-base font-medium transition-colors",
-                    isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  )}
-                >
-                  <item.icon className="h-5 w-5 mr-3" />
-                  {item.title}
-                </Link>
-              );
-            })}
-            
-            {/* Mobile Severe Weather */}
-            <div className="pt-2">
-              <p className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Severe Weather
-              </p>
-              {severeWeatherItems.map((item) => (
-                <Link
-                  key={item.title}
-                  to={item.path}
-                  className="flex items-center px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-                >
-                  <item.icon className="h-5 w-5 mr-3" />
-                  {item.title}
-                </Link>
-              ))}
-            </div>
-            
-            {/* Mobile External Services */}
-            <div className="pt-2">
-              <p className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                External Services
-              </p>
-              {externalServices.map((service) => (
-                <a
-                  key={service.title}
-                  href={service.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-                >
-                  <service.icon className="h-5 w-5 mr-3" />
-                  {service.title}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* Mobile list moved to Popover in the left section */}
       </div>
     </nav>
   );
