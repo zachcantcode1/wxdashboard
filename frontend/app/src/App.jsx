@@ -11,6 +11,7 @@ import ActiveAlertsPage from './pages/ActiveAlertsPage'; // Default export
 import CurrentWeatherPage from './pages/CurrentWeatherPage'; // Default export
 import TopStormReportsPage from './pages/TopStormReportsPage'; // Default export
 import WeatherStatsPage from './pages/WeatherStatsPage'; // Default export
+import OutlooksPage from './pages/OutlooksPage'; // Default export
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="current-weather" element={<CurrentWeatherPage />} />
                 <Route path="top-storm-reports" element={<TopStormReportsPage />} />
                 <Route path="weather-stats" element={<WeatherStatsPage />} />
+                <Route path="outlooks" element={<OutlooksPage />} />
 
                 {/* Add other routes here later */}
               </Route>

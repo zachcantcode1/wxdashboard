@@ -3,6 +3,133 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line } from 'recharts';
+import Chart from 'react-apexcharts';
+
+// Stable chart style constants to avoid prop identity changes on re-render
+const WSI_CHART_MARGIN = { top: 4, right: 12, bottom: 4, left: 8 };
+const WSI_GRID_STROKE = '#334155';
+const WSI_X_TICK = { fill: '#cbd5e1', fontSize: 10 };
+const WSI_Y_TICK = { fill: '#cbd5e1', fontSize: 10 };
+const WSI_TOOLTIP_STYLE = { backgroundColor: '#0f172a', borderColor: '#1e293b', color: '#e2e8f0' };
+const WSI_LINE_COLOR = '#86efac';
+
+// Live sparkline window (ms)
+const WSI_LIVE_RANGE_MS = 15 * 60 * 1000; // last 15 minutes
+// Extra time padding on both ends to avoid visual clipping at edges (ms)
+const WSI_TIME_PAD_MS = 120000; // 2 minutes on both sides
+
+// Memoized chart to prevent unnecessary rerenders/redraws when data didn't actually change
+const WSIChart = React.memo(
+  function WSIChart({ data }) {
+    return (
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data} margin={WSI_CHART_MARGIN}>
+          <CartesianGrid strokeDasharray="3 3" stroke={WSI_GRID_STROKE} />
+          <XAxis dataKey="ts" tick={WSI_X_TICK} />
+          <YAxis domain={[0, 100]} tick={WSI_Y_TICK} />
+          <Tooltip contentStyle={WSI_TOOLTIP_STYLE} />
+          <Line
+            type="monotone"
+            dataKey="value"
+            stroke={WSI_LINE_COLOR}
+            strokeWidth={1.75}
+            dot={false}
+            isAnimationActive={false}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    );
+  },
+  (prev, next) => {
+    const a = prev.data || [];
+    const b = next.data || [];
+    if (a.length !== b.length) return false; // new point appended/removed
+    if (a.length === 0) return true;
+    const pa = a[a.length - 1];
+    const pb = b[b.length - 1];
+    // If latest point didn't change, skip rerender
+    return pa?.value === pb?.value && pa?.ts === pb?.ts;
+  }
+);
+
+// ApexCharts sparkline for a more "live" feel
+const WSISparklineApex = React.memo(function WSISparklineApex({ series, rangeMs = WSI_LIVE_RANGE_MS }) {
+  const lastIdx = (series?.[0]?.data?.length ?? 0) - 1;
+  const lastPt = lastIdx >= 0 ? series[0].data[lastIdx] : null;
+  const firstPt = lastIdx >= 0 ? series[0].data[0] : null;
+  const options = useMemo(() => ({
+    chart: {
+      type: 'line',
+      animations: {
+        enabled: true,
+        easing: 'linear',
+        dynamicAnimation: { speed: 200 }
+      },
+      sparkline: { enabled: true },
+      toolbar: { show: false },
+      foreColor: '#cbd5e1',
+      background: 'transparent',
+      offsetX: 24
+    },
+    stroke: { curve: 'smooth', width: 2, lineCap: 'round' },
+    colors: [WSI_LINE_COLOR],
+    markers: {
+      size: 0,
+      strokeWidth: 0,
+      discrete: (lastIdx >= 0) ? [{
+        seriesIndex: 0,
+        dataPointIndex: lastIdx,
+        fillColor: WSI_LINE_COLOR,
+        strokeColor: '#94a3b8',
+        size: 4
+      }] : [],
+      hover: { size: 4, sizeOffset: 2 },
+      // remove glow to prevent any edge clipping
+      dropShadow: { enabled: false }
+    },
+    xaxis: {
+      type: 'datetime',
+      // Pad both sides relative to actual data so the curve and marker never touch edges
+      min: (firstPt?.[0] ?? (Date.now() - rangeMs)) - WSI_TIME_PAD_MS,
+      max: (lastPt?.[0] ?? Date.now()) + WSI_TIME_PAD_MS
+    },
+    yaxis: {
+      show: false,
+      min: 0,
+      max: 100,
+      decimalsInFloat: 0,
+      tickAmount: 2,
+      labels: { show: false },
+      axisBorder: { show: false },
+      axisTicks: { show: false }
+    },
+    tooltip: {
+      theme: 'dark',
+      x: { show: false },
+      y: {
+        formatter: (val) => (Number.isFinite(val) ? Math.round(val) : 0)
+      }
+    },
+    grid: {
+      show: false,
+      padding: { left: 56, right: 12, top: 6, bottom: 6 }
+    }
+  }), [rangeMs, lastIdx, firstPt?.[0], lastPt?.[0], lastPt?.[1]]);
+
+  return (
+    <div style={{ width: '100%', height: '100%', overflow: 'visible', paddingLeft: 24 }}>
+      <Chart options={options} series={series} type="line" height="100%" width="100%" />
+    </div>
+  );
+}, (prev, next) => {
+  const pa = prev.series?.[0]?.data || [];
+  const pb = next.series?.[0]?.data || [];
+  if (pa.length !== pb.length) return false;
+  if (pa.length === 0) return true;
+  const la = pa[pa.length - 1];
+  const lb = pb[pb.length - 1];
+  return la?.[0] === lb?.[0] && la?.[1] === lb?.[1] && prev.rangeMs === next.rangeMs;
+});
 
 // Utilities mirrored from ActiveAlertsPage to determine active alerts
 const isAlertActive = (expiresTime) => {
@@ -28,6 +155,10 @@ function WeatherStatsPage() {
   const [wsiHistory, setWsiHistory] = useState([]);
   const [wsiError, setWsiError] = useState(null);
   const lastWsiRef = useRef(0);
+  const lastFingerprintRef = useRef('');
+  const debounceRef = useRef(null);
+  const lastPostAtRef = useRef(0);
+  const [wsiLive, setWsiLive] = useState(null);
   const [alerts, setAlerts] = useState([]);
   const [alertsLoading, setAlertsLoading] = useState(true);
   const [alertsError, setAlertsError] = useState(null);
@@ -84,7 +215,17 @@ function WeatherStatsPage() {
         const res = await fetch('/api/wsi-history');
         if (!res.ok) throw new Error('History fetch failed');
         const json = await res.json();
-        setWsiHistory(Array.isArray(json.points) ? json.points : []);
+        const points = Array.isArray(json.points) ? json.points : [];
+        setWsiHistory(points);
+        // Initialize current WSI from latest persisted value to avoid jitter on load
+        if (points.length > 0) {
+          const lastPt = points[points.length - 1];
+          if (lastPt && Number.isFinite(lastPt.value)) {
+            lastWsiRef.current = lastPt.value;
+            setWsi(lastPt.value);
+            setWsiCategory('');
+          }
+        }
       } catch (err) {
         console.error('WSI history error:', err);
       }
@@ -397,33 +538,68 @@ function WeatherStatsPage() {
     return () => Math.round(safeRaw);
   }, [alerts, lsrReports, wsiWeights]);
 
-  // compute and post WSI periodically (align with LSR refresh or alerts updates)
+  // Compute and post WSI only when underlying data truly changes (fingerprint + debounce + throttle)
   useEffect(() => {
     if (!wsiWeights) return;
-    const val = computeWSI();
-    // smoothing + hysteresis (simple)
-    const prev = lastWsiRef.current || 0;
-    // Guard non-finite values; if val is not finite, don't update and keep previous
-    const finiteVal = Number.isFinite(val) ? val : prev;
-    const smoothed = Math.round(0.7 * prev + 0.3 * finiteVal);
-    if (Number.isFinite(finiteVal) && Math.abs(smoothed - prev) >= 1) {
-      lastWsiRef.current = smoothed;
-      setWsi(smoothed);
-      // category no longer used for display, but keep stable string for potential telemetry
-      setWsiCategory('');
-      // post to backend history
-      fetch('/api/wsi-history', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ value: smoothed })
-      }).then(() => {
-        // refresh local history after append
-        fetch('/api/wsi-history').then(r => r.json()).then(json => {
-          setWsiHistory(Array.isArray(json.points) ? json.points : []);
-        }).catch(() => {});
-      }).catch(() => {});
-    }
-  }, [computeWSI, wsiWeights]);
+
+    // Build a compact fingerprint of inputs that affect WSI
+    const activeAlerts = alerts
+      .filter(a => isAlertActive(a.expires))
+      .map(a => ({
+        id: a.id || a.wfo || a.headline || '',
+        e: a.expires || '',
+        t: (a.producttype || a.productType || '').toLowerCase(),
+        h: a.max_hail_size || a.maxHailSize || '',
+        w: a.max_wind_gust || a.maxWindGust || '',
+        td: a.tornado_detection || a.tornadoDetection || '',
+        tdt: a.thunderstormDamageThreat || a.thunderstorm_damage_threat || ''
+      }));
+    const reportSlice = lsrReports.slice(0, 200).map(r => ({
+      id: r.id,
+      v: r.valid,
+      t: (r.type || '').toLowerCase(),
+      m: r.magnitude
+    }));
+    const fp = JSON.stringify({ a: activeAlerts, r: reportSlice, wv: wsiWeights?.version || null });
+
+    if (fp === lastFingerprintRef.current) return; // no real change
+    lastFingerprintRef.current = fp;
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      const val = computeWSI();
+      const prev = lastWsiRef.current || 0;
+      const finiteVal = Number.isFinite(val) ? val : prev;
+      const smoothedFloat = 0.7 * prev + 0.3 * finiteVal;
+      // update live float for sparkline immediately
+      if (Number.isFinite(smoothedFloat)) setWsiLive(smoothedFloat);
+      const smoothed = Math.round(smoothedFloat);
+      if (Number.isFinite(finiteVal) && Math.abs(smoothed - prev) >= 1) {
+        lastWsiRef.current = smoothed;
+        setWsi(smoothed);
+        setWsiCategory('');
+        const now = Date.now();
+        // throttle posts to at most once per 60s
+        if (now - lastPostAtRef.current > 60000) {
+          lastPostAtRef.current = now;
+          fetch('/api/wsi-history', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ value: smoothed })
+          }).then(() => {
+            fetch('/api/wsi-history')
+              .then(r => r.json())
+              .then(json => setWsiHistory(Array.isArray(json.points) ? json.points : []))
+              .catch(() => {});
+          }).catch(() => {});
+        }
+      }
+    }, 150); // faster debounce for more real-time feel
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [alerts, lsrReports, wsiWeights, computeWSI]);
 
   // Prepare LineChart data
   const wsiLineData = useMemo(() => {
@@ -432,6 +608,37 @@ function WeatherStatsPage() {
       value: p.value
     }));
   }, [wsiHistory]);
+
+  // ApexCharts series: [[timestampMs, value], ...]
+  const wsiApexSeries = useMemo(() => {
+    const data = (wsiHistory || [])
+      .map(p => [new Date(p.ts).getTime(), p.value])
+      .filter(d => Number.isFinite(d?.[1]));
+    return [{ name: 'WSI', data }];
+  }, [wsiHistory]);
+
+  // Ephemeral last point: update immediately when WSI changes to create a live feel
+  const [wsiEphemeral, setWsiEphemeral] = useState(null);
+  useEffect(() => {
+    if (Number.isFinite(wsiLive)) {
+      setWsiEphemeral([Date.now(), wsiLive]);
+    }
+  }, [wsiLive]);
+
+  // Combine history with ephemeral latest point for the sparkline
+  const wsiApexSeriesLive = useMemo(() => {
+    const base = wsiApexSeries?.[0]?.data || [];
+    const combined = wsiEphemeral ? [...base, wsiEphemeral] : base;
+    // Insert a small left-side ghost point to avoid curve clipping at the left edge
+    const leftPadMs = Math.min(10000, Math.floor(WSI_TIME_PAD_MS / 2));
+    let withGhost = combined;
+    if (combined.length > 0) {
+      const firstTs = combined[0][0];
+      const ghostTs = firstTs - leftPadMs;
+      withGhost = [[ghostTs, combined[0][1]], ...combined];
+    }
+    return [{ name: 'WSI', data: withGhost }];
+  }, [wsiApexSeries, wsiEphemeral]);
 
   // Category color no longer used; keep a neutral class for compatibility
   const categoryClass = 'text-slate-300';
@@ -443,7 +650,7 @@ function WeatherStatsPage() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <h1 className="text-2xl md:text-3xl font-bold mb-1 text-center">Weather Stats</h1>
+      <h1 className="text-2xl md:text-3xl font-bold mb-1 text-center">Weather Severity Index</h1>
       {/* WSI Display */}
       <div className="mx-auto max-w-5xl mb-4">
         <Card className="bg-slate-900 border-slate-700">
@@ -458,20 +665,14 @@ function WeatherStatsPage() {
           </CardHeader>
           <CardContent className="pt-2">
             <div className="flex flex-col gap-3">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                <div className="flex items-baseline gap-3">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 overflow-visible">
+                <div className="flex items-baseline gap-3 shrink-0">
                   <div className="text-4xl md:text-5xl font-extrabold text-slate-100">{Number.isFinite(wsi) ? wsi : 0}</div>
                 </div>
-                <div className="w-full h-24 md:h-20">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={wsiLineData} margin={{ top: 4, right: 12, bottom: 4, left: 8 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                      <XAxis dataKey="ts" tick={{ fill: '#cbd5e1', fontSize: 10 }} />
-                      <YAxis domain={[0, 100]} tick={{ fill: '#cbd5e1', fontSize: 10 }} />
-                      <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', color: '#e2e8f0' }} />
-                      <Line type="monotone" dataKey="value" stroke="#86efac" strokeWidth={1.75} dot={false} />
-                    </LineChart>
-                  </ResponsiveContainer>
+                <div className="flex-1 min-w-0 h-24 md:h-20 overflow-visible">
+                  <div className="relative w-full h-full overflow-visible px-4 md:px-6">
+                    <WSISparklineApex series={wsiApexSeriesLive} />
+                  </div>
                 </div>
               </div>
 

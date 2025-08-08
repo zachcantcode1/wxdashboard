@@ -39,16 +39,6 @@ const navigationItems = [
     path: "/current-weather",
     icon: CloudSun,
   },
-  {
-    title: "Active Alerts",
-    path: "/active-alerts",
-    icon: AlertTriangle,
-  },
-  {
-    title: "Weather Stats",
-    path: "/weather-stats",
-    icon: BarChart2,
-  },
 ];
 
 const stormReportsItems = [
@@ -61,6 +51,24 @@ const stormReportsItems = [
     title: "Top Storm Reports",
     path: "/top-storm-reports",
     icon: BarChart2,
+  },
+];
+
+const severeWeatherItems = [
+  {
+    title: "Active Alerts",
+    path: "/active-alerts",
+    icon: AlertTriangle,
+  },
+  {
+    title: "Weather Severity Index",
+    path: "/weather-stats",
+    icon: BarChart2,
+  },
+  {
+    title: "Outlooks",
+    path: "/outlooks",
+    icon: Radar,
   },
 ];
 
@@ -84,6 +92,8 @@ export function TopNavigation() {
   const [isExternalMediumOpen, setIsExternalMediumOpen] = useState(false);
   const [isStormReportsOpen, setIsStormReportsOpen] = useState(false);
   const [isStormReportsMediumOpen, setIsStormReportsMediumOpen] = useState(false);
+  const [isSevereOpen, setIsSevereOpen] = useState(false);
+  const [isSevereMediumOpen, setIsSevereMediumOpen] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
@@ -91,6 +101,7 @@ export function TopNavigation() {
 
   // Check if current path is a storm reports page
   const isStormReportsActive = stormReportsItems.some(item => location.pathname === item.path);
+  const isSevereActive = severeWeatherItems.some(item => location.pathname === item.path);
 
   return (
     <nav className="bg-background border-b border-border sticky top-0 z-50">
@@ -176,6 +187,54 @@ export function TopNavigation() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
                 {stormReportsItems.map((item) => (
+                  <DropdownMenuItem key={item.title} asChild>
+                    <Link
+                      to={item.path}
+                      className="flex items-center cursor-pointer"
+                    >
+                      <item.icon className="h-4 w-4 mr-2" />
+                      {item.title}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Severe Weather Dropdown */}
+            <DropdownMenu open={isSevereOpen} onOpenChange={setIsSevereOpen}>
+              <DropdownMenuTrigger asChild>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <Button
+                    variant="ghost"
+                    className={cn(
+                      "flex items-center px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap",
+                      isSevereActive
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    )}
+                  >
+                    <motion.div
+                      animate={{ rotate: isSevereActive ? 360 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <AlertTriangle className="h-4 w-4 mr-1.5" />
+                    </motion.div>
+                    Severe Weather
+                    <motion.div
+                      animate={{ rotate: isSevereOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="h-4 w-4 ml-1" />
+                    </motion.div>
+                  </Button>
+                </motion.div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                {severeWeatherItems.map((item) => (
                   <DropdownMenuItem key={item.title} asChild>
                     <Link
                       to={item.path}
@@ -282,6 +341,38 @@ export function TopNavigation() {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
+
+            {/* Severe Weather Dropdown for medium screens */}
+            <DropdownMenu open={isSevereMediumOpen} onOpenChange={setIsSevereMediumOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className={cn(
+                    "flex items-center px-2 py-2 rounded-md text-xs font-medium transition-colors whitespace-nowrap",
+                    isSevereActive
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                  )}
+                >
+                  <AlertTriangle className="h-4 w-4 mr-1" />
+                  Severe Weather
+                  <ChevronDown className="h-4 w-4 ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                {severeWeatherItems.map((item) => (
+                  <DropdownMenuItem key={item.title} asChild>
+                    <Link
+                      to={item.path}
+                      className="flex items-center cursor-pointer"
+                    >
+                      <item.icon className="h-4 w-4 mr-2" />
+                      {item.title}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             
             {/* External Services for medium screens */}
             <DropdownMenu open={isExternalMediumOpen} onOpenChange={setIsExternalMediumOpen}>
@@ -376,6 +467,23 @@ export function TopNavigation() {
                 </Link>
               );
             })}
+            
+            {/* Mobile Severe Weather */}
+            <div className="pt-2">
+              <p className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                Severe Weather
+              </p>
+              {severeWeatherItems.map((item) => (
+                <Link
+                  key={item.title}
+                  to={item.path}
+                  className="flex items-center px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                >
+                  <item.icon className="h-5 w-5 mr-3" />
+                  {item.title}
+                </Link>
+              ))}
+            </div>
             
             {/* Mobile External Services */}
             <div className="pt-2">

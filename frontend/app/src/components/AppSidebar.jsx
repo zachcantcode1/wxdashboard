@@ -48,7 +48,7 @@ const menuItems = [
     icon: BarChart2,
   },
   {
-    title: "Weather Stats",
+    title: "Weather Severity Index",
     path: "/weather-stats",
     icon: BarChart2,
   },

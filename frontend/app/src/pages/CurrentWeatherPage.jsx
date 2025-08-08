@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useWeather } from '../context/WeatherContext';
+import { useAuth } from '../contexts/AuthContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +10,13 @@ import HourlyForecastChart from '../components/HourlyForecastChart';
 const CurrentWeatherPage = () => {
   const [inputZipcode, setInputZipcode] = useState('');
   const { weatherData, locationName, loading, error, fetchWeatherData, setHomeLocation, zipcode } = useWeather();
+  const { homeZip } = useAuth();
+
+  // SPC State Outlook derivation
+  const [spcState, setSpcState] = useState(null);
+  const [spcUrl, setSpcUrl] = useState(null);
+  const [spcFallback, setSpcFallback] = useState(false);
+  const [spcLoading, setSpcLoading] = useState(false);
 
   const handleSearch = () => {
     fetchWeatherData(inputZipcode);
@@ -31,6 +39,41 @@ const CurrentWeatherPage = () => {
 
   const formatTime = (timestamp) => new Date(timestamp * 1000).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
   const formatDate = (timestamp) => new Date(timestamp * 1000).toLocaleDateString([], { weekday: 'short' });
+
+  // Resolve user's state from zip and build SPC Day 1 image URL
+  useEffect(() => {
+    const activeZip = (zipcode || homeZip || '').trim();
+    setSpcFallback(false);
+    if (!activeZip || activeZip.length < 5) {
+      setSpcState(null);
+      setSpcUrl(null);
+      return;
+    }
+    let cancelled = false;
+    async function run() {
+      try {
+        setSpcLoading(true);
+        const resp = await fetch(`/api/utils/zip-to-state?zip=${encodeURIComponent(activeZip)}`);
+        if (!resp.ok) throw new Error('zip-to-state failed');
+        const json = await resp.json();
+        if (cancelled) return;
+        const st = String(json.state || '').toUpperCase();
+        setSpcState(st);
+        // cache-busting param keeps image fresh
+        setSpcUrl(`https://www.spc.noaa.gov/partners/outlooks/state/images/${st}_swody1.png?${Date.now()}`);
+      } catch (e) {
+        if (!cancelled) {
+          setSpcState(null);
+          setSpcUrl(null);
+          setSpcFallback(true);
+        }
+      } finally {
+        if (!cancelled) setSpcLoading(false);
+      }
+    }
+    run();
+    return () => { cancelled = true; };
+  }, [zipcode, homeZip]);
 
   return (
     <motion.div 
@@ -84,6 +127,36 @@ const CurrentWeatherPage = () => {
                     <p><strong>Humidity:</strong> {weatherData.current.humidity}%</p>
                     <p><strong>Visibility:</strong> {(weatherData.current.visibility / 1609).toFixed(1)} mi</p>
                 </div>
+            </CardContent>
+          </Card>
+
+          {/* SPC Day 1 State Outlook */}
+          <Card className="bg-gray-800 border-gray-700">
+            <CardHeader>
+              <CardTitle>SPC Day 1 Outlook {spcState ? `for ${spcState}` : ''}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {spcLoading ? (
+                <div className="text-sm text-gray-300">Loading state outlook...</div>
+              ) : (
+                <div className="flex justify-center">
+                  <img
+                    src={
+                      spcFallback || !spcUrl
+                        ? `https://www.spc.noaa.gov/products/outlook/day1otlk.gif?${Date.now()}`
+                        : spcUrl
+                    }
+                    alt={
+                      spcState
+                        ? `SPC Day 1 Outlook for ${spcState}`
+                        : 'SPC Day 1 Outlook (National)'
+                    }
+                    className="w-full h-auto rounded-md border max-w-3xl"
+                    onError={() => setSpcFallback(true)}
+                    loading="eager"
+                  />
+                </div>
+              )}
             </CardContent>
           </Card>
 

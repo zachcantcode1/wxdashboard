@@ -7,9 +7,9 @@ const http = require('http');
 const { Server } = require('socket.io');
 const { spawn } = require('child_process');
 const { createClient } = require('@supabase/supabase-js');
+const zipcodes = require('zipcodes');
 
 const RADAR_CACHE_DIR = path.join(__dirname, 'radar_cache');
-
 
 const VERBOSE = process.env.XMPP_VERBOSE === 'true';
 // Replace old XMPP client with AtmosX parser
@@ -53,8 +53,104 @@ app.use((req, res, next) => {
   }
 });
 
+// Parse JSON and URL-encoded bodies before defining routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// --- SPC Outlook Summary via OpenRouter ---
+// Summarizes the SPC outlook (Day 1/2/3) into one paragraph using OpenRouter
+app.post('/api/spc/outlook/summary', async (req, res) => {
+  try {
+    const apiKey = process.env.OPENROUTER_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ error: 'Missing OpenRouter API key. Set OPENROUTER_API_KEY in backend environment.' });
+    }
+    const dayParam = String(req.body?.day || '');
+    if (!['1', '2', '3'].includes(dayParam)) {
+      return res.status(400).json({ error: 'Invalid day. Must be 1, 2, or 3.' });
+    }
+
+    const fetch = require('node-fetch');
+    const url = `https://www.spc.noaa.gov/products/outlook/day${dayParam}otlk.html`;
+    const resp = await fetch(url, {
+      headers: {
+        'User-Agent': 'WxDashboard/1.0 (+https://wxdashboard.vercel.app)'
+      }
+    });
+    if (!resp.ok) {
+      throw new Error(`SPC returned ${resp.status}: ${resp.statusText}`);
+    }
+    const html = await resp.text();
+
+    // Extract first <pre> block and clean footer items (same logic as text endpoint)
+    const match = html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
+    if (!match) {
+      return res.status(502).json({ error: 'Failed to parse SPC outlook text' });
+    }
+    let text = match[1] || '';
+    text = text
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&#39;/g, "'")
+      .replace(/&quot;/g, '"');
+    text = text.replace(/\r\n/g, '\n').trim();
+    const rawLines = text.split('\n');
+    const cleanedLines = rawLines.filter((ln) => {
+      const L = ln.trim();
+      const U = L.toUpperCase();
+      if (U.startsWith('CLICK TO GET')) return false;
+      if (U.startsWith('NOTE: THE NEXT DAY')) return false;
+      if (/<script\b/i.test(L)) return false;
+      if (/<\/script>/i.test(L)) return false;
+      if (/<a\b[^>]*>.*<\/a>/i.test(L) && L.includes('/products/outlook/archive/')) return false;
+      return true;
+    });
+    while (cleanedLines.length && cleanedLines[cleanedLines.length - 1].trim() === '') cleanedLines.pop();
+    text = cleanedLines.join('\n');
+
+    const userPrompt = (req.body?.prompt && String(req.body.prompt).trim().length > 0)
+      ? String(req.body.prompt)
+      : 'can you please summarize this outlook in one paragraph';
+
+    const body = {
+      model: 'google/gemini-2.5-flash-lite-preview-06-17',
+      messages: [
+        { role: 'system', content: 'You are a weather assistant. Summarize the SPC outlook concisely in one paragraph of plain text. Avoid markdown, bullets, and boilerplate.' },
+        { role: 'user', content: `${userPrompt}\n\n${text}` }
+      ],
+      temperature: 0.3,
+      max_tokens: 300
+    };
+
+    const orResp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://wxdashboard.vercel.app',
+        'X-Title': 'Weather Dashboard'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!orResp.ok) {
+      const errTxt = await orResp.text();
+      throw new Error(`OpenRouter error ${orResp.status}: ${errTxt}`);
+    }
+    const orJson = await orResp.json();
+    const summary = orJson?.choices?.[0]?.message?.content || '';
+    if (!summary) {
+      return res.status(502).json({ error: 'OpenRouter returned no summary' });
+    }
+
+    res.setHeader('Cache-Control', 'no-store');
+    return res.json({ day: Number(dayParam), summary });
+  } catch (err) {
+    console.error('Error summarizing SPC outlook:', err);
+    return res.status(500).json({ error: 'Failed to summarize SPC outlook' });
+  }
+});
 
 // Setup Socket.IO with CORS configuration to allow our frontend to connect
 const io = new Server(server, {
@@ -166,7 +262,70 @@ app.get('/api/alerts/all', async (req, res) => {
   }
 });
 
+// --- SPC Outlook Text API ---
+// Fetches the SPC Day 1/2/3 outlook text product and returns it as JSON
+app.get('/api/spc/outlook/day/:day', async (req, res) => {
+  try {
+    const dayParam = String(req.params.day);
+    if (!['1', '2', '3'].includes(dayParam)) {
+      return res.status(400).json({ error: 'Invalid day. Must be 1, 2, or 3.' });
+    }
 
+    const fetch = require('node-fetch');
+    const url = `https://www.spc.noaa.gov/products/outlook/day${dayParam}otlk.html`;
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'WxDashboard/1.0 (+https://wxdashboard.vercel.app)'
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`SPC returned ${response.status}: ${response.statusText}`);
+    }
+    const html = await response.text();
+
+    // Extract the first <pre> block which contains the textual discussion
+    const match = html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
+    if (!match) {
+      return res.status(502).json({ error: 'Failed to parse SPC outlook text' });
+    }
+
+    let text = match[1] || '';
+    // Basic HTML entity decoding for common entities
+    text = text
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&#39;/g, "'")
+      .replace(/&quot;/g, '"');
+
+    // Normalize line endings
+    text = text.replace(/\r\n/g, '\n').trim();
+
+    // Remove unwanted footer lines (archive link, note about next outlook, and scripts)
+    const rawLines = text.split('\n');
+    const cleanedLines = rawLines.filter((ln) => {
+      const L = ln.trim();
+      const U = L.toUpperCase();
+      if (U.startsWith('CLICK TO GET')) return false;
+      if (U.startsWith('NOTE: THE NEXT DAY')) return false;
+      if (/<script\b/i.test(L)) return false;
+      if (/<\/script>/i.test(L)) return false;
+      // Hide specific archive anchor lines if present
+      if (/<a\b[^>]*>.*<\/a>/i.test(L) && L.includes('/products/outlook/archive/')) return false;
+      return true;
+    });
+    // Trim trailing empty lines
+    while (cleanedLines.length && cleanedLines[cleanedLines.length - 1].trim() === '') cleanedLines.pop();
+    text = cleanedLines.join('\n');
+
+    res.setHeader('Cache-Control', 'public, max-age=300'); // cache 5 minutes
+    return res.json({ day: Number(dayParam), url, text });
+  } catch (err) {
+    console.error('Error fetching SPC outlook text:', err);
+    return res.status(500).json({ error: 'Failed to fetch SPC outlook text' });
+  }
+});
 
 // LSR (Local Storm Reports) endpoint with server-side processing
 app.get('/api/lsr/today', async (req, res) => {
@@ -487,6 +646,25 @@ app.get('/api/geocode/:zipcode', async (req, res) => {
   } catch (error) {
     console.error('Error fetching geocoding data:', error);
     res.status(500).json({ error: 'Failed to fetch geocoding data' });
+  }
+});
+
+// Zip to state abbreviation helper
+app.get('/api/utils/zip-to-state', (req, res) => {
+  try {
+    const zip = String(req.query?.zip || '').trim();
+    if (!/^[0-9]{5}$/.test(zip)) {
+      return res.status(400).json({ error: 'Valid 5-digit zip is required' });
+    }
+    const info = zipcodes.lookup(zip);
+    const state = info && info.state;
+    if (state && /^[A-Z]{2}$/.test(state)) {
+      return res.json({ state });
+    }
+    return res.status(404).json({ error: 'State not found for zip' });
+  } catch (e) {
+    console.error('zip-to-state error:', e);
+    return res.status(500).json({ error: 'Failed to resolve state' });
   }
 });
 
