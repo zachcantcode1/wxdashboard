@@ -25,7 +25,7 @@ const HomePage = () => {
             className="w-full"
             title="Impact Weather"
             description="Your central hub for comprehensive weather intelligence. Stay informed. Stay ahead."
-            to="/current-weather"
+            to="/login"
             ctaText="Let's Go!"
           />
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useAuth } from '../../contexts/AuthContext'
 import { Button } from '../ui/button'
@@ -7,6 +7,7 @@ import { Label } from '../ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 import { Alert, AlertDescription } from '../ui/alert'
 import { Loader2, Cloud, Zap, Wind, CloudRain, Sun } from 'lucide-react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const LoginScreen = () => {
   const [isLogin, setIsLogin] = useState(true)
@@ -16,7 +17,17 @@ export const LoginScreen = () => {
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
 
-  const { signIn, signUp } = useAuth()
+  const { signIn, signUp, user } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/current-weather'
+
+  // If already authenticated, bounce away from /login immediately
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true })
+    }
+  }, [user, from, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -29,6 +40,9 @@ export const LoginScreen = () => {
         const { error } = await signIn(email, password)
         if (error) {
           setError(error.message)
+        } else {
+          // Redirect to the originally requested route or default
+          navigate(from, { replace: true })
         }
       } else {
         const { error } = await signUp(email, password)

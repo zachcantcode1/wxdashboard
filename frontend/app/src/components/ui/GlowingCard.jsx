@@ -1,8 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import { Button } from './button'
 import { cn } from '../../lib/utils'
+import GetStartedButton from '@/components/shsfui/button/GetStartedButton'
 
 /**
  * GlowingCard
@@ -51,13 +50,9 @@ export function GlowingCard({
           ) : null}
 
           <div className="mt-6">
-            <Button asChild className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white shadow hover:bg-blue-700 transition">
-              <Link to={to}>
-                {/* Glow layer */}
-                <span className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 opacity-40 blur-xl transition-opacity group-hover:opacity-60" />
-                <span className="relative">{ctaText}</span>
-              </Link>
-            </Button>
+            <GetStartedButton to={to} size="lg">
+              {ctaText}
+            </GetStartedButton>
           </div>
         </div>
       </div>

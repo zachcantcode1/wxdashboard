@@ -1,10 +1,11 @@
 import React from 'react'
 import { useAuth } from '../../contexts/AuthContext'
-import { LoginScreen } from './LoginScreen'
 import { Loader2 } from 'lucide-react'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
 export const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
+  const location = useLocation()
 
   if (loading) {
     return (
@@ -18,8 +19,9 @@ export const ProtectedRoute = ({ children }) => {
   }
 
   if (!user) {
-    return <LoginScreen />
+    return <Navigate to="/login" replace state={{ from: location }} />
   }
 
-  return children
+  // Support both composition and route-guard usage
+  return children ? children : <Outlet />
 }

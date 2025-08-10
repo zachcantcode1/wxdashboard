@@ -1,5 +1,7 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import ChartContainer from '@/components/ui/chart-container';
+import { ChartTooltip } from '@/components/ui/chart-tooltip';
 
 const HourlyForecastChart = ({ data }) => {
   const formatTime = (timestamp) => new Date(timestamp * 1000).toLocaleTimeString([], { hour: 'numeric', hour12: true });
@@ -11,28 +13,44 @@ const HourlyForecastChart = ({ data }) => {
   }));
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart
-        data={chartData}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" stroke="#4A5568" />
-        <XAxis dataKey="time" stroke="#CBD5E0" />
-        <YAxis stroke="#CBD5E0" unit="°F" />
-        <Tooltip
-          contentStyle={{ backgroundColor: '#2D3748', border: '1px solid #4A5568', color: '#FFFFFF' }}
-          labelStyle={{ color: '#E2E8F0' }}
-        />
-        <Legend wrapperStyle={{ color: '#E2E8F0' }} />
-        <Line type="monotone" dataKey="Temperature" stroke="#38B2AC" activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey="Feels Like" stroke="#9F7AEA" strokeDasharray="5 5" />
-      </LineChart>
-    </ResponsiveContainer>
+    <ChartContainer
+      className="w-full"
+      colorMap={{ temperature: '#38B2AC', 'feels-like': '#9F7AEA' }}
+    >
+      <ResponsiveContainer width="100%" height={320}>
+        <LineChart
+          data={chartData}
+          margin={{ top: 8, right: 16, left: 24, bottom: 16 }}
+        >
+          <defs>
+            <linearGradient id="fillTemperature" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="var(--color-temperature)" stopOpacity={0.35} />
+              <stop offset="95%" stopColor="var(--color-temperature)" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid stroke="#334155" strokeOpacity={0.4} strokeDasharray="3 3" />
+          <XAxis
+            dataKey="time"
+            tick={{ fill: '#e2e8f0' }}
+            axisLine={{ stroke: '#475569' }}
+            tickLine={false}
+            tickMargin={8}
+            padding={{ left: 8, right: 8 }}
+          />
+          <YAxis
+            unit="°F"
+            tick={{ fill: '#e2e8f0' }}
+            axisLine={{ stroke: '#475569' }}
+            tickLine={false}
+            tickMargin={8}
+          />
+          <ChartTooltip unit="°F" />
+          <Area type="monotone" dataKey="Temperature" fill="url(#fillTemperature)" stroke="transparent" />
+          <Line type="monotone" dataKey="Temperature" stroke="var(--color-temperature)" activeDot={{ r: 6 }} />
+          <Line type="monotone" dataKey="Feels Like" stroke="var(--color-feels-like)" strokeDasharray="5 5" />
+        </LineChart>
+      </ResponsiveContainer>
+    </ChartContainer>
   );
 };
 

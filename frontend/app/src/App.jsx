@@ -1,5 +1,4 @@
 // src/App.jsx
-import 'leaflet/dist/leaflet.css'; // Required for react-leaflet
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { WeatherProvider } from './context/WeatherContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -12,16 +11,21 @@ import CurrentWeatherPage from './pages/CurrentWeatherPage'; // Default export
 import TopStormReportsPage from './pages/TopStormReportsPage'; // Default export
 import WeatherStatsPage from './pages/WeatherStatsPage'; // Default export
 import OutlooksPage from './pages/OutlooksPage'; // Default export
+import { LoginScreen } from './components/auth/LoginScreen';
 
 function App() {
   return (
     <AuthProvider>
       <WeatherProvider>
         <Router>
-          <ProtectedRoute>
-            <Routes>
-              <Route path="/" element={<MainLayout />}>
-                <Route index element={<HomePage />} />
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              {/* Public routes */}
+              <Route index element={<HomePage />} />
+              <Route path="login" element={<LoginScreen />} />
+
+              {/* Protected app routes */}
+              <Route element={<ProtectedRoute />}>
                 {/* Routes for Weather Services sub-pages */}
                 <Route path="recent-lsr" element={<LsrListPage />} />
                 <Route path="active-alerts" element={<ActiveAlertsPage />} />
@@ -29,11 +33,10 @@ function App() {
                 <Route path="top-storm-reports" element={<TopStormReportsPage />} />
                 <Route path="weather-stats" element={<WeatherStatsPage />} />
                 <Route path="outlooks" element={<OutlooksPage />} />
-
                 {/* Add other routes here later */}
               </Route>
-            </Routes>
-          </ProtectedRoute>
+            </Route>
+          </Routes>
         </Router>
       </WeatherProvider>
     </AuthProvider>

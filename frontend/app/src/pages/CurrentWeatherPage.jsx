@@ -83,7 +83,7 @@ const CurrentWeatherPage = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="flex flex-col items-center mb-8">
-        <h1 className="text-3xl font-bold mb-6">Current & Forecast Weather</h1>
+        <h1 className="text-3xl font-bold mb-6">Current Weather</h1>
         <div className="flex w-full max-w-sm items-center space-x-2">
         <Input
           type="text"
