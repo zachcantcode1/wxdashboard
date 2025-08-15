@@ -129,6 +129,12 @@ export function TopNavigation() {
                         <Link to="/current-weather" className="py-1.5 w-full block">Current Weather</Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
+                    {/* Today's Weather */}
+                    <NavigationMenuItem className="w-full">
+                      <NavigationMenuLink asChild>
+                        <Link to="/todays-weather" className="py-1.5 w-full block">Today's Weather</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
                     {/* Storm Reports */}
                     <NavigationMenuItem className="w-full">
                       <div className="text-muted-foreground px-2 py-1.5 text-xs font-medium">Storm Reports</div>
@@ -191,6 +197,12 @@ export function TopNavigation() {
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link to="/current-weather" className="px-2 py-1.5">Current Weather</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              {/* Today's Weather */}
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link to="/todays-weather" className="px-2 py-1.5">Today's Weather</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               {/* Storm Reports */}

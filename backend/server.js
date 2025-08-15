@@ -327,6 +327,316 @@ app.get('/api/spc/outlook/day/:day', async (req, res) => {
   }
 });
 
+// --- NOAA/NWS Summary Source Discovery ---
+// Probes key public-domain sources and returns previews + URLs.
+// Uses HTML fallbacks for resiliency. Does not depend on sockets or database.
+app.get('/api/summary/discovery', async (req, res) => {
+  try {
+    const fetch = require('node-fetch');
+    const UA = 'WxDashboard/1.0 (+https://wxdashboard.vercel.app)';
+
+    const extractPre = (html) => {
+      if (!html) return '';
+      const preMatch = html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
+      let text = preMatch ? preMatch[1] : '';
+      if (!text) {
+        // Fallback: strip tags and take first chunk
+        const stripped = html
+          .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+          .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+          .replace(/<[^>]+>/g, ' ')
+          .replace(/&nbsp;/g, ' ')
+          .replace(/&amp;/g, '&')
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&#39;/g, "'")
+          .replace(/&quot;/g, '"');
+        return stripped.trim().slice(0, 600);
+      }
+      // Basic entity decoding + cleanup
+      text = text
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/\r\n/g, '\n');
+      const lines = text.split('\n').map(l => l.trim());
+      const filtered = lines.filter(l => {
+        const U = l.toUpperCase();
+        if (!l) return false;
+        if (U.startsWith('CLICK TO GET')) return false;
+        if (U.startsWith('NOTE: THE NEXT DAY')) return false;
+        return true;
+      });
+      return filtered.join('\n').slice(0, 1200);
+    };
+
+    // Retry wrapper to mitigate transient upstream issues like 'Premature close'
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const fetchWithRetry = async (url, tries = 3) => {
+      let lastErr;
+      for (let i = 0; i < tries; i++) {
+        try {
+          const r = await fetch(url, {
+            headers: {
+              'User-Agent': UA,
+              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+              'Connection': 'keep-alive'
+            }
+          });
+          if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+          return await r.text();
+        } catch (e) {
+          lastErr = e;
+          const msg = String(e?.message || e);
+          const retryable = /(Premature close|ECONNRESET|EAI_AGAIN|ENOTFOUND|ETIMEDOUT|socket hang up|network)/i.test(msg);
+          if (i === tries - 1 || !retryable) break;
+          await sleep(250 * Math.pow(2, i));
+        }
+      }
+      throw lastErr;
+    };
+
+    const fetchPreview = async (url) => {
+      try {
+        const html = await fetchWithRetry(url, 3);
+        return { ok: true, url, preview: extractPre(html) };
+      } catch (e) {
+        return { ok: false, url, error: String(e.message || e) };
+      }
+    };
+
+    // HTML fallbacks for key sources
+    const sources = {
+      spc_day1: await fetchPreview('https://www.spc.noaa.gov/products/outlook/day1otlk.html'),
+      spc_day2: await fetchPreview('https://www.spc.noaa.gov/products/outlook/day2otlk.html'),
+      spc_fire_day1: await fetchPreview('https://www.spc.noaa.gov/products/fire_wx/fwdy1.html'),
+      wpc_excessive_rainfall: await fetchPreview('https://www.wpc.ncep.noaa.gov/discussions/hpcdis2.html'),
+      nhc_two_atlantic: await fetchPreview('https://www.nhc.noaa.gov/text/MIATWOAT.shtml'),
+      nhc_two_east_pacific: await fetchPreview('https://www.nhc.noaa.gov/text/MIATWOEP.shtml')
+    };
+
+    // NWS active Excessive Heat Warning alerts (use repeated message_type params)
+    let heatAlerts = { ok: false, count: 0, samples: [] };
+    try {
+      const heatUrl = 'https://api.weather.gov/alerts/active?status=actual&message_type=alert&message_type=update&event=Excessive%20Heat%20Warning';
+      const r = await fetch(heatUrl, { headers: { 'User-Agent': UA, 'Accept': 'application/geo+json' } });
+      if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+      const json = await r.json();
+      const feats = Array.isArray(json?.features) ? json.features : [];
+      heatAlerts = {
+        ok: true,
+        count: feats.length,
+        samples: feats.slice(0, 3).map(f => ({ id: f?.id, event: f?.properties?.event, area: f?.properties?.areaDesc }))
+      };
+    } catch (e) {
+      heatAlerts = { ok: false, error: String(e.message || e), count: 0, samples: [] };
+    }
+
+    res.setHeader('Cache-Control', 'no-store');
+    return res.json({ ok: true, sources, heatAlerts });
+  } catch (err) {
+    console.error('Discovery error:', err);
+    return res.status(500).json({ ok: false, error: 'Failed to run discovery' });
+  }
+});
+
+// --- Aggregated Daily Summary (LLM-polished) ---
+// Returns a concise multi-source daily hazards summary for the U.S.
+// - Fetches the same public sources used by discovery
+// - Uses OpenRouter to polish into a single paragraph
+// - 5-minute in-memory cache; bypass with ?nocache=1
+let summaryCache = { data: null, ts: 0, ttl: 5 * 60 * 1000 };
+app.get('/api/summary/today', async (req, res) => {
+  try {
+    const now = Date.now();
+    const noCache = String(req.query?.nocache || '0') === '1';
+    if (!noCache && summaryCache.data && now - summaryCache.ts < summaryCache.ttl) {
+      res.setHeader('Cache-Control', 'public, max-age=300');
+      return res.json({ cached: true, ...summaryCache.data });
+    }
+
+    const fetch = require('node-fetch');
+    const UA = 'WxDashboard/1.0 (+https://wxdashboard.vercel.app)';
+
+    const extractPre = (html) => {
+      if (!html) return '';
+      const preMatch = html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
+      let text = preMatch ? preMatch[1] : '';
+      if (!text) {
+        const stripped = html
+          .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+          .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+          .replace(/<[^>]+>/g, ' ')
+          .replace(/&nbsp;/g, ' ')
+          .replace(/&amp;/g, '&')
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&#39;/g, "'")
+          .replace(/&quot;/g, '"');
+        return stripped.trim().slice(0, 1400);
+      }
+      text = text
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/\r\n/g, '\n');
+      const lines = text.split('\n').map(l => l.trim());
+      const filtered = lines.filter(l => {
+        const U = l.toUpperCase();
+        if (!l) return false;
+        if (U.startsWith('CLICK TO GET')) return false;
+        if (U.startsWith('NOTE: THE NEXT DAY')) return false;
+        return true;
+      });
+      return filtered.join('\n').slice(0, 2200);
+    };
+
+    // Retry wrapper to mitigate transient upstream issues like 'Premature close'
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const fetchWithRetry = async (url, tries = 3) => {
+      let lastErr;
+      for (let i = 0; i < tries; i++) {
+        try {
+          const r = await fetch(url, {
+            headers: {
+              'User-Agent': UA,
+              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+              'Connection': 'keep-alive'
+            }
+          });
+          if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+          return await r.text();
+        } catch (e) {
+          lastErr = e;
+          const msg = String(e?.message || e);
+          const retryable = /(Premature close|ECONNRESET|EAI_AGAIN|ENOTFOUND|ETIMEDOUT|socket hang up|network)/i.test(msg);
+          if (i === tries - 1 || !retryable) break;
+          await sleep(250 * Math.pow(2, i));
+        }
+      }
+      throw lastErr;
+    };
+
+    const fetchPreview = async (url) => {
+      try {
+        const html = await fetchWithRetry(url, 3);
+        return { ok: true, url, preview: extractPre(html) };
+      } catch (e) {
+        return { ok: false, url, error: String(e.message || e) };
+      }
+    };
+
+    // WPC ERO discussion often moves URLs; try a small fallback list and pick first OK
+    const wpcCandidates = [
+      'https://www.wpc.ncep.noaa.gov/discussions/hpcdis2.html',
+      'https://www.wpc.ncep.noaa.gov/discussions/qpfpfd.html',
+      'https://www.wpc.ncep.noaa.gov/discussions/qpfdisc.html',
+      'https://www.wpc.ncep.noaa.gov/discussions/hpcdis1.html'
+    ];
+    const fetchFirstOk = async (urls) => {
+      for (const u of urls) {
+        const r = await fetchPreview(u);
+        if (r.ok) return r;
+      }
+      // return the first error for transparency
+      const firstErr = await fetchPreview(urls[0]);
+      return firstErr;
+    };
+
+    const tasks = {
+      spc_day1: fetchPreview('https://www.spc.noaa.gov/products/outlook/day1otlk.html'),
+      spc_fire_day1: fetchPreview('https://www.spc.noaa.gov/products/fire_wx/fwdy1.html'),
+      wpc_excessive_rainfall: fetchFirstOk(wpcCandidates),
+      nhc_two_atlantic: fetchPreview('https://www.nhc.noaa.gov/text/MIATWOAT.shtml'),
+      nhc_two_east_pacific: fetchPreview('https://www.nhc.noaa.gov/text/MIATWOEP.shtml')
+    };
+
+    const results = await Promise.all(Object.values(tasks));
+    const keys = Object.keys(tasks);
+    const sources = Object.fromEntries(results.map((r, i) => [keys[i], r]));
+
+    // Build parts from successful sources
+    const parts = [];
+    const addPart = (title, key) => {
+      const s = sources[key];
+      if (s && s.ok && s.preview) parts.push({ title, url: s.url, text: s.preview });
+    };
+    addPart('SPC Day 1', 'spc_day1');
+    // Day 2 SPC outlook intentionally omitted for current-day focus
+    addPart('SPC Fire Weather Day 1', 'spc_fire_day1');
+    addPart('WPC Excessive Rainfall/Quantitative Precipitation', 'wpc_excessive_rainfall');
+    addPart('NHC Tropical Weather Outlook (Atlantic)', 'nhc_two_atlantic');
+    addPart('NHC Tropical Weather Outlook (East Pacific)', 'nhc_two_east_pacific');
+
+    const apiKey = process.env.OPENROUTER_API_KEY;
+    if (!apiKey) {
+      const payload = {
+        ok: true,
+        summary: null,
+        message: 'OPENROUTER_API_KEY is not set; returning raw parts only',
+        sources,
+        parts,
+        generatedAt: new Date().toISOString()
+      };
+      summaryCache = { data: payload, ts: Date.now(), ttl: summaryCache.ttl };
+      res.setHeader('Cache-Control', 'public, max-age=300');
+      return res.json(payload);
+    }
+
+    // Avoid markdown-style headings that can bias the model; provide simple labeled blocks
+    const combinedText = parts.map(p => `${p.title}:\n${p.text}`).join('\n\n');
+    const body = {
+      model: 'google/gemini-2.5-flash-lite-preview-06-17',
+      messages: [
+        { role: 'system', content: 'You are a weather briefing assistant. Produce a longer, multi-paragraph, text-only U.S. hazards briefing for TODAY using only the provided official excerpts. Structure: 4–6 short paragraphs separated by a single blank line. Paragraph 1: one-sentence headline overview. Paragraph 2: severe convection (what/where/when, risk categories ONLY if explicitly present, key hazards). Paragraph 3: heavy rain/flash flooding (regions, timing, confidence). Paragraph 4: fire weather (regions, coverage, confidence) if present. Paragraph 5: tropical (active systems or areas of interest) if present. End with a short bottom-line timing sentence. Length requirement: 220–320 words total and 10–14 sentences. Use plain text only (no bullets, no markdown, no section labels). Do not invent cities, offices, numbers, or specifics not supported by the excerpts.' },
+        { role: 'user', content: `Use ONLY the information in these official excerpts to write the briefing to the specification above. If a category has no signal in the excerpts, omit that paragraph. Keep within 220–320 words and 10–14 sentences, broken into 4–6 paragraphs separated by blank lines.\n\n${combinedText}` }
+      ],
+      temperature: 0.3,
+      max_tokens: 800
+    };
+
+    const orResp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://wxdashboard.vercel.app',
+        'X-Title': 'Weather Dashboard'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!orResp.ok) {
+      const errTxt = await orResp.text();
+      throw new Error(`OpenRouter error ${orResp.status}: ${errTxt}`);
+    }
+    const orJson = await orResp.json();
+    const summary = orJson?.choices?.[0]?.message?.content || '';
+
+    const payload = {
+      ok: true,
+      summary,
+      sourcesUsed: parts.map(p => ({ title: p.title, url: p.url })),
+      missingSources: Object.entries(sources)
+        .filter(([, v]) => !v.ok)
+        .map(([k, v]) => ({ key: k, url: v.url, error: v.error })),
+      partsCount: parts.length,
+      generatedAt: new Date().toISOString()
+    };
+    summaryCache = { data: payload, ts: Date.now(), ttl: summaryCache.ttl };
+    res.setHeader('Cache-Control', 'public, max-age=300');
+    return res.json(payload);
+  } catch (err) {
+    console.error('Summary aggregator error:', err);
+    return res.status(500).json({ ok: false, error: 'Failed to generate summary' });
+  }
+});
+
 // LSR (Local Storm Reports) endpoint with server-side processing
 app.get('/api/lsr/today', async (req, res) => {
   try {

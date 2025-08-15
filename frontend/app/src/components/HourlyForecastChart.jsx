@@ -3,7 +3,7 @@ import { LineChart, Line, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer
 import ChartContainer from '@/components/ui/chart-container';
 import { ChartTooltip } from '@/components/ui/chart-tooltip';
 
-const HourlyForecastChart = ({ data }) => {
+const HourlyForecastChart = ({ data, height = 320 }) => {
   const formatTime = (timestamp) => new Date(timestamp * 1000).toLocaleTimeString([], { hour: 'numeric', hour12: true });
 
   const chartData = data.map(hour => ({
@@ -17,7 +17,7 @@ const HourlyForecastChart = ({ data }) => {
       className="w-full"
       colorMap={{ temperature: '#38B2AC', 'feels-like': '#9F7AEA' }}
     >
-      <ResponsiveContainer width="100%" height={320}>
+      <ResponsiveContainer width="100%" height={height}>
         <LineChart
           data={chartData}
           margin={{ top: 8, right: 16, left: 24, bottom: 16 }}

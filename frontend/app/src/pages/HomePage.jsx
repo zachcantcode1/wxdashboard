@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import LightningStormPro from '../components/LightningStormPro';
-import GlowingCard from '../components/ui/GlowingCard';
+import GetStartedButton from '../components/shsfui/button/GetStartedButton';
 
 const HomePage = () => {
   return (
@@ -20,14 +20,23 @@ const HomePage = () => {
       </motion.div>
       <div className="z-10 text-center px-4 w-full">
         <div className="max-w-5xl mx-auto w-full">
-          <GlowingCard
-            hero
-            className="w-full"
-            title="Impact Weather"
-            description="Your central hub for comprehensive weather intelligence. Stay informed. Stay ahead."
-            to="/login"
-            ctaText="Let's Go!"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+          >
+            <h1 className="text-white tracking-tight text-4xl md:text-5xl lg:text-6xl font-extrabold">
+              Impact Weather
+            </h1>
+            <p className="mt-2 text-slate-300 text-base md:text-lg">
+              Your central hub for comprehensive weather intelligence. Stay informed. Stay ahead.
+            </p>
+            <div className="mt-6">
+              <GetStartedButton to="/login" size="lg">
+                Let's Go!
+              </GetStartedButton>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

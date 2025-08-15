@@ -59,7 +59,7 @@ const WarningCountDisplay = ({ alertsData = [] }) => {
       case 'severeThunderstorm': return 'bg-orange-500/20 text-orange-300';
       case 'flashFlood': return 'bg-green-500/20 text-green-300';
       case 'specialWeatherStatement': return 'bg-blue-500/20 text-blue-300';
-      default: return 'bg-gray-500/20 text-gray-300';
+      default: return 'bg-muted/40 text-muted-foreground';
     }
   };
 
@@ -184,7 +184,7 @@ const WarningCountDisplay = ({ alertsData = [] }) => {
     >
       {/* Compact view */}
       <div
-        className={`flex items-center gap-2 bg-gray-800/90 backdrop-blur-md rounded-lg px-3 py-2 shadow-lg border border-gray-600 cursor-pointer transition-all duration-300 hover:bg-gray-700/90 ${
+        className={`flex items-center gap-2 bg-card/90 backdrop-blur-md rounded-lg px-3 py-2 shadow-lg border border-border cursor-pointer transition-all duration-300 hover:bg-card ${
           isExpanded ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'
         }`}
         onClick={toggleExpanded}
@@ -193,11 +193,11 @@ const WarningCountDisplay = ({ alertsData = [] }) => {
           className={`w-3 h-3 rounded-full ${
             isFlashing
               ? 'bg-teal-500 animate-pulse'
-              : 'bg-gray-500'
+              : 'bg-muted-foreground/50'
           }`}
         />
         
-        <span className="text-sm font-medium text-gray-200">
+        <span className="text-sm font-medium text-foreground">
           {warningCount} {warningCount === 1 ? 'Warning' : 'Warnings'}
         </span>
       </div>
@@ -205,16 +205,16 @@ const WarningCountDisplay = ({ alertsData = [] }) => {
       {/* Expanded view */}
       {isExpanded && (
         <div
-          className="absolute top-0 right-0 bg-gray-800/95 backdrop-blur-md rounded-lg shadow-lg border border-gray-600 w-80 max-h-96 flex flex-col transition-all duration-300 ease-in-out z-[1001]"
+          className="absolute top-0 right-0 bg-card/95 backdrop-blur-md rounded-lg shadow-lg border border-border w-80 max-h-96 flex flex-col transition-all duration-300 ease-in-out z-[1001]"
         >
           {/* Header */}
-          <div className="flex justify-between items-center p-3 border-b border-gray-700">
-            <h3 className="text-lg font-semibold text-gray-200">
+          <div className="flex justify-between items-center p-3 border-b border-border">
+            <h3 className="text-lg font-semibold text-foreground">
               Active Warnings ({warningCount})
             </h3>
             <button
               onClick={closeExpanded}
-              className="text-gray-400 hover:text-gray-200 transition-colors rounded-full p-1 hover:bg-gray-700"
+              className="text-muted-foreground hover:text-foreground transition-colors rounded-full p-1 hover:bg-muted/30"
               aria-label="Close warnings list"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -233,8 +233,8 @@ const WarningCountDisplay = ({ alertsData = [] }) => {
               >
                 {/* Warning type header */}
                 <CollapsibleTrigger asChild>
-                  <div className="bg-gray-700/50 px-3 py-2 border-b border-gray-600 cursor-pointer hover:bg-gray-700 transition-colors">
-                    <h4 className="font-semibold text-gray-200 flex items-center justify-between">
+                  <div className="bg-muted/50 px-3 py-2 border-b border-border cursor-pointer hover:bg-muted transition-colors">
+                    <h4 className="font-semibold text-foreground flex items-center justify-between">
                       <span>{getWarningTypeDisplayName(warningType)}</span>
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-1 rounded text-xs font-medium ${getWarningTypeStyle(warningType)}`}>
@@ -258,15 +258,15 @@ const WarningCountDisplay = ({ alertsData = [] }) => {
                   {groupedAlerts[warningType].map((alert, index) => (
                     <div
                       key={index}
-                      className="p-3 border-b border-gray-700 last:border-b-0 hover:bg-gray-700/50 transition-colors"
+                      className="p-3 border-b border-border last:border-b-0 hover:bg-muted/40 transition-colors"
                     >
                       <div className="flex justify-between items-start">
-                        <h5 className="font-medium text-gray-200">{alert.alertType}</h5>
+                        <h5 className="font-medium text-foreground">{alert.alertType}</h5>
                       </div>
                       
-                      <p className="text-sm text-gray-400 mt-1">{alert.locations}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{alert.locations}</p>
                       
-                      <div className="mt-2 text-xs text-gray-500 grid grid-cols-2 gap-1">
+                      <div className="mt-2 text-xs text-muted-foreground grid grid-cols-2 gap-1">
                         <div>
                           <span className="font-medium">Issued:</span> {alert.issued}
                         </div>
